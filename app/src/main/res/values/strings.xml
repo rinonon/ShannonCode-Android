@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ShannonCode</string>
+    <string name="next_button">next</string>
+    <string name="input_character_number">input character number</string>
 </resources>

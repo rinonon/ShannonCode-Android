@@ -2,4 +2,6 @@
     <string name="app_name">ShannonCode</string>
     <string name="next_button">next</string>
     <string name="input_character_number">input character number</string>
+    <string name="character">character</string>
+    <string name="probability">probability</string>
 </resources>

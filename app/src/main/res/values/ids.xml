@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="character0" />
+    <item type="id" name="character1" />
+    <item type="id" name="character2" />
+    <item type="id" name="character3" />
+    <item type="id" name="character4" />
+    <item type="id" name="character5" />
+    <item type="id" name="character6" />
+    <item type="id" name="character7" />
+    <item type="id" name="character8" />
+    <item type="id" name="character9" />
+
+    <item type="id" name="probability0" />
+    <item type="id" name="probability1" />
+    <item type="id" name="probability2" />
+    <item type="id" name="probability3" />
+    <item type="id" name="probability4" />
+    <item type="id" name="probability5" />
+    <item type="id" name="probability6" />
+    <item type="id" name="probability7" />
+    <item type="id" name="probability8" />
+    <item type="id" name="probability9" />
+</resources>

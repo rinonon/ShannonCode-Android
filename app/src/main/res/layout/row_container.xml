@@ -10,12 +10,10 @@
         android:layout_height="50dp"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
-        android:digits="1"
         android:ems="10"
         android:hint=""
-        android:textAlignment="center">
-
-        <requestFocus />
+        android:inputType="text"
+        android:textAlignment="center" >
     </EditText>
 
     <EditText

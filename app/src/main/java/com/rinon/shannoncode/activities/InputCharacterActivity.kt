@@ -4,23 +4,26 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import com.rinon.shannoncode.R
+import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_input_character.*
 
 class InputCharacterActivity : AppCompatActivity() {
 
     companion object {
-        val NUMBER = "number"
+        var num = 0     // 文字数
+        var pairList = ArrayList<Pair<EditText, EditText>>()     // first:char second:probability
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_character)
 
-        // EditTextを入れるに格納しておく
-        var charList = ArrayList<EditText>()
-        var probabilityList = ArrayList<EditText>()
+        calc_button.setOnClickListener {
+            var shannon = calc()
+            shannon.calc()
+        }
 
-        val num = intent.getIntExtra(InputNumberActivity.NUMBER, 0)
+        num = intent.getIntExtra(InputNumberActivity.NUMBER, 0)
         var counter = 0
 
         while(counter < num) {
@@ -75,10 +78,20 @@ class InputCharacterActivity : AppCompatActivity() {
                 }
             }
 
-            charList.add(char)
-            probabilityList.add(probability)
-6
+            pairList.add(Pair<EditText, EditText>(char, probability))
             counter++
         }
+    }
+
+    fun calc (): ShannonCode {
+
+        var contentList = ArrayList<ShannonCode.Content>()
+
+        // 変換作業
+        for(content in pairList) {
+            contentList.add(ShannonCode.Content(content.first.text.toString().get(0),
+                                                content.second.text.toString().toInt()))
+        }
+        return ShannonCode(contentList)
     }
 }

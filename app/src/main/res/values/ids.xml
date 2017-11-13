@@ -23,7 +23,7 @@
     <item type="id" name="probability_input_character8" />
     <item type="id" name="probability_input_character9" />
 
-    <!-- container_result
+    <!-- container_result -->
     <item type="id" name="num_result0" />
     <item type="id" name="num_result1" />
     <item type="id" name="num_result2" />
@@ -100,5 +100,4 @@
     <item type="id" name="codeword_result7" />
     <item type="id" name="codeword_result8" />
     <item type="id" name="codeword_result9" />
-    -->
 </resources>

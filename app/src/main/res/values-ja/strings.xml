@@ -1,3 +1,21 @@
 <resources>
+    <!-- global -->
     <string name="app_name">ShannonCode</string>
+    <string name="character">character</string>
+    <string name="probability">probability</string>
+
+    <!-- activity_input_number -->
+    <string name="input_character_number">input character number</string>
+    <string name="next_button">next</string>
+
+    <!-- activity_input_character -->
+    <string name="calc_button">calc</string>
+
+    <!-- activity_result -->
+    <string name="i">i</string>
+    <string name="binary">binary</string>
+    <string name="length">length</string>
+    <string name="codeword">codeword</string>
+    <string name="result">Result</string>
+    <string name="pre_probability_description">sum of pre probability</string>
 </resources>

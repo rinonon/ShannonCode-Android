@@ -1,5 +1,6 @@
 package com.rinon.shannoncode.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -8,10 +9,9 @@ import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_input_character.*
 
 class InputCharacterActivity : AppCompatActivity() {
-
     companion object {
-        var num = 0     // 文字数
-        var pairList = ArrayList<Pair<EditText, EditText>>()     // first:char second:probability
+        var pairList = ArrayList<Pair<EditText, EditText>>()        // first:char second:probability
+        val RESULT = "result"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,79 +19,81 @@ class InputCharacterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_input_character)
 
         calc_button.setOnClickListener {
-            var shannon = calc()
-            shannon.calc()
+            val shannon = calc()
+
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra(RESULT, shannon)
+            startActivity(intent)
         }
 
-        num = intent.getIntExtra(InputNumberActivity.NUMBER, 0)
-        var counter = 0
+        val num = intent.getIntExtra(InputNumberActivity.NUMBER, 0)
 
-        while(counter < num) {
-            var row = layoutInflater.inflate(R.layout.row_container, scroll_view_content, true)
-            var char = row.findViewById<EditText>(R.id.edit_character)
-            var probability = row.findViewById<EditText>(R.id.edit_probability)
+        for(counter in 0 until num) {
+            val row = layoutInflater.inflate(R.layout.container_input_character, scroll_view_content, true)
+            val char = row.findViewById<EditText>(R.id.edit_character)
+            val probability = row.findViewById<EditText>(R.id.edit_probability)
 
             // TODO: 処理の仕方がわからなすぎるのでとりあえずはこれ
             when(counter) {
                 0 -> {
-                    char.id = R.id.character0
-                    probability.id = R.id.probability0
+                    char.id = R.id.character_input_character0
+                    probability.id = R.id.probability_input_character0
                 }
                 1 -> {
-                    char.id = R.id.character1
-                    probability.id = R.id.probability1
+                    char.id = R.id.character_input_character1
+                    probability.id = R.id.probability_input_character1
                 }
                 2 -> {
-                    char.id = R.id.character2
-                    probability.id = R.id.probability2
+                    char.id = R.id.character_input_character2
+                    probability.id = R.id.probability_input_character2
                 }
                 3 -> {
-                    char.id = R.id.character3
-                    probability.id = R.id.probability3
+                    char.id = R.id.character_input_character3
+                    probability.id = R.id.probability_input_character3
                 }
                 4 -> {
-                    char.id = R.id.character4
-                    probability.id = R.id.probability4
+                    char.id = R.id.character_input_character4
+                    probability.id = R.id.probability_input_character4
                 }
                 5 -> {
-                    char.id = R.id.character5
-                    probability.id = R.id.probability5
+                    char.id = R.id.character_input_character5
+                    probability.id = R.id.probability_input_character5
                 }
                 6 -> {
-                    char.id = R.id.character6
-                    probability.id = R.id.probability6
+                    char.id = R.id.character_input_character6
+                    probability.id = R.id.probability_input_character6
                 }
                 7 -> {
-                    char.id = R.id.character7
-                    probability.id = R.id.probability7
+                    char.id = R.id.character_input_character7
+                    probability.id = R.id.probability_input_character7
                 }
                 8 -> {
-                    char.id = R.id.character8
-                    probability.id = R.id.probability8
+                    char.id = R.id.character_input_character8
+                    probability.id = R.id.probability_input_character8
                 }
                 9 -> {
-                    char.id = R.id.character9
-                    probability.id = R.id.probability9
+                    char.id = R.id.character_input_character9
+                    probability.id = R.id.probability_input_character9
                 }
                 else -> {
                     // ありえないのでエラー処理
                 }
             }
-
             pairList.add(Pair<EditText, EditText>(char, probability))
-            counter++
         }
     }
 
-    fun calc (): ShannonCode {
-
-        var contentList = ArrayList<ShannonCode.Content>()
+    private fun calc (): ShannonCode {
+        val contentList = ArrayList<ShannonCode.Content>()
 
         // 変換作業
-        for(content in pairList) {
-            contentList.add(ShannonCode.Content(content.first.text.toString().get(0),
-                                                content.second.text.toString().toInt()))
+        pairList.mapTo(contentList) {
+            ShannonCode.Content(it.first.text.toString()[0],
+                    it.second.text.toString().toInt())
         }
-        return ShannonCode(contentList)
+        val ret = ShannonCode(contentList)
+        ret.calc()
+
+        return ret
     }
 }

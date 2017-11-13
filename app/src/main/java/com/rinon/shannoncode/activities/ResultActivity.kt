@@ -34,32 +34,21 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun createRow(result: ShannonCode) {
-        var counter = 0
-        for(content in result.contentList) {
-
-            var row: TableRow = layoutInflater.inflate(R.layout.container_result, null, false) as TableRow
+        for((index, content) in result.contentList.withIndex()) {
+            val row: TableRow = layoutInflater.inflate(R.layout.container_result, table_result, false) as TableRow
 
             // 文字列設定
             Log.d("num", Location.Num.value.toString())
-            (row.getChildAt(Location.Num.value) as TextView).setText((counter + 1).toString())
-            (row.getChildAt(Location.Character.value) as TextView).setText(content.char.toString())
-            (row.getChildAt(Location.Probability.value) as TextView).setText(content.probability.toString())
-            (row.getChildAt(Location.PreProbability.value) as TextView).setText(content.preProbability.toString())
-            (row.getChildAt(Location.Binary.value) as TextView).setText(content.binaryText)
-            (row.getChildAt(Location.Length.value) as TextView).setText(content.length.toString())
-            (row.getChildAt(Location.Codeword.value) as TextView).setText(content.codeword)
+            (row.getChildAt(Location.Num.value) as TextView).text = (index + 1).toString()
+            (row.getChildAt(Location.Character.value) as TextView).text = content.char.toString()
+            (row.getChildAt(Location.Probability.value) as TextView).text = content.probability.toString()
+            (row.getChildAt(Location.PreProbability.value) as TextView).text = content.preProbability.toString()
+            (row.getChildAt(Location.Binary.value) as TextView).text = content.binaryText
+            (row.getChildAt(Location.Length.value) as TextView).text = content.length.toString()
+            (row.getChildAt(Location.Codeword.value) as TextView).text = content.codeword
 
             // 行を付け足す
             table_result.addView(row)
-
-            /*
-            row.findViewById<TextView>(R.id.character_container_result).setText(content.char.toString())
-            row.findViewById<TextView>(R.id.probability_container_result).setText(content.probability)
-            row.findViewById<TextView>(R.id.preprobability_container_result).setText(content.preProbability)
-            row.findViewById<TextView>(R.id.binary_container_result).setText(content.binaryText)
-            row.findViewById<TextView>(R.id.length_container_result).setText(content.length)
-            row.findViewById<TextView>(R.id.codeword_container_result).setText(content.codeword)
-            */
         }
     }
 }

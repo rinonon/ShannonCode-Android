@@ -4,4 +4,11 @@
     <string name="input_character_number">input character number</string>
     <string name="character">character</string>
     <string name="probability">probability</string>
+
+    <!-- activity_result -->
+    <string name="i">i</string>
+    <string name="binary">binary</string>
+    <string name="length">length</string>
+    <string name="codeword">codeword</string>
+    <string name="result">Result</string>
 </resources>

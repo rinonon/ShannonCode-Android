@@ -43,7 +43,9 @@ class ResultActivity : AppCompatActivity() {
         }
 
         decode_button.setOnClickListener {
-
+            val intent = Intent(this, DecodeActivity::class.java)
+            intent.putExtra(RESULT, result)
+            startActivity(intent)
         }
     }
 

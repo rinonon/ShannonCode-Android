@@ -23,8 +23,8 @@
         app:layout_constraintVertical_bias="0.054" />
 
     <ScrollView
-        android:layout_width="367dp"
-        android:layout_height="270dp"
+        android:layout_width="368dp"
+        android:layout_height="291dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="92dp"
@@ -99,4 +99,5 @@
             </TableRow>
         </TableLayout>
     </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

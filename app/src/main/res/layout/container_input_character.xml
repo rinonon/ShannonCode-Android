@@ -8,23 +8,25 @@
     <EditText
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_weight="1"
-        android:maxLength="1"
         android:ems="10"
         android:hint=""
         android:inputType="text"
-        android:textAlignment="center">
-    </EditText>
+        android:maxLength="1"
+        android:textAlignment="center"></EditText>
 
     <EditText
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_weight="1"
-        android:maxLength="3"
         android:ems="10"
         android:hint=""
         android:inputType="number"
-        android:textAlignment="center">
-    </EditText>
+        android:maxLength="3"
+        android:textAlignment="center"></EditText>
 
 </TableRow>

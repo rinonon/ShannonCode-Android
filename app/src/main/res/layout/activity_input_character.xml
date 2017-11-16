@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="330dp"
-        android:layout_height="54dp"
+        android:layout_height="43dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -18,9 +19,6 @@
         <TextView
             android:layout_width="105dp"
             android:layout_height="35dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="@string/character"
             android:textAlignment="center"
@@ -33,10 +31,6 @@
         <TextView
             android:layout_width="106dp"
             android:layout_height="34dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="@string/probability"
             android:textAlignment="center"
@@ -51,12 +45,10 @@
 
     <ScrollView
         android:layout_width="329dp"
-        android:layout_height="354dp"
+        android:layout_height="350dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:isScrollContainer="false"
         app:layout_constraintBottom_toBottomOf="parent"

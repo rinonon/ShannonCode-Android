@@ -22,10 +22,9 @@ class ShannonCode (var contentList: ArrayList<Content>) : Serializable {
         // 2.確率の合計値を計算していく
         contentList[0].preProbability = 0
 
-        // 初回はとばす
         (0 until contentList.size)
                 .asSequence()
-                .filter { it > 0 }
+                .filter { it > 0 }  // 初回はとばす
                 .forEach {
                     contentList[it].preProbability = contentList[it - 1].probability + contentList[it - 1].preProbability
                 }
@@ -39,7 +38,7 @@ class ShannonCode (var contentList: ArrayList<Content>) : Serializable {
             // 最初の0.を抜いたbitNumの数
             content.codeword = content.binaryText.substring(2, content.length + 2)
 
-            Log.d("codeword", "char: " + content.char + '\n' +
+            Log.d("result", "char: " + content.char + '\n' +
                               "probability: " + content.probability.toString() + '\n' +
                               "preprobability: " + content.preProbability.toString() + '\n' +
                               "binaryText: " + content.binaryText + '\n' +

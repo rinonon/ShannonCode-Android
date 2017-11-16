@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_input_character.*
 
 class InputCharacterActivity : AppCompatActivity() {
     companion object {
-        enum class Location(val value: Int) {
+        enum class Order(val value: Int) {
             Character(0),
             Probability(1),
 
@@ -38,8 +38,8 @@ class InputCharacterActivity : AppCompatActivity() {
 
         for(counter in 0 until num) {
             val row = layoutInflater.inflate(R.layout.container_input_character, scroll_view_content, false) as TableRow
-            val char = row.getChildAt(Location.Character.value) as EditText
-            val probability = row.getChildAt(Location.Probability.value) as EditText
+            val char = row.getChildAt(Order.Character.value) as EditText
+            val probability = row.getChildAt(Order.Probability.value) as EditText
             scroll_view_content.addView(row)
 
             pairList.add(Pair<EditText, EditText>(char, probability))

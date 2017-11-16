@@ -15,7 +15,11 @@ class ShannonCode (var contentList: ArrayList<Content>) : Serializable {
                   var length: Int = 0,
                   var codeword: String = "") : Serializable
 
-    fun calc() {
+    init {
+        calc()
+    }
+
+    private fun calc() {
         // 1.確率順に並び替える
         contentList.sortByDescending { it -> it.probability }
 

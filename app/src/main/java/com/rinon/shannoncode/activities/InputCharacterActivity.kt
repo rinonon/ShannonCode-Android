@@ -18,23 +18,31 @@ class InputCharacterActivity : AppCompatActivity() {
 
             Max(2)
         }
-
-        val pairList = ArrayList<Pair<EditText, EditText>>()        // first:char second:probability
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_character)
 
-        calc_button.setOnClickListener {
-            val shannon = calc()
-
-            val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra(ResultActivity.RESULT, shannon)
-            startActivity(intent)
-        }
-
         val num = intent.getIntExtra(InputNumberActivity.NUMBER, 0)
+        val pairList = generateInputRows(num)
+
+        // リスナー設定
+        calc_button.setOnClickListener {
+            if(isCorrectProbability(pairList)) {
+                val shannon = convertToShannonCode(pairList)
+                val intent = Intent(this, ResultActivity::class.java)
+                intent.putExtra(ResultActivity.RESULT, shannon)
+                startActivity(intent)
+            }
+            else {
+                // エラー処理
+            }
+        }
+    }
+
+    private fun generateInputRows(num: Int) :  ArrayList<Pair<EditText, EditText>> {
+        val ret = ArrayList<Pair<EditText, EditText>>()        // first:char second:probability
 
         for(counter in 0 until num) {
             val row = layoutInflater.inflate(R.layout.container_input_character, scroll_view_content, false) as TableRow
@@ -42,11 +50,12 @@ class InputCharacterActivity : AppCompatActivity() {
             val probability = row.getChildAt(Order.Probability.value) as EditText
             scroll_view_content.addView(row)
 
-            pairList.add(Pair<EditText, EditText>(char, probability))
+            ret.add(Pair<EditText, EditText>(char, probability))
         }
+        return ret
     }
 
-    private fun calc (): ShannonCode {
+    private fun convertToShannonCode (pairList: ArrayList<Pair<EditText, EditText>>): ShannonCode {
         val contentList = ArrayList<ShannonCode.Content>()
 
         // 変換作業
@@ -54,9 +63,11 @@ class InputCharacterActivity : AppCompatActivity() {
             ShannonCode.Content(it.first.text.toString()[0],
                     it.second.text.toString().toInt())
         }
-        val ret = ShannonCode(contentList)
-        ret.calc()
+        return ShannonCode(contentList)
+    }
 
-        return ret
+    private fun isCorrectProbability(pairList: ArrayList<Pair<EditText, EditText>>) : Boolean {
+        val sum = pairList.sumBy { it.second.text.toString().toInt() }
+        return (sum == 100)
     }
 }

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import com.rinon.shannoncode.R
+import com.rinon.shannoncode.dialogs.ErrorDialogFragment
 import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_encode.*
 
@@ -22,8 +23,8 @@ class EncodeActivity : AppCompatActivity() {
         }
     }
 
-    fun encode(result: ShannonCode, sourceText: String): String {
-        var ret: String = ""
+    private fun encode(result: ShannonCode, sourceText: String): String {
+        var ret = ""
 
         // 1文字ずつ変換
         for (char in sourceText) {
@@ -35,6 +36,11 @@ class EncodeActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 // エラー処理
+                val dialog = ErrorDialogFragment()
+                dialog.title = "Error"
+                dialog.message = "wrong character found"
+                dialog.show(supportFragmentManager, null)
+                break
             }
         }
         return ret

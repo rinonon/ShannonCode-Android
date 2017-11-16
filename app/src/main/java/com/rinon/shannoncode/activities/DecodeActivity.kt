@@ -2,9 +2,9 @@ package com.rinon.shannoncode.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 
 import com.rinon.shannoncode.R
+import com.rinon.shannoncode.dialogs.ErrorDialogFragment
 import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_decode.*
 
@@ -30,13 +30,16 @@ class DecodeActivity : AppCompatActivity() {
         while (currentIdx < sourceText.length) {
             try {
                 val match: ShannonCode.Content = result.contentList.find {
-                    it.codeword.equals(sourceText.substring(currentIdx, it.codeword.length + currentIdx))
+                    it.codeword == sourceText.substring(currentIdx, it.codeword.length + currentIdx)
                 } ?: throw Exception("not found")
                 ret += match.char
                 currentIdx += match.codeword.length
             } catch (e: Exception) {
                 // エラー処理
-                Log.d("error", "not found")
+                val dialog = ErrorDialogFragment()
+                dialog.title = "Error"
+                dialog.message = "wrong codeword found"
+                dialog.show(supportFragmentManager, null)
                 break
             }
         }

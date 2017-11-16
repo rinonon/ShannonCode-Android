@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TableRow
+
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_input_character.*
@@ -19,7 +20,6 @@ class InputCharacterActivity : AppCompatActivity() {
         }
 
         val pairList = ArrayList<Pair<EditText, EditText>>()        // first:char second:probability
-        val RESULT = "result"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class InputCharacterActivity : AppCompatActivity() {
             val shannon = calc()
 
             val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra(RESULT, shannon)
+            intent.putExtra(ResultActivity.RESULT, shannon)
             startActivity(intent)
         }
 

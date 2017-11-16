@@ -1,5 +1,6 @@
 package com.rinon.shannoncode.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,14 +24,27 @@ class ResultActivity : AppCompatActivity() {
 
             Max(7)
         }
+
+        val RESULT = "result"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        val result = intent.getSerializableExtra(InputCharacterActivity.RESULT) as ShannonCode
+        val result = intent.getSerializableExtra(RESULT) as ShannonCode
         createRow(result)
+
+        // リスナー設定
+        encode_button.setOnClickListener {
+            val intent = Intent(this, EncodeActivity::class.java)
+            intent.putExtra(RESULT, result)
+            startActivity(intent)
+        }
+
+        decode_button.setOnClickListener {
+
+        }
     }
 
     private fun createRow(result: ShannonCode) {

@@ -16,6 +16,11 @@
     <string name="binary">binary</string>
     <string name="length">length</string>
     <string name="codeword">codeword</string>
-    <string name="result">Result</string>
+    <string name="result">result</string>
     <string name="pre_probability_description">sum of pre probability</string>
+    <string name="encode_button">encode</string>
+    <string name="decode_button">decode</string>
+
+    <!-- activity_encode -->
+    <string name="source_text">source text</string>
 </resources>

@@ -8,12 +8,12 @@ import java.io.Serializable
  */
 class ShannonCode (var contentList: ArrayList<Content>) : Serializable {
     // データ格納用の内部クラス
-    class Content(val char: Char,
-                  val probability: Int,
+    class Content(override val char: Char,
+                  override val probability: Int,
                   var preProbability: Int = 0,
                   var binaryText: String = "",
                   var length: Int = 0,
-                  var codeword: String = "") : Serializable
+                  override var codeword: String = "") : Serializable, com.rinon.shannoncode.models.Content
 
     init {
         calc()

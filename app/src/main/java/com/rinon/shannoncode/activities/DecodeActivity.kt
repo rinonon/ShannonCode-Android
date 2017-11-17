@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.dialogs.ErrorDialogFragment
+import com.rinon.shannoncode.fragments.ErrorDialogFragment
 import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_decode.*
 
@@ -38,7 +38,7 @@ class DecodeActivity : AppCompatActivity() {
                 // エラー処理
                 val dialog = ErrorDialogFragment()
                 dialog.title = "Error"
-                dialog.message = "wrong codeword found"
+                dialog.message = "wrong codeword is found"
                 dialog.show(supportFragmentManager, null)
                 break
             }

@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.dialogs.ErrorDialogFragment
+import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_encode.*
 
@@ -36,9 +36,7 @@ class EncodeActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 // エラー処理
-                val dialog = ErrorDialogFragment()
-                dialog.title = "Error"
-                dialog.message = "wrong character found"
+                val dialog = DialogManager.createSimpleErrorDialog("wrong character is found")
                 dialog.show(supportFragmentManager, null)
                 break
             }

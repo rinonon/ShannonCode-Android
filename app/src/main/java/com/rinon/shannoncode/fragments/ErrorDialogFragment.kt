@@ -1,4 +1,4 @@
-package com.rinon.shannoncode.dialogs
+package com.rinon.shannoncode.fragments
 
 import android.content.DialogInterface
 import android.os.Bundle

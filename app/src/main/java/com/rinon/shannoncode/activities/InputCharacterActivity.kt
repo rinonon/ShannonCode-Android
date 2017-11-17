@@ -7,7 +7,7 @@ import android.widget.EditText
 import android.widget.TableRow
 
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.dialogs.ErrorDialogFragment
+import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_input_character.*
 
@@ -32,23 +32,17 @@ class InputCharacterActivity : AppCompatActivity() {
         calc_button.setOnClickListener {
             if(!isInputAll(pairList)) {
                 // 入力されていないところがある
-                val dialog = ErrorDialogFragment()
-                dialog.title = "Error"
-                dialog.message = "please input all"
+                val dialog = DialogManager.createSimpleErrorDialog("please input all")
                 dialog.show(supportFragmentManager, null)
             }
             else if(!isCorrectProbability(pairList)) {
                 // 確率の合計が100じゃない
-                val dialog = ErrorDialogFragment()
-                dialog.title = "Error"
-                dialog.message = "sum of probability should be 100"
+                val dialog = DialogManager.createSimpleErrorDialog("sum of probability should be 100")
                 dialog.show(supportFragmentManager, null)
             }
             else if(!isCorrectCharacter(pairList)){
                 // 重複した文字がある
-                val dialog = ErrorDialogFragment()
-                dialog.title = "Error"
-                dialog.message = "character should be unique"
+                val dialog = DialogManager.createSimpleErrorDialog("character should be unique")
                 dialog.show(supportFragmentManager, null)
             }
             else {

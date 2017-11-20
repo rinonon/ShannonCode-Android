@@ -3,15 +3,16 @@ package com.rinon.shannoncode.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.TableRow
-import android.widget.TextView
 
 import com.rinon.shannoncode.R
+import com.rinon.shannoncode.fragments.ResultShannonFragment
+import com.rinon.shannoncode.models.Content
 import com.rinon.shannoncode.models.ShannonCode
+import com.rinon.shannoncode.activities.TopActivity.Companion.Type as Type
 import kotlinx.android.synthetic.main.activity_result.*
 
 class ResultActivity : AppCompatActivity() {
+
     companion object {
         enum class Order(val value: Int) {
             Num(0),
@@ -32,39 +33,33 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        val result = intent.getSerializableExtra(RESULT) as ShannonCode
-        createRow(result)
+        if(savedInstanceState == null) {
+            when (TopActivity.type) {
+                Type.Shannon -> {
+                    val result = intent.getSerializableExtra(RESULT) as ArrayList<ShannonCode.Content>
+                    val fragment = ResultShannonFragment.getInstance()
+                    fragment.contentList = result
 
-        // リスナー設定
-        encode_button.setOnClickListener {
-            val intent = Intent(this, EncodeActivity::class.java)
-            intent.putExtra(RESULT, result)
-            startActivity(intent)
-        }
+                    supportFragmentManager.beginTransaction()
+                            .add(R.id.result_scroll, fragment)
+                            .commit()
+                }
+            }
 
-        decode_button.setOnClickListener {
-            val intent = Intent(this, DecodeActivity::class.java)
-            intent.putExtra(RESULT, result)
-            startActivity(intent)
-        }
-    }
+            // リスナー設定
+            var contentList = intent.getSerializableExtra(RESULT) as ArrayList<Content>
 
-    private fun createRow(result: ShannonCode) {
-        for((index, content) in result.contentList.withIndex()) {
-            val row: TableRow = layoutInflater.inflate(R.layout.container_result, table_result, false) as TableRow
+            encode_button.setOnClickListener {
+                val intent = Intent(this, EncodeActivity::class.java)
+                intent.putExtra(RESULT, contentList)
+                startActivity(intent)
+            }
 
-            // 文字列設定
-            Log.d("num", Order.Num.value.toString())
-            (row.getChildAt(Order.Num.value) as TextView).text = (index + 1).toString()
-            (row.getChildAt(Order.Character.value) as TextView).text = content.char.toString()
-            (row.getChildAt(Order.Probability.value) as TextView).text = content.probability.toString()
-            (row.getChildAt(Order.PreProbability.value) as TextView).text = content.preProbability.toString()
-            (row.getChildAt(Order.Binary.value) as TextView).text = content.binaryText
-            (row.getChildAt(Order.Length.value) as TextView).text = content.length.toString()
-            (row.getChildAt(Order.Codeword.value) as TextView).text = content.codeword
-
-            // 行を付け足す
-            table_result.addView(row)
+            decode_button.setOnClickListener {
+                val intent = Intent(this, DecodeActivity::class.java)
+                intent.putExtra(RESULT, contentList)
+                startActivity(intent)
+            }
         }
     }
 }

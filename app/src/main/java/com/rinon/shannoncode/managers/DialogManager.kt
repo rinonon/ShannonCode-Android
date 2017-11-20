@@ -8,11 +8,12 @@ import com.rinon.shannoncode.fragments.ErrorDialogFragment
  */
 
 internal object DialogManager {
+
     fun createSimpleErrorDialog(message: String,
                                 onOkClickListener: DialogInterface.OnClickListener? = null,
                                 title: String = "Error",
                                 positiveText: String = "OK"): ErrorDialogFragment {
-        val dialog = ErrorDialogFragment()
+        val dialog = ErrorDialogFragment.getInstance()
         dialog.title = title
         dialog.message = message
         dialog.positiveText = positiveText

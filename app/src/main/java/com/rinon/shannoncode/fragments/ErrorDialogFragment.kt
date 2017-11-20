@@ -8,6 +8,13 @@ import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 
 class ErrorDialogFragment : DialogFragment() {
+
+    companion object {
+        fun getInstance(): ErrorDialogFragment {
+            return ErrorDialogFragment()
+        }
+    }
+
     var title = "title"
     var message = "message"
     var positiveText = "OK"

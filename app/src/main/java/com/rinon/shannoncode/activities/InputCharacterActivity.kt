@@ -9,9 +9,11 @@ import android.widget.TableRow
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.models.ShannonCode
+import com.rinon.shannoncode.activities.TopActivity.Companion.Type as Type
 import kotlinx.android.synthetic.main.activity_input_character.*
 
 class InputCharacterActivity : AppCompatActivity() {
+
     companion object {
         enum class Order(val value: Int) {
             Character(0),
@@ -19,6 +21,8 @@ class InputCharacterActivity : AppCompatActivity() {
 
             Max(2)
         }
+
+        var type = Type.None
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +50,18 @@ class InputCharacterActivity : AppCompatActivity() {
                 dialog.show(supportFragmentManager, null)
             }
             else {
-                val shannon = convertToShannonCode(pairList)
-                val intent = Intent(this, ResultActivity::class.java)
-                intent.putExtra(ResultActivity.RESULT, shannon)
-                startActivity(intent)
+                // 計算して画面遷移
+                when(TopActivity.type) {
+                    Type.Shannon -> {
+                        val intent = Intent(this, ResultActivity::class.java)
+                        intent.putExtra(ResultActivity.RESULT, convertToShannonCode(pairList))
+                        startActivity(intent)
+                    }
+                    else -> {
+
+                    }
+                }
+
             }
         }
     }
@@ -68,7 +80,7 @@ class InputCharacterActivity : AppCompatActivity() {
         return ret
     }
 
-    private fun convertToShannonCode (pairList: ArrayList<Pair<EditText, EditText>>): ShannonCode {
+    private fun convertToShannonCode (pairList: ArrayList<Pair<EditText, EditText>>): ArrayList<ShannonCode.Content> {
         val contentList = ArrayList<ShannonCode.Content>()
 
         // 変換作業
@@ -76,7 +88,7 @@ class InputCharacterActivity : AppCompatActivity() {
             ShannonCode.Content(it.first.text.toString()[0],
                     it.second.text.toString().toInt())
         }
-        return ShannonCode(contentList)
+        return ShannonCode.calc(contentList)
     }
 
     private fun isInputAll(pairList: ArrayList<Pair<EditText, EditText>>): Boolean {

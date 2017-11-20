@@ -6,20 +6,16 @@ import java.io.Serializable
 /**
  * Created by rinon on 2017/10/13.
  */
-class ShannonCode (var contentList: ArrayList<Content>) : Serializable {
+object ShannonCode {
     // データ格納用の内部クラス
     class Content(override val char: Char,
                   override val probability: Int,
+                  override var codeword: String = "",
                   var preProbability: Int = 0,
                   var binaryText: String = "",
-                  var length: Int = 0,
-                  override var codeword: String = "") : Serializable, com.rinon.shannoncode.models.Content
+                  var length: Int = 0): Serializable, com.rinon.shannoncode.models.Content()
 
-    init {
-        calc()
-    }
-
-    private fun calc() {
+    fun calc(contentList: ArrayList<Content>): ArrayList<Content> {
         // 1.確率順に並び替える
         contentList.sortByDescending { it -> it.probability }
 
@@ -49,6 +45,7 @@ class ShannonCode (var contentList: ArrayList<Content>) : Serializable {
                               "length: " + content.length.toString() + '\n' +
                               "codeword: " + content.codeword + '\n')
         }
+        return contentList
     }
 
     private fun generateBinaryText(probability: Double): String {

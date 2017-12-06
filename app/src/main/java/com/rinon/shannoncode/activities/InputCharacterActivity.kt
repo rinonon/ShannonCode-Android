@@ -21,8 +21,6 @@ class InputCharacterActivity : AppCompatActivity() {
 
             Max(2)
         }
-
-        var type = Type.None
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

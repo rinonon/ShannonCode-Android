@@ -3,6 +3,11 @@
     <string name="app_name">ShannonCode</string>
     <string name="character">character</string>
     <string name="probability">probability</string>
+    <string name="probability_percent">probability(%)</string>
+
+    <!-- activity_top -->
+    <string name="top_text">Welcome to learning\n data compression app</string>
+    <string name="help_button">help</string>
 
     <!-- activity_input_number -->
     <string name="input_character_number">input character number</string>

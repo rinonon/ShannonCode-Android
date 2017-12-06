@@ -32,7 +32,7 @@
             android:layout_width="106dp"
             android:layout_height="34dp"
             android:layout_weight="1"
-            android:text="@string/probability"
+            android:text="@string/probability_percent"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

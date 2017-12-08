@@ -49,8 +49,8 @@ object ShannonCode {
     }
 
     private fun generateBinaryText(probability: Double): String {
-        // 10桁までしか作成しない
-        val maxCount = 10
+        // 8桁までしか作成しない
+        val maxCount = 8
         var binary = ""
         var num = probability
 

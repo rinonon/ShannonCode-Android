@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableRow
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.activities.ResultActivity
@@ -35,14 +35,14 @@ class ResultShannonFragment : Fragment() {
 
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         createRow(contentList)
+        super.onViewCreated(view, savedInstanceState)
     }
 
 
     private fun createRow(contentList: ArrayList<ShannonCode.Content>) {
         for((index, content) in contentList.withIndex()) {
-            val row: TableRow = layoutInflater.inflate(R.layout.container_result, table_result, false) as TableRow
+            val row: LinearLayout = layoutInflater.inflate(R.layout.container_result, result_shannon, false) as LinearLayout
 
             // 文字列設定
             Log.d("num", ResultActivity.Companion.Order.Num.value.toString())
@@ -55,7 +55,7 @@ class ResultShannonFragment : Fragment() {
             (row.getChildAt(ResultActivity.Companion.Order.Codeword.value) as TextView).text = content.codeword
 
             // 行を付け足す
-            table_result.addView(row)
+            result_shannon.addView(row)
         }
     }
 }

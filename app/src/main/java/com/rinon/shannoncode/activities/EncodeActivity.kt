@@ -21,6 +21,13 @@ class EncodeActivity : AppCompatActivity() {
             val resultText = encode(result, sourceText)
             encode_result_text.text = resultText
         }
+
+        var codewordListStr = ""
+        result.forEachIndexed {
+            index, content -> codewordListStr += content.char + ":" + content.codeword +
+                if(index + 1 % 5 == 0) "\n" else if(index + 1 == result.size) "" else ", "
+        }
+        encode_description_text.text = "($codewordListStr)"
     }
 
     private fun encode(result: ArrayList<Content>, sourceText: String): String {

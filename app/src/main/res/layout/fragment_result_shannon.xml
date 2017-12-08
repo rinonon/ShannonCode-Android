@@ -8,7 +8,7 @@
 
     <TableLayout
         android:id="@+id/table_result"
-        android:layout_width="match_parent"
+        android:layout_width="500dp"
         android:layout_height="wrap_content">
 
         <TableRow

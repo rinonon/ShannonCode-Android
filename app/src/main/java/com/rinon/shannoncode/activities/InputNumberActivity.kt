@@ -23,12 +23,12 @@ class InputNumberActivity : AppCompatActivity() {
             when {
                 num == null -> {
                     // 数字が入力されていない
-                    val dialog = DialogManager.createSimpleErrorDialog("please input number")
+                    val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_input_check))
                     dialog.show(supportFragmentManager, null)
                 }
                 num > MAX_NUM -> {
                     // 数が最大値よりも大きい
-                    val dialog = DialogManager.createSimpleErrorDialog("number should be less than $MAX_NUM")
+                    val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_num_check) + MAX_NUM)
                     dialog.show(supportFragmentManager, null)
                 }
                 else -> {

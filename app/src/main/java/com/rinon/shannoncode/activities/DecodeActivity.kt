@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.fragments.ErrorDialogFragment
+import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.models.Content
 import kotlinx.android.synthetic.main.activity_decode.*
 
@@ -16,7 +16,7 @@ class DecodeActivity : AppCompatActivity() {
 
         val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<Content>
 
-        encode_encode_button.setOnClickListener {
+        decode_decode_button.setOnClickListener {
             val sourceText: String = decode_source_text.text.toString()
             val resultText = decode(result, sourceText)
             decode_result_text.text = resultText
@@ -36,11 +36,9 @@ class DecodeActivity : AppCompatActivity() {
                 currentIdx += match.codeword.length
             } catch (e: Exception) {
                 // エラー処理
-                val dialog = ErrorDialogFragment()
-                dialog.title = "Error"
-                dialog.message = "wrong codeword is found"
+                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_decode_check))
                 dialog.show(supportFragmentManager, null)
-                break
+                return ""
             }
         }
         return ret

@@ -34,17 +34,17 @@ class InputCharacterActivity : AppCompatActivity() {
         calc_button.setOnClickListener {
             if(!isInputAll(pairList)) {
                 // 入力されていないところがある
-                val dialog = DialogManager.createSimpleErrorDialog("please input all")
+                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_input_check))
                 dialog.show(supportFragmentManager, null)
             }
             else if(!isCorrectProbability(pairList)) {
                 // 確率の合計が100じゃない
-                val dialog = DialogManager.createSimpleErrorDialog("sum of probability should be 100")
+                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_probability_check))
                 dialog.show(supportFragmentManager, null)
             }
             else if(!isCorrectCharacter(pairList)){
                 // 重複した文字がある
-                val dialog = DialogManager.createSimpleErrorDialog("character should be unique")
+                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_unique_check))
                 dialog.show(supportFragmentManager, null)
             }
             else {

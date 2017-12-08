@@ -1,31 +1,40 @@
 <resources>
     <!-- global -->
     <string name="app_name">ShannonCode</string>
-    <string name="character">character</string>
-    <string name="probability">probability</string>
-    <string name="probability_percent">probability(%)</string>
+    <string name="character">Character</string>
+    <string name="probability">Probability</string>
+    <string name="probability_percent">Probability(%)</string>
 
     <!-- activity_top -->
     <string name="top_text">Welcome to learning\n data compression app</string>
-    <string name="help_button">help</string>
+    <string name="help_button">Help</string>
 
     <!-- activity_input_number -->
-    <string name="input_character_number">input character number</string>
-    <string name="next_button">next</string>
+    <string name="input_character_number">Input character number</string>
+    <string name="next_button">Next</string>
 
     <!-- activity_input_character -->
-    <string name="calc_button">calc</string>
+    <string name="calc_button">Calc</string>
 
     <!-- activity_result -->
     <string name="i">i</string>
-    <string name="binary">binary</string>
-    <string name="length">length</string>
-    <string name="codeword">codeword</string>
-    <string name="result">result</string>
-    <string name="pre_probability_description">sum of pre probability</string>
-    <string name="encode_button">encode</string>
-    <string name="decode_button">decode</string>
+    <string name="binary">Binary</string>
+    <string name="length">Length</string>
+    <string name="codeword">Codeword</string>
+    <string name="result">Result</string>
+    <string name="pre_probability_description">Sum of pre probability</string>
+    <string name="encode_button">Encode</string>
+    <string name="decode_button">Decode</string>
 
     <!-- activity_encode -->
-    <string name="source_text">source text</string>
+    <string name="source_text">Source text</string>
+
+    <!-- error_dialog -->
+    <string name="error_input_check">Please input all</string>
+    <string name="error_num_check">"Number should be less than</string>
+    <string name="error_probability_check">Sum of probability should be 100%</string>
+    <string name="error_unique_check">Character should be unique</string>
+    <string name="error_encode_check">Wrong character is found</string>
+    <string name="error_decode_check">Can not decode</string>
+
 </resources>

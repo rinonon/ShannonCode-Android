@@ -36,9 +36,9 @@ class EncodeActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 // エラー処理
-                val dialog = DialogManager.createSimpleErrorDialog("wrong character is found")
+                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_encode_check))
                 dialog.show(supportFragmentManager, null)
-                break
+                return ""
             }
         }
         return ret

@@ -7,6 +7,19 @@ import java.io.Serializable
  * Created by rinon on 2017/10/13.
  */
 object ShannonCode {
+
+    enum class Order(val value: Int) {
+        Num(0),
+        Character(1),
+        Probability(2),
+        PreProbability(3),
+        Binary(4),
+        Length(5),
+        Codeword(6),
+
+        Max(7)
+    }
+
     // データ格納用の内部クラス
     class Content(override val char: Char,
                   override val probability: Int,

@@ -14,18 +14,6 @@ import kotlinx.android.synthetic.main.activity_result.*
 class ResultActivity : AppCompatActivity() {
 
     companion object {
-        enum class Order(val value: Int) {
-            Num(0),
-            Character(1),
-            Probability(2),
-            PreProbability(3),
-            Binary(4),
-            Length(5),
-            Codeword(6),
-
-            Max(7)
-        }
-
         val RESULT = "result"
     }
 
@@ -39,6 +27,7 @@ class ResultActivity : AppCompatActivity() {
                     val result = intent.getSerializableExtra(RESULT) as ArrayList<ShannonCode.Content>
                     val fragment = ResultShannonFragment.getInstance()
                     fragment.contentList = result
+                    fragment.quizFlag = true
 
                     supportFragmentManager.beginTransaction()
                             .add(R.id.result_scroll, fragment)

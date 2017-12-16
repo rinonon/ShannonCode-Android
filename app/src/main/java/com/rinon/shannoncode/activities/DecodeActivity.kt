@@ -5,7 +5,7 @@ import android.os.Bundle
 
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.managers.DialogManager
-import com.rinon.shannoncode.models.Content
+import com.rinon.shannoncode.models.AbstractContent
 import kotlinx.android.synthetic.main.activity_decode.*
 
 class DecodeActivity : AppCompatActivity() {
@@ -14,7 +14,7 @@ class DecodeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_decode)
 
-        val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<Content>
+        val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<AbstractContent>
 
         decode_decode_button.setOnClickListener {
             val sourceText: String = decode_source_text.text.toString()
@@ -30,13 +30,13 @@ class DecodeActivity : AppCompatActivity() {
         decode_description_text.text = "($codewordListStr)"
     }
 
-    private fun decode(result: ArrayList<Content>, sourceText: String): String {
+    private fun decode(result: ArrayList<AbstractContent>, sourceText: String): String {
         var ret = ""
         var currentIdx = 0
 
         while (currentIdx < sourceText.length) {
             try {
-                val match: Content = result.find {
+                val match: AbstractContent = result.find {
                     it.codeword == sourceText.substring(currentIdx, it.codeword.length + currentIdx)
                 } ?: throw Exception("not found")
                 ret += match.char

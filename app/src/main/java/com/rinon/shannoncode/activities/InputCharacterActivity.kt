@@ -51,8 +51,8 @@ class InputCharacterActivity : AppCompatActivity() {
                 // 計算して画面遷移
                 when(TopActivity.type) {
                     Type.Shannon -> {
-                        val intent = Intent(this, ResultActivity::class.java)
-                        intent.putExtra(ResultActivity.RESULT, convertToShannonCode(pairList))
+                        val intent = Intent(this, QuizActivity::class.java)
+                        intent.putExtra(QuizActivity.RESULT, convertToShannonCode(pairList))
                         startActivity(intent)
                     }
                     else -> {

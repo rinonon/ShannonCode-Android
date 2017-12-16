@@ -5,7 +5,7 @@ import android.os.Bundle
 
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.managers.DialogManager
-import com.rinon.shannoncode.models.Content
+import com.rinon.shannoncode.models.AbstractContent
 import kotlinx.android.synthetic.main.activity_encode.*
 
 class EncodeActivity : AppCompatActivity() {
@@ -14,7 +14,7 @@ class EncodeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encode)
 
-        val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<Content>
+        val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<AbstractContent>
 
         encode_encode_button.setOnClickListener {
             val sourceText: String = encode_source_text.text.toString()
@@ -30,13 +30,13 @@ class EncodeActivity : AppCompatActivity() {
         encode_description_text.text = "($codewordListStr)"
     }
 
-    private fun encode(result: ArrayList<Content>, sourceText: String): String {
+    private fun encode(result: ArrayList<AbstractContent>, sourceText: String): String {
         var ret = ""
 
         // 1文字ずつ変換
         for (char in sourceText) {
             try {
-                val match: Content = result.find {
+                val match: AbstractContent = result.find {
                     it.char == char
                 } ?: throw Exception("not found")
                 ret += match.codeword

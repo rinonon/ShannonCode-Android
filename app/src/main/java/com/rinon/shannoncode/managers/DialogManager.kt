@@ -1,7 +1,7 @@
 package com.rinon.shannoncode.managers
 
 import android.content.DialogInterface
-import com.rinon.shannoncode.fragments.ErrorDialogFragment
+import com.rinon.shannoncode.fragments.ConfirmDialogFragment
 
 /**
  * Created by rinon on 2017/11/17.
@@ -12,8 +12,8 @@ internal object DialogManager {
     fun createSimpleErrorDialog(message: String,
                                 onOkClickListener: DialogInterface.OnClickListener? = null,
                                 title: String = "Error",
-                                positiveText: String = "OK"): ErrorDialogFragment {
-        val dialog = ErrorDialogFragment.getInstance()
+                                positiveText: String = "OK"): ConfirmDialogFragment {
+        val dialog = ConfirmDialogFragment.getInstance()
         dialog.title = title
         dialog.message = message
         dialog.positiveText = positiveText
@@ -24,8 +24,8 @@ internal object DialogManager {
     fun createSimpleDialog(title: String,
                            message: String,
                            onOkClickListener: DialogInterface.OnClickListener? = null,
-                           positiveText: String = "OK"): ErrorDialogFragment {
-        val dialog = ErrorDialogFragment.getInstance()
+                           positiveText: String = "OK"): ConfirmDialogFragment {
+        val dialog = ConfirmDialogFragment.getInstance()
         dialog.title = title
         dialog.message = message
         dialog.positiveText = positiveText

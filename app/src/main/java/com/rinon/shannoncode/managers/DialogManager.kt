@@ -20,4 +20,16 @@ internal object DialogManager {
         dialog.onOkClickListener = onOkClickListener
         return dialog
     }
+
+    fun createSimpleDialog(title: String,
+                           message: String,
+                           onOkClickListener: DialogInterface.OnClickListener? = null,
+                           positiveText: String = "OK"): ErrorDialogFragment {
+        val dialog = ErrorDialogFragment.getInstance()
+        dialog.title = title
+        dialog.message = message
+        dialog.positiveText = positiveText
+        dialog.onOkClickListener = onOkClickListener
+        return dialog
+    }
 }

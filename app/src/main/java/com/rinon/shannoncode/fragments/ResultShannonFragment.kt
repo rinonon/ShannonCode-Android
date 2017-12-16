@@ -86,7 +86,8 @@ class ResultShannonFragment : AbstractResultFragment() {
     }
 
     private fun setQuiz() {
-        quizPos.reset()
+        quizPos.x = QUIZ_START_INDEX_X
+        quizPos.y = QUIZ_START_INDEX_Y
 
         for (x in QUIZ_START_INDEX_X until contentList.size + 1) {
             for (y in QUIZ_START_INDEX_Y until ShannonCode.Order.Max.value) {
@@ -96,23 +97,21 @@ class ResultShannonFragment : AbstractResultFragment() {
                 viewSwitcher.showNext()
 
                 // TODO: ここの判定
-                if (x > quizPos.x + QUIZ_START_INDEX_X || y > quizPos.y + QUIZ_START_INDEX_Y) {
+                if (x > quizPos.x || y > quizPos.y) {
                     viewSwitcher.visibility = View.INVISIBLE
                 }
             }
         }
     }
 
-    override fun judge() {
+    override fun judge(): Boolean {
 
-        val x = quizPos.x + QUIZ_START_INDEX_X
-        val y = quizPos.y + QUIZ_START_INDEX_Y
-
-        val viewSwitcher = ((result_shannon.getChildAt(x) as LinearLayout).getChildAt(y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
+        var viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
+        var imageSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Image.value) as ImageSwitcher
         val ans = (viewSwitcher.getChildAt(TextOrder.EditText.value) as EditText).text.toString()
-        val content = contentList.get(quizPos.x) as ShannonCode.Content
+        val content = contentList.get(quizPos.x - QUIZ_START_INDEX_X) as ShannonCode.Content
 
-        val correct = when(y) {
+        val correct = when(quizPos.y) {
             ShannonCode.Order.PreProbability.value -> content.preProbability.toString()
             ShannonCode.Order.Binary.value -> content.binaryText
             ShannonCode.Order.Length.value -> content.length.toString()
@@ -120,11 +119,45 @@ class ResultShannonFragment : AbstractResultFragment() {
             else -> ""
         }
 
+        imageSwitcher.visibility = View.VISIBLE
+
         if(ans == correct) {
-            Log.d("a", "correct")
+            //correctマークをだし、次の問題へ
+            if(status == Status.Wrong) {
+                imageSwitcher.showNext()
+            }
+            viewSwitcher.showNext()
+            status = Status.Correct
+            quizPos.x++
+
+            if(quizPos.x - QUIZ_START_INDEX_X >= contentList.size) {
+                quizPos.x -= contentList.size
+                quizPos.y++
+            }
+
+            if(quizPos.y >= ShannonCode.Order.Max.value) {
+                // すべて正解
+                return true
+            }
+            else {
+                var x = quizPos.x
+                var y = quizPos.y
+                Log.d("pos", "x: $x, y:$y\n")
+                viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
+                viewSwitcher.visibility = View.VISIBLE
+            }
+
         }
         else {
-            Log.d("a", "wrong")
+            // wrongマークを出す
+            if(status == Status.Correct) {
+                imageSwitcher.showNext()
+            }
+            else {
+                // TODO: 間違いがわかるアニメーション
+            }
+            status = Status.Wrong
         }
+        return false
     }
 }

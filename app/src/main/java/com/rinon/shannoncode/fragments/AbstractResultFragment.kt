@@ -12,16 +12,17 @@ abstract class AbstractResultFragment : Fragment() {
     object Grid {
         var x: Int = 0
         var y: Int = 0
+    }
 
-        fun reset() {
-            x = 0
-            y = 0
-        }
+    enum class Status(val value: Int) {
+        Correct(0),
+        Wrong(1)
     }
 
     var quizPos: Grid = Grid
     var quizFlag: Boolean = false
+    var status = Status.Correct
     var contentList: ArrayList<AbstractContent> = ArrayList()
 
-    abstract fun judge()
+    abstract fun judge(): Boolean
 }

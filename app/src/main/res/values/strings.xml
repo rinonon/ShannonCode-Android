@@ -34,7 +34,11 @@
     <string name="error_num_check">"Number should be less than</string>
     <string name="error_probability_check">Sum of probability should be 100%</string>
     <string name="error_unique_check">Character should be unique</string>
-    <string name="error_encode_check">Wrong character is found</string>
+    <string name="error_encode_check">Can not encode</string>
     <string name="error_decode_check">Can not decode</string>
+
+    <!-- dialog -->
+    <string name="congratulation">Congratulation!</string>
+    <string name="all_correct">All are Correct!</string>
 
 </resources>

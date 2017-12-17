@@ -40,6 +40,18 @@ class QuizActivity : AppCompatActivity() {
             }
         }
 
+        hint_button.setOnClickListener {
+            val hintText = fragment?.getHintText()
+
+            if(hintText != null) {
+                val dialog = DialogManager.createSimpleDialog("Hint", hintText)
+                dialog.show(supportFragmentManager, null)
+            }
+            else {
+                // ありえないのでエラー処理
+            }
+        }
+
         if(savedInstanceState == null) {
             when (TopActivity.type) {
                 Type.Shannon -> {

@@ -1,7 +1,6 @@
 package com.rinon.shannoncode.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -161,5 +160,16 @@ class ResultShannonFragment : AbstractResultFragment() {
             status = Status.Wrong
         }
         return false
+    }
+
+    override fun getHintText(): String {
+        return when(quizPos.y) {
+            ShannonCode.Order.PreProbability.value -> resources.getString(R.string.shannon_preprobability_hint)
+            ShannonCode.Order.Binary.value -> resources.getString(R.string.shannon_binary_hint)
+            ShannonCode.Order.Length.value -> resources.getString(R.string.shannon_length_hint)
+            ShannonCode.Order.Codeword.value -> resources.getString(R.string.shannon_codeword_hint)
+
+            else -> ""
+        }
     }
 }

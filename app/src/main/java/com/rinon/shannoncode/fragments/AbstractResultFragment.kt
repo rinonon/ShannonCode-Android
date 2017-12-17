@@ -25,4 +25,5 @@ abstract class AbstractResultFragment : Fragment() {
     var contentList: ArrayList<AbstractContent> = ArrayList()
 
     abstract fun judge(): Boolean
+    abstract fun getHintText(): String
 }

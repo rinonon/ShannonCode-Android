@@ -52,7 +52,7 @@ class InputCharacterActivity : AppCompatActivity() {
                 when(TopActivity.type) {
                     Type.Shannon -> {
                         val intent = Intent(this, QuizActivity::class.java)
-                        intent.putExtra(QuizActivity.RESULT, convertToShannonCode(pairList))
+                        intent.putExtra(ResultActivity.RESULT, convertToShannonCode(pairList))
                         startActivity(intent)
                     }
                     else -> {

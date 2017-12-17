@@ -8,6 +8,7 @@ import com.rinon.shannoncode.R
 import com.rinon.shannoncode.managers.DialogManager
 
 class InputNumberActivity : AppCompatActivity() {
+
     companion object {
         val NUMBER = "number"
         val MAX_NUM = 10

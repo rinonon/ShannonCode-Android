@@ -16,7 +16,6 @@ import com.rinon.shannoncode.activities.TopActivity.Companion.Type as Type
 class QuizActivity : AppCompatActivity() {
 
     companion object {
-        val RESULT = "result"
         var fragment: AbstractResultFragment? = null
     }
 
@@ -24,7 +23,7 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        var contentList = intent.getSerializableExtra(RESULT) as ArrayList<AbstractContent>
+        val contentList = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<AbstractContent>
 
         judge_button.setOnClickListener {
             val allComplete = fragment?.judge()
@@ -44,7 +43,7 @@ class QuizActivity : AppCompatActivity() {
         if(savedInstanceState == null) {
             when (TopActivity.type) {
                 Type.Shannon -> {
-                    val result = intent.getSerializableExtra(RESULT) as ArrayList<AbstractContent>
+                    val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<AbstractContent>
                     fragment = ResultShannonFragment.getInstance()
 
                     fragment?.contentList = result

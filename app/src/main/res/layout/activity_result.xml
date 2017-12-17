@@ -31,7 +31,7 @@
         android:layout_marginTop="76dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></HorizontalScrollView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TableRow
         android:layout_width="370dp"

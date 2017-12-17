@@ -53,7 +53,7 @@ object ShannonCode {
 
             Log.d("result", "char: " + content.char + '\n' +
                               "probability: " + content.probability.toString() + '\n' +
-                              "preprobability: " + content.preProbability.toString() + '\n' +
+                              "preProbability: " + content.preProbability.toString() + '\n' +
                               "binaryText: " + content.binaryText + '\n' +
                               "length: " + content.length.toString() + '\n' +
                               "codeword: " + content.codeword + '\n')

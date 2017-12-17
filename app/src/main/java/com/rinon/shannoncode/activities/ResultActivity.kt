@@ -20,7 +20,7 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        var contentList = intent.getSerializableExtra(RESULT) as ArrayList<AbstractContent>
+        val contentList = intent.getSerializableExtra(RESULT) as ArrayList<AbstractContent>
 
         // リスナー設定
         encode_button.setOnClickListener {
@@ -38,7 +38,7 @@ class ResultActivity : AppCompatActivity() {
         if(savedInstanceState == null) {
             when (TopActivity.type) {
                 Type.Shannon -> {
-                    val result = intent.getSerializableExtra(QuizActivity.RESULT) as ArrayList<AbstractContent>
+                    val result = intent.getSerializableExtra(RESULT) as ArrayList<AbstractContent>
                     val fragment = ResultShannonFragment.getInstance()
                     fragment.contentList = result
                     fragment.quizFlag = false

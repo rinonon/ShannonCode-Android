@@ -23,15 +23,14 @@ class ResultActivity : AppCompatActivity() {
         val contentList = intent.getSerializableExtra(RESULT) as ArrayList<AbstractContent>
 
         // リスナー設定
-        encode_button.setOnClickListener {
-            val intent = Intent(this, EncodeActivity::class.java)
+        encode_decode_button.setOnClickListener {
+            val intent = Intent(this, EncodeDecodeActivity::class.java)
             intent.putExtra(RESULT, contentList)
             startActivity(intent)
         }
 
-        decode_button.setOnClickListener {
-            val intent = Intent(this, DecodeActivity::class.java)
-            intent.putExtra(RESULT, contentList)
+        top_button.setOnClickListener {
+            val intent = Intent(this, TopActivity::class.java)
             startActivity(intent)
         }
 

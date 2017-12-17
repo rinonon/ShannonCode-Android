@@ -45,22 +45,22 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/encode_button"
+            android:id="@+id/encode_decode_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="@string/encode_button" />
+            android:text="@string/encode_decode_button" />
 
         <Button
-            android:id="@+id/decode_button"
+            android:id="@+id/top_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="@string/decode_button" />
+            android:text="@string/top_button" />
     </TableRow>
 
 </android.support.constraint.ConstraintLayout>

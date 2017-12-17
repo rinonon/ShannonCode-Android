@@ -7,21 +7,27 @@ import android.os.Bundle
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.models.AbstractContent
-import kotlinx.android.synthetic.main.activity_decode.*
+import kotlinx.android.synthetic.main.activity_encode_decode.*
 
-class DecodeActivity : AppCompatActivity() {
+class EncodeDecodeActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_decode)
+        setContentView(R.layout.activity_encode_decode)
 
         val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<AbstractContent>
 
-        decode_decode_button.setOnClickListener {
-            val sourceText: String = decode_source_text.text.toString()
+        encode_button.setOnClickListener {
+            val sourceText: String = encode_source_text.text.toString()
+            val resultText = encode(result, sourceText)
+            encode_decode_result_text.text = resultText
+        }
+
+        decode_button.setOnClickListener {
+            val sourceText: String = encode_source_text.text.toString()
             val resultText = decode(result, sourceText)
-            decode_result_text.text = resultText
+            encode_decode_result_text.text = resultText
         }
 
         var codewordListStr = ""
@@ -29,7 +35,28 @@ class DecodeActivity : AppCompatActivity() {
             index, content -> codewordListStr += content.char + ":" + content.codeword +
                 if(index + 1 % 5 == 0) "\n" else if(index + 1 == result.size) "" else ", "
         }
-        decode_description_text.text = "($codewordListStr)"
+        encode_description_text.text = "($codewordListStr)"
+    }
+
+    private fun encode(result: ArrayList<AbstractContent>, sourceText: String): String {
+        var ret = ""
+
+        // 1文字ずつ変換
+        for (char in sourceText) {
+            try {
+                val match: AbstractContent = result.find {
+                    it.char == char
+                } ?: throw Exception("not found")
+                ret += match.codeword
+
+            } catch (e: Exception) {
+                // エラー処理
+                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_encode_check))
+                dialog.show(supportFragmentManager, null)
+                return ""
+            }
+        }
+        return ret
     }
 
     private fun decode(result: ArrayList<AbstractContent>, sourceText: String): String {

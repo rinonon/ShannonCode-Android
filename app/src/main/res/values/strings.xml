@@ -28,11 +28,13 @@
     <string name="codeword">Codeword</string>
     <string name="result">Result</string>
     <string name="pre_probability_description">Sum of pre probability</string>
+    <string name="encode_decode_button">Encode Decode</string>
+    <string name="top_button">Top</string>
+
+    <!-- activity_encode_decode -->
+    <string name="source_text">Source text</string>
     <string name="encode_button">Encode</string>
     <string name="decode_button">Decode</string>
-
-    <!-- activity_encode -->
-    <string name="source_text">Source text</string>
 
     <!-- error_dialog -->
     <string name="error_input_check">Please input all</string>

@@ -10,6 +10,7 @@ import com.rinon.shannoncode.models.ShannonCode
 
 import kotlinx.android.synthetic.main.fragment_result_shannon.*
 
+
 /**
  * Created by rinon on 2017/11/20.
  */
@@ -37,6 +38,11 @@ class ResultShannonFragment : AbstractResultFragment() {
 
         val QUIZ_START_INDEX_X = 1
         val QUIZ_START_INDEX_Y = ShannonCode.Order.PreProbability.value
+
+        val KEY_QUIZ_FLAG = "quiz_flag"
+        val KEY_CONTENT_LIST = "content_list"
+
+        var contentList: ArrayList<ShannonCode.Content> = ArrayList()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -44,6 +50,10 @@ class ResultShannonFragment : AbstractResultFragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        val bundle = arguments
+        quizFlag = bundle.getBoolean(KEY_QUIZ_FLAG)
+        contentList = bundle.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Content>? ?: throw IllegalArgumentException("contentList is null")
+
         createResult()
 
         if(quizFlag) {

@@ -10,6 +10,7 @@ import com.rinon.shannoncode.fragments.AbstractResultFragment
 import com.rinon.shannoncode.fragments.ResultShannonFragment
 import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.models.AbstractContent
+import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_quiz.*
 import com.rinon.shannoncode.activities.TopActivity.Companion.Type as Type
 
@@ -55,11 +56,13 @@ class QuizActivity : AppCompatActivity() {
         if(savedInstanceState == null) {
             when (TopActivity.type) {
                 Type.Shannon -> {
-                    val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<AbstractContent>
+                    val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<ShannonCode.Content>
                     fragment = ResultShannonFragment.getInstance()
 
-                    fragment?.contentList = result
-                    fragment?.quizFlag = true
+                    val bundle = Bundle()
+                    bundle.putSerializable(ResultShannonFragment.KEY_CONTENT_LIST, result)
+                    bundle.putBoolean(ResultShannonFragment.KEY_QUIZ_FLAG, true)
+                    fragment?.arguments = bundle
 
                     supportFragmentManager.beginTransaction()
                             .add(R.id.result_scroll, fragment)

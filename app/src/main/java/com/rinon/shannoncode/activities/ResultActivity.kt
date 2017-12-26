@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.fragments.ResultShannonFragment
 import com.rinon.shannoncode.models.AbstractContent
+import com.rinon.shannoncode.models.ShannonCode
 import com.rinon.shannoncode.activities.TopActivity.Companion.Type as Type
 import kotlinx.android.synthetic.main.activity_result.*
 
@@ -19,6 +20,11 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+
+        result_scroll.setOnTouchListener { v, event ->
+            v.requestFocusFromTouch()
+            false
+        }
 
         val contentList = intent.getSerializableExtra(RESULT) as ArrayList<AbstractContent>
 
@@ -37,10 +43,13 @@ class ResultActivity : AppCompatActivity() {
         if(savedInstanceState == null) {
             when (TopActivity.type) {
                 Type.Shannon -> {
-                    val result = intent.getSerializableExtra(RESULT) as ArrayList<AbstractContent>
+                    val result = intent.getSerializableExtra(RESULT) as ArrayList<ShannonCode.Content>
                     val fragment = ResultShannonFragment.getInstance()
-                    fragment.contentList = result
-                    fragment.quizFlag = false
+
+                    val bundle = Bundle()
+                    bundle.putSerializable(ResultShannonFragment.KEY_CONTENT_LIST, result)
+                    bundle.putBoolean(ResultShannonFragment.KEY_QUIZ_FLAG, true)
+                    QuizActivity.fragment?.arguments = bundle
 
                     supportFragmentManager.beginTransaction()
                             .add(R.id.result_scroll, fragment)

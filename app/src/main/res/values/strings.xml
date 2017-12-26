@@ -1,6 +1,6 @@
 <resources>
     <!-- global -->
-    <string name="app_name">ShannonCode</string>
+    <string name="app_name">ShannonCoding</string>
     <string name="character">Character</string>
     <string name="probability">Probability</string>
     <string name="probability_percent">Probability(%)</string>
@@ -23,7 +23,7 @@
 
     <!-- activity_result -->
     <string name="i">i</string>
-    <string name="binary">Binary</string>
+    <string name="binary">Binary(8 digit)</string>
     <string name="length">Length</string>
     <string name="codeword">Codeword</string>
     <string name="result">Result</string>

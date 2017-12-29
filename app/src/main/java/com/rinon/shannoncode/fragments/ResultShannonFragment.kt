@@ -1,5 +1,6 @@
 package com.rinon.shannoncode.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,31 @@ import com.rinon.shannoncode.models.ShannonCode
 
 import kotlinx.android.synthetic.main.fragment_result_shannon.*
 
-
-/**
- * Created by rinon on 2017/11/20.
- */
+interface ResultShannonFragmentListener {
+    fun resultShannonListener(result: ResultShannonFragment.Companion.Event, hintText: String? = null)
+}
 
 class ResultShannonFragment : AbstractResultFragment() {
 
     companion object {
-        fun getInstance(): ResultShannonFragment {
-            return ResultShannonFragment()
+        fun newInstance(contentList: ArrayList<ShannonCode.Content>,
+                        quizFlag: Boolean): ResultShannonFragment {
+
+            val instance = ResultShannonFragment()
+            val bundle = Bundle()
+            bundle.putSerializable(ResultShannonFragment.KEY_CONTENT_LIST, contentList)
+            bundle.putBoolean(ResultShannonFragment.KEY_QUIZ_FLAG, quizFlag)
+            instance.arguments = bundle
+
+            return instance
+        }
+
+        enum class Event {
+            Complete,
+            Wrong,
+            Hint,
+
+            None
         }
 
         enum class Order(val value: Int) {
@@ -43,6 +59,15 @@ class ResultShannonFragment : AbstractResultFragment() {
         val KEY_CONTENT_LIST = "content_list"
 
         var contentList: ArrayList<ShannonCode.Content> = ArrayList()
+        var listener: ResultShannonFragmentListener? = null
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        if (context is ResultShannonFragmentListener) {
+            listener = context
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -50,6 +75,8 @@ class ResultShannonFragment : AbstractResultFragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val bundle = arguments
         quizFlag = bundle.getBoolean(KEY_QUIZ_FLAG)
         contentList = bundle.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Content>? ?: throw IllegalArgumentException("contentList is null")
@@ -60,7 +87,13 @@ class ResultShannonFragment : AbstractResultFragment() {
             setQuiz()
         }
 
-        super.onViewCreated(view, savedInstanceState)
+        judge_button.setOnClickListener {
+            judge()
+        }
+
+        hint_button.setOnClickListener {
+            listener?.resultShannonListener(Event.Hint, getHintText())
+        }
     }
 
     private fun createResult() {
@@ -114,7 +147,6 @@ class ResultShannonFragment : AbstractResultFragment() {
         }
     }
 
-    // すべて正解ならtrueを返す
     override fun judge(): Boolean {
         var viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
         val imageSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Image.value) as ImageSwitcher
@@ -149,9 +181,9 @@ class ResultShannonFragment : AbstractResultFragment() {
                 quizPos.y++
             }
 
-            // すべて正解ならtrueを返す
+            // すべて正解
             if(quizPos.y >= ShannonCode.Order.Max.value) {
-                return true
+                listener?.resultShannonListener(Event.Complete)
             }
             else {
                 viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
@@ -164,9 +196,7 @@ class ResultShannonFragment : AbstractResultFragment() {
             if(status == Status.Correct) {
                 imageSwitcher.showNext()
             }
-            else {
-                // TODO: 間違いがわかるアニメーション
-            }
+            listener?.resultShannonListener(Event.Wrong)
             status = Status.Wrong
         }
         return false

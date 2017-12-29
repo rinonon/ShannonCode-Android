@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.InputNumberActivity" />
+        <activity android:name=".activities.ShannonCodingActivity" />
         <activity android:name=".activities.InputCharacterActivity" />
         <activity android:name=".activities.QuizActivity" />
         <activity android:name=".activities.ResultActivity" />

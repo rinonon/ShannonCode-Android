@@ -11,12 +11,16 @@ import kotlinx.android.synthetic.main.activity_encode_decode.*
 
 class EncodeDecodeActivity : AppCompatActivity() {
 
+    companion object {
+        val CONTENT = "content"
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encode_decode)
 
-        val result = intent.getSerializableExtra(ResultActivity.RESULT) as ArrayList<AbstractContent>
+        val result = intent.getSerializableExtra(CONTENT) as ArrayList<AbstractContent>
 
         encode_button.setOnClickListener {
             val sourceText: String = encode_source_text.text.toString()

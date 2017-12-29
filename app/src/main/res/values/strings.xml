@@ -5,6 +5,10 @@
     <string name="probability">Probability</string>
     <string name="probability_percent">Probability(%)</string>
 
+    <!-- tool_bar -->
+    <string name="top_menu">Top Menu</string>
+    <string name="shannon_coding">Shannon Coding</string>
+
     <!-- activity_top -->
     <string name="top_text">Welcome to learning\n data compression app</string>
     <string name="help_button">Help</string>
@@ -47,10 +51,12 @@
     <!-- dialog -->
     <string name="congratulation">Congratulation!</string>
     <string name="all_correct">All are Correct!</string>
+    <string name="wrong_answer">Wrong answer!</string>
 
     <!-- shannon hint -->
     <string name="shannon_preprobability_hint">This formula stands for cumulative probabilities</string>
     <string name="shannon_binary_hint">Make cumulative probabilities a decimal number and make it a binary number</string>
     <string name="shannon_length_hint">Length is minus of the absolute value of probability log2</string>
     <string name="shannon_codeword_hint">Codeword is assigned by taking the first value of length bits from the binary expansions</string>
+
 </resources>

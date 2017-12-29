@@ -22,10 +22,14 @@ class TopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top)
 
-        type = Type.Shannon
+        // ツールバーの設定
+        toolbar.title = resources.getString(R.string.top_menu)
+        setSupportActionBar(toolbar)
 
-        top_button.setOnClickListener {
-            val intent = Intent(this, InputNumberActivity::class.java)
+        button_shannon_coding.setOnClickListener {
+            type = Type.Shannon
+
+            val intent = Intent(this, ShannonCodingActivity::class.java)
             startActivity(intent)
         }
     }

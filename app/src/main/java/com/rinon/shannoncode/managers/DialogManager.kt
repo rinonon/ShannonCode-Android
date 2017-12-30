@@ -3,9 +3,6 @@ package com.rinon.shannoncode.managers
 import android.content.DialogInterface
 import com.rinon.shannoncode.fragments.ConfirmDialogFragment
 
-/**
- * Created by rinon on 2017/11/17.
- */
 
 internal object DialogManager {
 
@@ -13,10 +10,7 @@ internal object DialogManager {
                                 onOkClickListener: DialogInterface.OnClickListener? = null,
                                 title: String = "Error",
                                 positiveText: String = "OK"): ConfirmDialogFragment {
-        val dialog = ConfirmDialogFragment.getInstance()
-        dialog.title = title
-        dialog.message = message
-        dialog.positiveText = positiveText
+        val dialog = ConfirmDialogFragment.newInstance(title, message, positiveText)
         dialog.onOkClickListener = onOkClickListener
         return dialog
     }
@@ -25,10 +19,7 @@ internal object DialogManager {
                            message: String,
                            onOkClickListener: DialogInterface.OnClickListener? = null,
                            positiveText: String = "OK"): ConfirmDialogFragment {
-        val dialog = ConfirmDialogFragment.getInstance()
-        dialog.title = title
-        dialog.message = message
-        dialog.positiveText = positiveText
+        val dialog = ConfirmDialogFragment.newInstance(title, message, positiveText)
         dialog.onOkClickListener = onOkClickListener
         return dialog
     }

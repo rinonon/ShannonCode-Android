@@ -1,6 +1,5 @@
 package com.rinon.shannoncode.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,6 @@ import com.rinon.shannoncode.R
 import com.rinon.shannoncode.model.ShannonCode
 
 import kotlinx.android.synthetic.main.fragment_result_shannon.*
-
-interface ResultShannonFragmentListener {
-    fun resultShannonListener(result: ResultShannonFragment.Companion.Event, hintText: String? = null)
-}
 
 class ResultShannonFragment : AbstractResultFragment() {
 
@@ -33,9 +28,6 @@ class ResultShannonFragment : AbstractResultFragment() {
         enum class Event {
             Complete,
             Wrong,
-            Hint,
-            Encode,
-            Decode,
 
             None
         }
@@ -61,15 +53,6 @@ class ResultShannonFragment : AbstractResultFragment() {
         val KEY_CONTENT_LIST = "content_list"
 
         var contentList: ArrayList<ShannonCode.Content> = ArrayList()
-        var listener: ResultShannonFragmentListener? = null
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-        if (context is ResultShannonFragmentListener) {
-            listener = context
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -80,39 +63,20 @@ class ResultShannonFragment : AbstractResultFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val bundle = arguments
-        quizFlag = bundle.getBoolean(KEY_QUIZ_FLAG)
-        contentList = bundle.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Content>? ?: throw IllegalArgumentException("contentList is null")
+        val quizFlag = bundle.getBoolean(KEY_QUIZ_FLAG)
+        contentList = bundle.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Content>
 
         createResult()
 
         if(quizFlag) {
             setQuiz()
-        } else {
-            // エンコード/デコードボタンに切り替える
-            button_switcher.showNext()
-        }
-
-        check_button.setOnClickListener {
-            check()
-        }
-
-        hint_button.setOnClickListener {
-            listener?.resultShannonListener(Event.Hint, getHintText())
-        }
-
-        encode_button.setOnClickListener {
-            listener?.resultShannonListener(Event.Encode)
-        }
-
-        decode_button.setOnClickListener {
-            listener?.resultShannonListener(Event.Decode)
         }
     }
 
     private fun createResult() {
-        for((index, abstractContent) in contentList.withIndex()) {
+        for((index, content) in contentList.withIndex()) {
             val row: LinearLayout = layoutInflater.inflate(R.layout.container_result_shannon, result_shannon, false) as LinearLayout
-            val content = abstractContent as ShannonCode.Content
+            val content = content
 
             for(order in 0 until ShannonCode.Order.Max.value) {
                 val layout = row.getChildAt(order) as LinearLayout
@@ -164,8 +128,8 @@ class ResultShannonFragment : AbstractResultFragment() {
         var viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
         val imageSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Image.value) as ImageSwitcher
         val ans = (viewSwitcher.getChildAt(TextOrder.EditText.value) as EditText).text.toString()
-        val content = contentList[quizPos.x - QUIZ_START_INDEX_X] as ShannonCode.Content
 
+        val content = contentList?.get(quizPos.x - QUIZ_START_INDEX_X)
         val correct = when(quizPos.y) {
             ShannonCode.Order.PreProbability.value -> content.preProbability.toString()
             ShannonCode.Order.Binary.value -> content.binaryText
@@ -196,10 +160,7 @@ class ResultShannonFragment : AbstractResultFragment() {
 
             // すべて正解
             if(quizPos.y >= ShannonCode.Order.Max.value) {
-                listener?.resultShannonListener(Event.Complete)
-
-                // エンコード/デコードボタンに切り替える
-                button_switcher.showNext()
+                (parentFragment as ResultFragment).eventListener(Event.Complete)
             }
             else {
                 viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
@@ -212,7 +173,7 @@ class ResultShannonFragment : AbstractResultFragment() {
             if(status == Status.Correct) {
                 imageSwitcher.showNext()
             }
-            listener?.resultShannonListener(Event.Wrong)
+            (parentFragment as ResultFragment).eventListener(Event.Wrong)
             status = Status.Wrong
         }
         return false

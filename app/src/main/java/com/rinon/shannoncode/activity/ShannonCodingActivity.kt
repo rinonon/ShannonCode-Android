@@ -5,19 +5,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.fragment.InputCharacterFragmentListener
-import com.rinon.shannoncode.fragment.InputNumberFragment
-import com.rinon.shannoncode.fragment.InputNumberFragmentListener
-import com.rinon.shannoncode.fragment.ResultShannonFragmentListener
-import com.rinon.shannoncode.fragment.InputCharacterFragment
-import com.rinon.shannoncode.fragment.ResultShannonFragment
+import com.rinon.shannoncode.fragment.*
 import com.rinon.shannoncode.managers.DialogManager
+import com.rinon.shannoncode.model.AbstractContent
 import com.rinon.shannoncode.model.ShannonCode
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
 
 class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
                                                  , InputCharacterFragmentListener
-                                                 , ResultShannonFragmentListener {
+                                                 , ResultFragmentListener {
 
     companion object {
         var result: ArrayList<ShannonCode.Content>? = null
@@ -90,8 +86,10 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
             InputCharacterFragment.Companion.ErrorType.None -> {
                 if(pairList != null) {
                     result = convertToShannonCode(pairList)
-                    val resultFragment = ResultShannonFragment.newInstance(result?: throw NullPointerException("result is null"),
-                                                                            false)
+                    val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.Shannon,
+                                                                    result as ArrayList<AbstractContent> ,
+                                                                    true)
+
                     supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_right,
                                     R.anim.slide_out_left,
@@ -107,33 +105,33 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
         }
     }
 
-    override fun resultShannonListener(status: ResultShannonFragment.Companion.Event, hintText: String?) {
+    override fun resultListener(status: ResultFragment.Companion.Event, hintText: String?) {
        when(status) {
-           ResultShannonFragment.Companion.Event.Wrong -> {
+           ResultFragment.Companion.Event.Wrong -> {
                val dialog = DialogManager.createSimpleDialog("Wrong", resources.getString(R.string.wrong_answer))
                dialog.show(supportFragmentManager, null)
            }
 
-           ResultShannonFragment.Companion.Event.Complete -> {
+           ResultFragment.Companion.Event.Complete -> {
                // ダイアログを出す
                val dialog = DialogManager.createSimpleDialog(resources.getString(R.string.congratulation),
                                                              resources.getString(R.string.all_correct))
                dialog.show(supportFragmentManager, null)
            }
 
-           ResultShannonFragment.Companion.Event.Hint -> {
+           ResultFragment.Companion.Event.Hint -> {
                val dialog = DialogManager.createSimpleDialog("Hint", hintText?: throw NullPointerException("hint text is null"))
                dialog.show(supportFragmentManager, null)
            }
 
-           ResultShannonFragment.Companion.Event.Encode -> {
+           ResultFragment.Companion.Event.Encode -> {
                val intent = Intent(this, EncodeDecodeActivity::class.java)
                intent.putExtra(EncodeDecodeActivity.CONTENT, result?: throw NullPointerException("result is null"))
                intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Encode)
                startActivity(intent)
            }
 
-           ResultShannonFragment.Companion.Event.Decode -> {
+           ResultFragment.Companion.Event.Decode -> {
                val intent = Intent(this, EncodeDecodeActivity::class.java)
                intent.putExtra(EncodeDecodeActivity.CONTENT, result?: throw NullPointerException("result is null"))
                intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Decode)

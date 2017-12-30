@@ -16,11 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.InputNumberActivity" />
         <activity android:name=".activity.ShannonCodingActivity" />
-        <activity android:name=".activity.InputCharacterActivity" />
-        <activity android:name=".activity.QuizActivity" />
-        <activity android:name=".activity.ResultActivity" />
         <activity android:name=".activity.EncodeDecodeActivity" />
     </application>
 

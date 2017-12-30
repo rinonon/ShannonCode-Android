@@ -18,6 +18,7 @@ class ConfirmDialogFragment : DialogFragment() {
             bundle.putString(KEY_TITLE, title)
             bundle.putString(KEY_MESSAGE, message)
             bundle.putString(KEY_POSITIVE_TEXT, positiveText)
+            instance.arguments = bundle
 
             return instance
         }

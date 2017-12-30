@@ -19,7 +19,6 @@ abstract class AbstractResultFragment : Fragment() {
     }
 
     var quizPos: Grid = Grid
-    var quizFlag: Boolean = false
     var status = Status.Correct
 
     abstract fun check(): Boolean

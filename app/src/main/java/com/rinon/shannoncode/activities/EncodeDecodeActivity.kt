@@ -1,86 +1,71 @@
 package com.rinon.shannoncode.activities
 
-import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import com.rinon.shannoncode.R
+import com.rinon.shannoncode.adapters.EncodeDecodeFragmentPagerAdapter
+import com.rinon.shannoncode.fragments.DecodeFragment
+import com.rinon.shannoncode.fragments.DecodeFragmentListener
+import com.rinon.shannoncode.fragments.EncodeFragment
+import com.rinon.shannoncode.fragments.EncodeFragmentListener
 import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.models.AbstractContent
 import kotlinx.android.synthetic.main.activity_encode_decode.*
 
-class EncodeDecodeActivity : AppCompatActivity() {
+class EncodeDecodeActivity : AppCompatActivity(), EncodeFragmentListener,
+                                                  DecodeFragmentListener {
 
     companion object {
+        enum class Status(val value: Int) {
+            Encode(0),
+            Decode(1),
+
+            None(-1);
+        }
+
         val CONTENT = "content"
+        val STATUS = "status"
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encode_decode)
 
-        val result = intent.getSerializableExtra(CONTENT) as ArrayList<AbstractContent>
+        val contentList = intent.getSerializableExtra(CONTENT) as ArrayList<AbstractContent>
+        val status = intent.getSerializableExtra(STATUS) as Status
 
-        encode_button.setOnClickListener {
-            val sourceText: String = encode_source_text.text.toString()
-            val resultText = encode(result, sourceText)
-            encode_decode_result_text.text = resultText
-        }
+        // ツールバーの設定
+        toolbar.title = "Encode/Decode"
+        setSupportActionBar(toolbar)
 
-        decode_button.setOnClickListener {
-            val sourceText: String = encode_source_text.text.toString()
-            val resultText = decode(result, sourceText)
-            encode_decode_result_text.text = resultText
-        }
+        // tabの設定
+        view_pager.adapter = EncodeDecodeFragmentPagerAdapter(supportFragmentManager, contentList)
+        tabs.setViewPager(view_pager)
 
-        var codewordListStr = ""
-        result.forEachIndexed {
-            index, content -> codewordListStr += content.char + ":" + content.codeword +
-                if(index + 1 % 5 == 0) "\n" else if(index + 1 == result.size) "" else ", "
+        // 初期ページ設定
+        if (status == Status.None) {
+            throw IllegalArgumentException("Status is none")
+        } else {
+            view_pager.currentItem = status.value
         }
-        encode_description_text.text = "($codewordListStr)"
     }
 
-    private fun encode(result: ArrayList<AbstractContent>, sourceText: String): String {
-        var ret = ""
-
-        // 1文字ずつ変換
-        for (char in sourceText) {
-            try {
-                val match: AbstractContent = result.find {
-                    it.char == char
-                } ?: throw Exception("not found")
-                ret += match.codeword
-
-            } catch (e: Exception) {
-                // エラー処理
+    override fun encodeListener(event: EncodeFragment.Companion.Event) {
+        when(event) {
+            EncodeFragment.Companion.Event.EncodeError -> {
                 val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_encode_check))
                 dialog.show(supportFragmentManager, null)
-                return ""
             }
         }
-        return ret
     }
 
-    private fun decode(result: ArrayList<AbstractContent>, sourceText: String): String {
-        var ret = ""
-        var currentIdx = 0
-
-        while (currentIdx < sourceText.length) {
-            try {
-                val match: AbstractContent = result.find {
-                    it.codeword == sourceText.substring(currentIdx, it.codeword.length + currentIdx)
-                } ?: throw Exception("not found")
-                ret += match.char
-                currentIdx += match.codeword.length
-            } catch (e: Exception) {
-                // エラー処理
+    override fun decodeListener(event: DecodeFragment.Companion.Event) {
+        when(event) {
+            DecodeFragment.Companion.Event.DecodeError -> {
                 val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_decode_check))
                 dialog.show(supportFragmentManager, null)
-                return ""
             }
         }
-        return ret
     }
 }

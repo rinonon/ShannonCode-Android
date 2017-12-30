@@ -22,7 +22,7 @@
     <string name="calc_button">Calc</string>
 
     <!-- activity_quiz -->
-    <string name="judge_button">Judge</string>
+    <string name="check_button">Check</string>
     <string name="hint_button">Hint</string>
 
     <!-- activity_result -->

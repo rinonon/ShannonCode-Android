@@ -56,7 +56,6 @@ class InputCharacterFragment : Fragment() {
         }
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_input_character, container, false)
     }
@@ -67,14 +66,14 @@ class InputCharacterFragment : Fragment() {
         pairList = generateInputRows(arguments.getInt(KEY_CHARACTER_NUM))
 
         calc_button.setOnClickListener {
-            val localPair = pairList ?: throw NullPointerException("pairList is null")
+            val localPairList = pairList ?: throw NullPointerException("pairList is null")
             val errorType = when {
-                !isInputAll(localPair) -> ErrorType.InputAll
-                !isCorrectProbability(localPair) -> ErrorType.CorrectProbability
-                !isCorrectCharacter(localPair) -> ErrorType.Unique
+                !isInputAll(localPairList) -> ErrorType.InputAll
+                !isCorrectProbability(localPairList) -> ErrorType.CorrectProbability
+                !isCorrectCharacter(localPairList) -> ErrorType.Unique
                 else -> ErrorType.None
             }
-            listener?.inputCharacterListener(errorType, localPair)
+            listener?.inputCharacterListener(errorType, localPairList)
         }
     }
 

@@ -1,19 +1,19 @@
 package com.rinon.shannoncode.activities
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.fragments.*
+import com.rinon.shannoncode.fragments.InputCharacterFragmentListener
+import com.rinon.shannoncode.fragments.InputNumberFragment
+import com.rinon.shannoncode.fragments.InputNumberFragmentListener
+import com.rinon.shannoncode.fragments.ResultShannonFragmentListener
+import com.rinon.shannoncode.fragments.InputCharacterFragment
+import com.rinon.shannoncode.fragments.ResultShannonFragment
 import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.models.ShannonCode
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
-
-/**
- * Created by rinon on 2017/12/29.
- */
 
 class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
                                                  , InputCharacterFragmentListener
@@ -35,7 +35,7 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
             val inputNumberFragment = InputNumberFragment.newInstance()
 
             supportFragmentManager.beginTransaction()
-                    .add(R.id.container, inputNumberFragment, inputNumberFragment.tag)
+                    .replace(R.id.container, inputNumberFragment, inputNumberFragment.tag)
                     .commit()
         }
     }
@@ -63,7 +63,7 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
                                                            R.anim.slide_in_left,
                                                            R.anim.slide_out_right)
                                       .replace(R.id.container, inputCharacterFragment, inputCharacterFragment.tag)
-                                      .addToBackStack(null)
+                                      .addToBackStack(inputCharacterFragment.tag)
                                       .commit()
             }
         }
@@ -91,14 +91,14 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
                 if(pairList != null) {
                     result = convertToShannonCode(pairList)
                     val resultFragment = ResultShannonFragment.newInstance(result?: throw NullPointerException("result is null"),
-                                                                            true)
+                                                                            false)
                     supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_right,
                                     R.anim.slide_out_left,
                                     R.anim.slide_in_left,
                                     R.anim.slide_out_right)
                             .replace(R.id.container, resultFragment)
-                            .addToBackStack(null)
+                            .addToBackStack(resultFragment.tag)
                             .commit()
                 } else {
                     throw IllegalArgumentException("pairList is null")
@@ -115,20 +115,29 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
            }
 
            ResultShannonFragment.Companion.Event.Complete -> {
-               // ダイアログを出し、クリックしたら遷移する
+               // ダイアログを出す
                val dialog = DialogManager.createSimpleDialog(resources.getString(R.string.congratulation),
-                       resources.getString(R.string.all_correct),
-                       DialogInterface.OnClickListener { dialog, id ->
-                           val intent = Intent(this, EncodeDecodeActivity::class.java)
-                           intent.putExtra(EncodeDecodeActivity.CONTENT, result?: throw NullPointerException("result is null"))
-                           startActivity(intent)
-                       })
+                                                             resources.getString(R.string.all_correct))
                dialog.show(supportFragmentManager, null)
            }
 
            ResultShannonFragment.Companion.Event.Hint -> {
-               val dialog = DialogManager.createSimpleDialog("Hint", hintText?: "")
+               val dialog = DialogManager.createSimpleDialog("Hint", hintText?: throw NullPointerException("hint text is null"))
                dialog.show(supportFragmentManager, null)
+           }
+
+           ResultShannonFragment.Companion.Event.Encode -> {
+               val intent = Intent(this, EncodeDecodeActivity::class.java)
+               intent.putExtra(EncodeDecodeActivity.CONTENT, result?: throw NullPointerException("result is null"))
+               intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Encode)
+               startActivity(intent)
+           }
+
+           ResultShannonFragment.Companion.Event.Decode -> {
+               val intent = Intent(this, EncodeDecodeActivity::class.java)
+               intent.putExtra(EncodeDecodeActivity.CONTENT, result?: throw NullPointerException("result is null"))
+               intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Decode)
+               startActivity(intent)
            }
        }
     }

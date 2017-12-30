@@ -34,6 +34,8 @@ class ResultShannonFragment : AbstractResultFragment() {
             Complete,
             Wrong,
             Hint,
+            Encode,
+            Decode,
 
             None
         }
@@ -85,14 +87,25 @@ class ResultShannonFragment : AbstractResultFragment() {
 
         if(quizFlag) {
             setQuiz()
+        } else {
+            // エンコード/デコードボタンに切り替える
+            button_switcher.showNext()
         }
 
-        judge_button.setOnClickListener {
-            judge()
+        check_button.setOnClickListener {
+            check()
         }
 
         hint_button.setOnClickListener {
             listener?.resultShannonListener(Event.Hint, getHintText())
+        }
+
+        encode_button.setOnClickListener {
+            listener?.resultShannonListener(Event.Encode)
+        }
+
+        decode_button.setOnClickListener {
+            listener?.resultShannonListener(Event.Decode)
         }
     }
 
@@ -147,7 +160,7 @@ class ResultShannonFragment : AbstractResultFragment() {
         }
     }
 
-    override fun judge(): Boolean {
+    override fun check(): Boolean {
         var viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
         val imageSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Image.value) as ImageSwitcher
         val ans = (viewSwitcher.getChildAt(TextOrder.EditText.value) as EditText).text.toString()
@@ -184,6 +197,9 @@ class ResultShannonFragment : AbstractResultFragment() {
             // すべて正解
             if(quizPos.y >= ShannonCode.Order.Max.value) {
                 listener?.resultShannonListener(Event.Complete)
+
+                // エンコード/デコードボタンに切り替える
+                button_switcher.showNext()
             }
             else {
                 viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher

@@ -22,6 +22,6 @@ abstract class AbstractResultFragment : Fragment() {
     var quizFlag: Boolean = false
     var status = Status.Correct
 
-    abstract fun judge(): Boolean
+    abstract fun check(): Boolean
     abstract fun getHintText(): String
 }

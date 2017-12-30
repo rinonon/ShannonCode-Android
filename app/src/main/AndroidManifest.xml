@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.TopActivity">
+        <activity android:name=".activity.TopActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.InputNumberActivity" />
-        <activity android:name=".activities.ShannonCodingActivity" />
-        <activity android:name=".activities.InputCharacterActivity" />
-        <activity android:name=".activities.QuizActivity" />
-        <activity android:name=".activities.ResultActivity" />
-        <activity android:name=".activities.EncodeDecodeActivity" />
+        <activity android:name=".activity.InputNumberActivity" />
+        <activity android:name=".activity.ShannonCodingActivity" />
+        <activity android:name=".activity.InputCharacterActivity" />
+        <activity android:name=".activity.QuizActivity" />
+        <activity android:name=".activity.ResultActivity" />
+        <activity android:name=".activity.EncodeDecodeActivity" />
     </application>
 
 </manifest>

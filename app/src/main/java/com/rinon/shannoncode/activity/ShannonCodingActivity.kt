@@ -1,18 +1,18 @@
-package com.rinon.shannoncode.activities
+package com.rinon.shannoncode.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.fragments.InputCharacterFragmentListener
-import com.rinon.shannoncode.fragments.InputNumberFragment
-import com.rinon.shannoncode.fragments.InputNumberFragmentListener
-import com.rinon.shannoncode.fragments.ResultShannonFragmentListener
-import com.rinon.shannoncode.fragments.InputCharacterFragment
-import com.rinon.shannoncode.fragments.ResultShannonFragment
+import com.rinon.shannoncode.fragment.InputCharacterFragmentListener
+import com.rinon.shannoncode.fragment.InputNumberFragment
+import com.rinon.shannoncode.fragment.InputNumberFragmentListener
+import com.rinon.shannoncode.fragment.ResultShannonFragmentListener
+import com.rinon.shannoncode.fragment.InputCharacterFragment
+import com.rinon.shannoncode.fragment.ResultShannonFragment
 import com.rinon.shannoncode.managers.DialogManager
-import com.rinon.shannoncode.models.ShannonCode
+import com.rinon.shannoncode.model.ShannonCode
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
 
 class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener

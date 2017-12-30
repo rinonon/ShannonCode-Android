@@ -1,16 +1,16 @@
-package com.rinon.shannoncode.activities
+package com.rinon.shannoncode.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.adapters.EncodeDecodeFragmentPagerAdapter
-import com.rinon.shannoncode.fragments.DecodeFragment
-import com.rinon.shannoncode.fragments.DecodeFragmentListener
-import com.rinon.shannoncode.fragments.EncodeFragment
-import com.rinon.shannoncode.fragments.EncodeFragmentListener
+import com.rinon.shannoncode.adapter.EncodeDecodeFragmentPagerAdapter
+import com.rinon.shannoncode.fragment.DecodeFragment
+import com.rinon.shannoncode.fragment.DecodeFragmentListener
+import com.rinon.shannoncode.fragment.EncodeFragment
+import com.rinon.shannoncode.fragment.EncodeFragmentListener
 import com.rinon.shannoncode.managers.DialogManager
-import com.rinon.shannoncode.models.AbstractContent
+import com.rinon.shannoncode.model.AbstractContent
 import kotlinx.android.synthetic.main.activity_encode_decode.*
 
 class EncodeDecodeActivity : AppCompatActivity(), EncodeFragmentListener,

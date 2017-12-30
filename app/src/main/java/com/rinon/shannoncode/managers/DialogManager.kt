@@ -1,7 +1,7 @@
 package com.rinon.shannoncode.managers
 
 import android.content.DialogInterface
-import com.rinon.shannoncode.fragments.ConfirmDialogFragment
+import com.rinon.shannoncode.fragment.ConfirmDialogFragment
 
 
 internal object DialogManager {

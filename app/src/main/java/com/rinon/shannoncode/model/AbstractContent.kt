@@ -1,4 +1,4 @@
-package com.rinon.shannoncode.models
+package com.rinon.shannoncode.model
 
 /**
  * Created by rinon on 2017/11/17.

@@ -1,4 +1,4 @@
-package com.rinon.shannoncode.activities
+package com.rinon.shannoncode.activity
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity

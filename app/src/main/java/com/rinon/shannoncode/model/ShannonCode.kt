@@ -1,4 +1,4 @@
-package com.rinon.shannoncode.models
+package com.rinon.shannoncode.model
 
 import android.util.Log
 import java.io.Serializable
@@ -26,7 +26,7 @@ object ShannonCode {
                   override var codeword: String = "",
                   var preProbability: Int = 0,
                   var binaryText: String = "",
-                  var length: Int = 0): Serializable, com.rinon.shannoncode.models.AbstractContent()
+                  var length: Int = 0): Serializable, com.rinon.shannoncode.model.AbstractContent()
 
     fun calc(contentList: ArrayList<Content>): ArrayList<Content> {
         // 1.確率順に並び替える

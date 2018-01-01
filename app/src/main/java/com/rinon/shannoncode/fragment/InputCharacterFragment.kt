@@ -60,10 +60,10 @@ class InputCharacterFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_input_character, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pairList = generateInputRows(arguments.getInt(KEY_CHARACTER_NUM))
+        pairList = generateInputRows(arguments?.getInt(KEY_CHARACTER_NUM)?: throw IllegalArgumentException("argument is null"))
 
         calc_button.setOnClickListener {
             val localPairList = pairList ?: throw NullPointerException("pairList is null")

@@ -59,12 +59,11 @@ class ResultShannonFragment : AbstractResultFragment() {
         return inflater.inflate(R.layout.fragment_result_shannon, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bundle = arguments
-        val quizFlag = bundle.getBoolean(KEY_QUIZ_FLAG)
-        contentList = bundle.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Content>
+        val quizFlag = arguments?.getBoolean(KEY_QUIZ_FLAG) ?: throw NullPointerException("argument is null")
+        contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Content>
 
         createResult()
 

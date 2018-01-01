@@ -2,7 +2,12 @@ package com.rinon.shannoncode.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.fragment.*
@@ -11,9 +16,11 @@ import com.rinon.shannoncode.model.AbstractContent
 import com.rinon.shannoncode.model.ShannonCode
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
 
-class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
-                                                 , InputCharacterFragmentListener
-                                                 , ResultFragmentListener {
+class ShannonCodingActivity : AppCompatActivity(),
+        NavigationView.OnNavigationItemSelectedListener,
+        InputNumberFragmentListener,
+        InputCharacterFragmentListener,
+        ResultFragmentListener {
 
     companion object {
         var result: ArrayList<ShannonCode.Content>? = null
@@ -27,6 +34,13 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
         toolbar.title = resources.getString(R.string.shannon_coding)
         setSupportActionBar(toolbar)
 
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.top_menu,
+                R.string.shannon_coding)
+
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+
         if (savedInstanceState == null) {
             val inputNumberFragment = InputNumberFragment.newInstance()
 
@@ -36,6 +50,36 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
         }
     }
 
+    // --- Navigation View ---
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_item1 -> {
+            }
+
+            else -> {
+            }
+        }
+
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.action_settings -> {
+
+            }
+        }
+
+        return true
+    }
+
+    // --- Listener ---
     override fun inputNumberListener(errorType: InputNumberFragment.Companion.ErrorType,
                                      num: Int?) {
         when (errorType){

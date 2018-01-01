@@ -27,7 +27,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:textAlignment="center"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/app_text_size_small" />
 
                         <EditText
                             android:layout_width="match_parent"

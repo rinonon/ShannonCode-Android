@@ -45,7 +45,7 @@ class InputNumberFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_input_number, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         next_button.setOnClickListener {

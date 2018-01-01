@@ -63,12 +63,12 @@ class ResultFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_result, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val type = arguments.getSerializable(KEY_TYPE) as TopActivity.Companion.Type
-        val quizFlag = arguments.getBoolean(KEY_QUIZ_FLAG)
-        val contentList = arguments.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractContent>
+        val type = arguments?.getSerializable(KEY_TYPE) as TopActivity.Companion.Type
+        val quizFlag = arguments?.getBoolean(KEY_QUIZ_FLAG)?: throw NullPointerException("quiz flag is null")
+        val contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractContent>
 
         val fragment = when(type) {
             TopActivity.Companion.Type.Shannon -> ResultShannonFragment.newInstance(contentList as ArrayList<ShannonCode.Content>, quizFlag)

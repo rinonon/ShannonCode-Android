@@ -33,10 +33,10 @@ class ConfirmDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Use the Builder class for convenient dialog construction
-        val builder = AlertDialog.Builder(activity)
-        builder.setTitle(arguments.getString(KEY_TITLE))
-                .setMessage(arguments.getString(KEY_MESSAGE))
-                .setPositiveButton(arguments.getString(KEY_POSITIVE_TEXT), onOkClickListener)
+        val builder = AlertDialog.Builder(context?: throw NullPointerException("Context is null"))
+        builder.setTitle(arguments?.getString(KEY_TITLE))
+                .setMessage(arguments?.getString(KEY_MESSAGE))
+                .setPositiveButton(arguments?.getString(KEY_POSITIVE_TEXT), onOkClickListener)
         // Create the AlertDialog object and return it
         return builder.create()
     }

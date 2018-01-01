@@ -51,10 +51,10 @@ class EncodeFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        contentList = arguments.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractContent>
+        contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractContent>
 
         // 一覧の説明文作成
         var codewordListStr = ""

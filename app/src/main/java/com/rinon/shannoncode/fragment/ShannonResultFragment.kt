@@ -10,16 +10,16 @@ import com.rinon.shannoncode.model.ShannonCode
 
 import kotlinx.android.synthetic.main.fragment_result_shannon.*
 
-class ResultShannonFragment : AbstractResultFragment() {
+class ShannonResultFragment : AbstractResultFragment() {
 
     companion object {
         fun newInstance(contentList: ArrayList<ShannonCode.Content>,
-                        quizFlag: Boolean): ResultShannonFragment {
+                        quizFlag: Boolean): ShannonResultFragment {
 
-            val instance = ResultShannonFragment()
+            val instance = ShannonResultFragment()
             val bundle = Bundle()
-            bundle.putSerializable(ResultShannonFragment.KEY_CONTENT_LIST, contentList)
-            bundle.putBoolean(ResultShannonFragment.KEY_QUIZ_FLAG, quizFlag)
+            bundle.putSerializable(ShannonResultFragment.KEY_CONTENT_LIST, contentList)
+            bundle.putBoolean(ShannonResultFragment.KEY_QUIZ_FLAG, quizFlag)
             instance.arguments = bundle
 
             return instance

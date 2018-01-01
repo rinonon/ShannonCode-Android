@@ -71,7 +71,7 @@ class ResultFragment : Fragment() {
         val contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractContent>
 
         val fragment = when(type) {
-            TopActivity.Companion.Type.Shannon -> ResultShannonFragment.newInstance(contentList as ArrayList<ShannonCode.Content>, quizFlag)
+            TopActivity.Companion.Type.Shannon -> ShannonResultFragment.newInstance(contentList as ArrayList<ShannonCode.Content>, quizFlag)
 
             else -> throw NullPointerException("Type is illegal")
         }
@@ -104,15 +104,15 @@ class ResultFragment : Fragment() {
         }
     }
 
-    fun eventListener(event: ResultShannonFragment.Companion.Event) {
+    fun eventListener(event: ShannonResultFragment.Companion.Event) {
         when(event) {
-            ResultShannonFragment.Companion.Event.Complete -> {
+            ShannonResultFragment.Companion.Event.Complete -> {
                 // エンコード/デコードボタンに切り替える
                 button_switcher.showNext()
                 listener?.resultListener(Event.Complete)
             }
 
-            ResultShannonFragment.Companion.Event.Wrong -> {
+            ShannonResultFragment.Companion.Event.Wrong -> {
                 listener?.resultListener(Event.Wrong)
             }
         }

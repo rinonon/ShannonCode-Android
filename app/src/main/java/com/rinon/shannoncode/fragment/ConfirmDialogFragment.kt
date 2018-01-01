@@ -26,7 +26,7 @@ class ConfirmDialogFragment : DialogFragment() {
         private val KEY_TITLE = "title"
         private val KEY_MESSAGE = "message"
         private val KEY_POSITIVE_TEXT = "positive_text"
-        private val KEY_ON_CLICK_LISTENER = "on_click_listener"
+        // private val KEY_ON_CLICK_LISTENER = "on_click_listener"
     }
 
     var onOkClickListener : DialogInterface.OnClickListener? = null // TODO: どうにかする

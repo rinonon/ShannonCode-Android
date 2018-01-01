@@ -79,7 +79,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/holo_orange_light"
                     android:elevation="0dp"
-                    android:text="ShannonCoding"
+                    android:text="@string/shannon_coding"
                     android:textAllCaps="false" />
 
                 <Button

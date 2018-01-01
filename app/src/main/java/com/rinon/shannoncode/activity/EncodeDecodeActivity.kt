@@ -39,9 +39,7 @@ class EncodeDecodeActivity : AppCompatActivity(), EncodeFragmentListener,
         toolbar.title = "Encode/Decode"
         setSupportActionBar(toolbar)
 
-        // tabの設定
         view_pager.adapter = EncodeDecodeFragmentPagerAdapter(supportFragmentManager, contentList)
-        tabs.setViewPager(view_pager)
 
         // 初期ページ設定
         if (status == Status.None) {
@@ -49,6 +47,10 @@ class EncodeDecodeActivity : AppCompatActivity(), EncodeFragmentListener,
         } else {
             view_pager.currentItem = status.value
         }
+
+        // tabの設定
+        tabs.setViewPager(view_pager)
+
     }
 
     override fun encodeListener(event: EncodeFragment.Companion.Event) {

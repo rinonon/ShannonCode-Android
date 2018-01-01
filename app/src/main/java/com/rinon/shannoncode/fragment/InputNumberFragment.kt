@@ -18,8 +18,7 @@ class InputNumberFragment : Fragment() {
 
     companion object {
         fun newInstance(): InputNumberFragment {
-            val instance = InputNumberFragment()
-            return instance
+            return InputNumberFragment()
         }
 
         enum class ErrorType {

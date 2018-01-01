@@ -13,11 +13,11 @@ class EncodeDecodeFragmentPagerAdapter(fragmentManager: FragmentManager,
     private val pageTitle = listOf("Encode", "Decode")
 
     override fun getItem(position: Int): Fragment {
-       when(position) {
-           0 -> return EncodeFragment.newInstance(contentList)
-           1 -> return DecodeFragment.newInstance(contentList)
-           else -> throw Exception("fragment error")
-       }
+        return when(position) {
+            0 -> EncodeFragment.newInstance(contentList)
+            1 -> DecodeFragment.newInstance(contentList)
+            else -> throw Exception("fragment error")
+        }
     }
 
     override fun getCount(): Int {

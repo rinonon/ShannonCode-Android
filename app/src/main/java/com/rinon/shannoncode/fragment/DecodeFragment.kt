@@ -1,5 +1,6 @@
 package com.rinon.shannoncode.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -49,6 +50,7 @@ class DecodeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_decode, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

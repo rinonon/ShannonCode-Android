@@ -88,7 +88,7 @@ class ShannonCodingActivity : AppCompatActivity(), InputNumberFragmentListener
                     result = convertToShannonCode(pairList)
                     val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.Shannon,
                                                                     result as ArrayList<AbstractContent> ,
-                                                                    true)
+                                                                    false)
 
                     supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_right,

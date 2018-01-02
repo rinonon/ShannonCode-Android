@@ -10,7 +10,7 @@ import com.rinon.shannoncode.R
 import kotlinx.android.synthetic.main.fragment_top_menu.*
 
 interface TopMenuFragmentListener {
-    fun topMenuListener(event: TopMenuFragment.Companion.Event)
+    fun topMenuListener(event: TopMenuFragment.Companion.Event, view: View)
 }
 
 class TopMenuFragment : Fragment() {
@@ -45,7 +45,7 @@ class TopMenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         button_shannon_coding.setOnClickListener {
-            listener?.topMenuListener(Event.Shannon)
+            listener?.topMenuListener(Event.Shannon, button_shannon_coding)
         }
     }
 }

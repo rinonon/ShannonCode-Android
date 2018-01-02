@@ -20,13 +20,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ToolbarTheme">
-
-            <!-- ためしにスピナーを追加 -->
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </android.support.v7.widget.Toolbar>
+            android:theme="@style/ToolbarTheme" />
 
         <com.astuetz.PagerSlidingTabStrip
             android:id="@+id/tabs"
@@ -36,10 +30,11 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:theme="@style/ToolbarTheme"
             app:pstsShouldExpand="true"/>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@drawable/toolbar_shadow" />
+            android:layout_height="match_parent"
+            android:foreground="?android:windowContentOverlay"
+            android:layout_below="@+id/toolbar" />
     </android.support.design.widget.AppBarLayout>
 
     <!-- Main Content -->
@@ -56,7 +51,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <!-- Navigation View -->
 <android.support.design.widget.NavigationView
-    android:id="@+id/navigationView"
+    android:id="@+id/navigation_view"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     app:headerLayout="@layout/drawer_header"

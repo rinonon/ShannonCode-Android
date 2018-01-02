@@ -25,11 +25,13 @@
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:layout_marginBottom="@dimen/padding_bottom"
-        android:layout_marginLeft="@dimen/padding_normal"
-        android:layout_marginRight="@dimen/padding_normal"
+        android:layout_marginEnd="@dimen/padding_normal"
+        android:layout_marginStart="@dimen/padding_normal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,17 +49,18 @@
                     android:layout_height="85dp"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:background="@android:color/holo_orange_light"
+                    android:background="@color/shannon"
                     android:elevation="0dp"
                     android:text="@string/shannon_coding"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:transitionName="image" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="85dp"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:background="@android:color/holo_green_light"
+                    android:background="@color/a"
                     android:text="Button"
                     android:textAllCaps="false" />
             </LinearLayout>
@@ -72,7 +75,7 @@
                     android:layout_height="85dp"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:background="@android:color/holo_blue_light"
+                    android:background="@color/b"
                     android:elevation="0dp"
                     android:text="ShannonCoding"
                     android:textAllCaps="false" />
@@ -82,7 +85,7 @@
                     android:layout_height="85dp"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:background="@android:color/holo_purple"
+                    android:background="@color/c"
                     android:text="Button"
                     android:textAllCaps="false" />
             </LinearLayout>

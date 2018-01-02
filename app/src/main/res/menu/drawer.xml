@@ -15,9 +15,9 @@
     <item android:title="Algorithm">
         <menu>
             <item
-                android:id="@+id/menu_item3"
+                android:id="@+id/menu_shannon"
                 android:icon="@android:drawable/ic_menu_save"
-                android:title="Save" />
+                android:title="@string/shannon_coding" />
             <item
                 android:id="@+id/menu_item4"
                 android:icon="@android:drawable/ic_menu_delete"

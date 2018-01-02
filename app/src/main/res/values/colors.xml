@@ -5,4 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="toolbarText">#FFFF</color>
     <color name="colorDrawerHeader">#CDDC39</color>
+
+    <color name="shannon">#EF9A9A</color>
+    <color name="a">#FFE082</color>
+    <color name="b">#A5D6A7</color>
+    <color name="c">#90CAF9</color>
+    
 </resources>

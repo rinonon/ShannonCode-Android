@@ -2,6 +2,11 @@ package com.rinon.shannoncode.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
+import android.view.Menu
+import android.view.MenuItem
 
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.adapter.EncodeDecodeFragmentPagerAdapter
@@ -13,7 +18,8 @@ import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.model.AbstractContent
 import kotlinx.android.synthetic.main.activity_encode_decode.*
 
-class EncodeDecodeActivity : AppCompatActivity(), EncodeFragmentListener,
+class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+                                                  EncodeFragmentListener,
                                                   DecodeFragmentListener {
 
     companion object {
@@ -39,6 +45,15 @@ class EncodeDecodeActivity : AppCompatActivity(), EncodeFragmentListener,
         toolbar.title = "Encode/Decode"
         setSupportActionBar(toolbar)
 
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.top_menu,
+                R.string.shannon_coding)
+
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navigation_view.setNavigationItemSelectedListener(this)
+
         view_pager.adapter = EncodeDecodeFragmentPagerAdapter(supportFragmentManager, contentList)
 
         // 初期ページ設定
@@ -50,9 +65,41 @@ class EncodeDecodeActivity : AppCompatActivity(), EncodeFragmentListener,
 
         // tabの設定
         tabs.setViewPager(view_pager)
-
     }
 
+
+    // --- Navigation View ---
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_item1 -> {
+            }
+
+            R.id.menu_shannon -> {
+
+            }
+
+            else -> {
+            }
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.action_settings -> {
+
+            }
+        }
+        return true
+    }
+
+    // --- Fragment listener
     override fun encodeListener(event: EncodeFragment.Companion.Event) {
         when(event) {
             EncodeFragment.Companion.Event.EncodeError -> {

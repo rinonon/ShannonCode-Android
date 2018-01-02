@@ -16,14 +16,15 @@ import com.rinon.shannoncode.model.AbstractContent
 import com.rinon.shannoncode.model.ShannonCode
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
 
-class ShannonCodingActivity : AppCompatActivity(),
-        NavigationView.OnNavigationItemSelectedListener,
-        InputNumberFragmentListener,
-        InputCharacterFragmentListener,
-        ResultFragmentListener {
+class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+                                                   TopFragmentListener,
+                                                   InputNumberFragmentListener,
+                                                   InputCharacterFragmentListener,
+                                                   ResultFragmentListener {
 
     companion object {
         var result: ArrayList<ShannonCode.Content>? = null
+        var quizMode: Boolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +42,13 @@ class ShannonCodingActivity : AppCompatActivity(),
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
+        navigation_view.setNavigationItemSelectedListener(this)
+
         if (savedInstanceState == null) {
-            val inputNumberFragment = InputNumberFragment.newInstance()
+            val fragment = TopFragment.newInstance()
 
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, inputNumberFragment, inputNumberFragment.tag)
+                    .replace(R.id.container, fragment, fragment.tag)
                     .commit()
         }
     }
@@ -56,10 +59,13 @@ class ShannonCodingActivity : AppCompatActivity(),
             R.id.menu_item1 -> {
             }
 
+            R.id.menu_shannon -> {
+
+            }
+
             else -> {
             }
         }
-
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
@@ -75,11 +81,28 @@ class ShannonCodingActivity : AppCompatActivity(),
 
             }
         }
-
         return true
     }
 
-    // --- Listener ---
+    // --- Fragment listener ---
+    override fun topListener(event: TopFragment.Companion.Event, quizFlag: Boolean) {
+        when(event) {
+            TopFragment.Companion.Event.Start -> {
+                quizMode = quizFlag
+                val fragment = InputNumberFragment.newInstance()
+
+                supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_right,
+                                R.anim.slide_out_left,
+                                R.anim.slide_in_left,
+                                R.anim.slide_out_right)
+                        .replace(R.id.container, fragment, fragment.tag)
+                        .addToBackStack(fragment.tag)
+                        .commit()
+            }
+        }
+    }
+
     override fun inputNumberListener(errorType: InputNumberFragment.Companion.ErrorType,
                                      num: Int?) {
         when (errorType){
@@ -132,7 +155,7 @@ class ShannonCodingActivity : AppCompatActivity(),
                     result = convertToShannonCode(pairList)
                     val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.Shannon,
                                                                     result as ArrayList<AbstractContent> ,
-                                                                    false)
+                                                                    quizMode)
 
                     supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_right,

@@ -4,10 +4,14 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.fragment.TopMenuFragment
 import com.rinon.shannoncode.fragment.TopMenuFragmentListener
@@ -22,9 +26,9 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
 
             None
         }
-
-        var type = Type.None
     }
+
+    var type = Type.None
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +45,8 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
+        navigation_view.setNavigationItemSelectedListener(this)
+
         if(savedInstanceState == null) {
             val fragment = TopMenuFragment.newInstance()
 
@@ -56,10 +62,13 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
             R.id.menu_item1 -> {
             }
 
+            R.id.menu_shannon -> {
+                Log.d("menu", "shannon")
+            }
+
             else -> {
             }
         }
-
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
@@ -75,17 +84,18 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
 
             }
         }
-
         return true
     }
 
-    override fun topMenuListener(event: TopMenuFragment.Companion.Event) {
+    // --- Fragment listener ---
+    override fun topMenuListener(event: TopMenuFragment.Companion.Event, view: View) {
         when(event) {
             TopMenuFragment.Companion.Event.Shannon -> {
                 type = Type.Shannon
 
+                val optionCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, Pair(view, view.transitionName))
                 val intent = Intent(this, ShannonCodingActivity::class.java)
-                startActivity(intent)
+                startActivity(intent, optionCompat.toBundle())
             }
         }
     }

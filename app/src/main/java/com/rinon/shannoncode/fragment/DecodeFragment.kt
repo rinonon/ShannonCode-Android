@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.model.AbstractContent
+import com.rinon.shannoncode.model.AbstractCode
 import kotlinx.android.synthetic.main.fragment_decode.*
 
 interface DecodeFragmentListener {
@@ -18,10 +18,10 @@ interface DecodeFragmentListener {
 class DecodeFragment : Fragment() {
 
     companion object {
-        fun newInstance(contentList: ArrayList<AbstractContent>): DecodeFragment {
+        fun newInstance(codeList: ArrayList<AbstractCode>): DecodeFragment {
             val instance = DecodeFragment()
             val bundle = Bundle()
-            bundle.putSerializable(KEY_CONTENT_LIST, contentList)
+            bundle.putSerializable(KEY_CONTENT_LIST, codeList)
             instance.arguments = bundle
 
             return instance
@@ -35,7 +35,7 @@ class DecodeFragment : Fragment() {
 
         private val KEY_CONTENT_LIST = "content_list"
         private var listener: DecodeFragmentListener? = null
-        private var contentList: ArrayList<AbstractContent>? = null
+        private var codeList: ArrayList<AbstractCode>? = null
     }
 
     override fun onAttach(context: Context?) {
@@ -54,31 +54,31 @@ class DecodeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractContent>
+        codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractCode>
 
         // 一覧の説明文作成
         var codewordListStr = ""
-        contentList?.forEachIndexed {
+        codeList?.forEachIndexed {
             index, content -> codewordListStr += content.char + ":" + content.codeword +
-                if(index + 1 % 5 == 0) "\n" else if(index + 1 == contentList?.size) "" else ", "
+                if(index + 1 % 5 == 0) "\n" else if(index + 1 == codeList?.size) "" else ", "
         }
         description_text.text = "($codewordListStr)"
 
         decode_button.setOnClickListener {
-            val decodeText = decode(contentList?: throw NullPointerException("contentList is null"),
+            val decodeText = decode(codeList ?: throw NullPointerException("codeList is null"),
                                     codeword.text.toString())
 
             result_text.text = decodeText
         }
     }
 
-    private fun decode(result: ArrayList<AbstractContent>, sourceText: String): String {
+    private fun decode(result: ArrayList<AbstractCode>, sourceText: String): String {
         var ret = ""
         var currentIdx = 0
 
         while (currentIdx < sourceText.length) {
             try {
-                val match: AbstractContent = result.find {
+                val match: AbstractCode = result.find {
                     it.codeword == sourceText.substring(currentIdx, it.codeword.length + currentIdx)
                 } ?: throw Exception("not found")
 

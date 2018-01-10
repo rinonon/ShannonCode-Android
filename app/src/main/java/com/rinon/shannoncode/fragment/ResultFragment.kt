@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.activity.TopActivity
-import com.rinon.shannoncode.model.AbstractContent
+import com.rinon.shannoncode.model.AbstractCode
 import com.rinon.shannoncode.model.ShannonCode
 import kotlinx.android.synthetic.main.fragment_result.*
 
@@ -20,13 +20,13 @@ class ResultFragment : Fragment() {
 
     companion object {
         fun newInstance(type: TopActivity.Companion.Type,
-                        contentList: ArrayList<AbstractContent>,
+                        codeList: ArrayList<AbstractCode>,
                         quizFlag: Boolean): ResultFragment {
 
             val instance = ResultFragment()
             val bundle = Bundle()
             bundle.putSerializable(KEY_TYPE, type)
-            bundle.putSerializable(KEY_CONTENT_LIST, contentList)
+            bundle.putSerializable(KEY_CONTENT_LIST, codeList)
             bundle.putBoolean(KEY_QUIZ_FLAG, quizFlag)
             instance.arguments = bundle
 
@@ -47,7 +47,7 @@ class ResultFragment : Fragment() {
         private val KEY_QUIZ_FLAG = "quiz_flag"
         private val KEY_CONTENT_LIST = "content_list"
 
-        //private var contentList: ArrayList<AbstractContent>? = null
+        //private var codeList: ArrayList<AbstractCode>? = null
         private var listener: ResultFragmentListener? = null
     }
 
@@ -68,10 +68,10 @@ class ResultFragment : Fragment() {
 
         val type = arguments?.getSerializable(KEY_TYPE) as TopActivity.Companion.Type
         val quizFlag = arguments?.getBoolean(KEY_QUIZ_FLAG)?: throw NullPointerException("quiz flag is null")
-        val contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractContent>
+        val contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractCode>
 
         val fragment = when(type) {
-            TopActivity.Companion.Type.Shannon -> ShannonResultFragment.newInstance(contentList as ArrayList<ShannonCode.Content>, quizFlag)
+            TopActivity.Companion.Type.Shannon -> ShannonResultFragment.newInstance(contentList as ArrayList<ShannonCode.Code>, quizFlag)
 
             else -> throw NullPointerException("Type is illegal")
         }

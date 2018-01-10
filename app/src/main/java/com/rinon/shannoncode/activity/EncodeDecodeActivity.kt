@@ -15,7 +15,7 @@ import com.rinon.shannoncode.fragment.DecodeFragmentListener
 import com.rinon.shannoncode.fragment.EncodeFragment
 import com.rinon.shannoncode.fragment.EncodeFragmentListener
 import com.rinon.shannoncode.managers.DialogManager
-import com.rinon.shannoncode.model.AbstractContent
+import com.rinon.shannoncode.model.AbstractCode
 import kotlinx.android.synthetic.main.activity_encode_decode.*
 
 class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
@@ -38,7 +38,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encode_decode)
 
-        val contentList = intent.getSerializableExtra(CONTENT) as ArrayList<AbstractContent>
+        val contentList = intent.getSerializableExtra(CONTENT) as ArrayList<AbstractCode>
         val status = intent.getSerializableExtra(STATUS) as Status
 
         // ツールバーの設定

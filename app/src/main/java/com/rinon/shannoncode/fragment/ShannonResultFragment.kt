@@ -13,12 +13,12 @@ import kotlinx.android.synthetic.main.fragment_result_shannon.*
 class ShannonResultFragment : AbstractResultFragment() {
 
     companion object {
-        fun newInstance(contentList: ArrayList<ShannonCode.Content>,
+        fun newInstance(codeList: ArrayList<ShannonCode.Code>,
                         quizFlag: Boolean): ShannonResultFragment {
 
             val instance = ShannonResultFragment()
             val bundle = Bundle()
-            bundle.putSerializable(ShannonResultFragment.KEY_CONTENT_LIST, contentList)
+            bundle.putSerializable(ShannonResultFragment.KEY_CONTENT_LIST, codeList)
             bundle.putBoolean(ShannonResultFragment.KEY_QUIZ_FLAG, quizFlag)
             instance.arguments = bundle
 
@@ -52,7 +52,7 @@ class ShannonResultFragment : AbstractResultFragment() {
         val KEY_QUIZ_FLAG = "quiz_flag"
         val KEY_CONTENT_LIST = "content_list"
 
-        var contentList: ArrayList<ShannonCode.Content> = ArrayList()
+        var codeList: ArrayList<ShannonCode.Code> = ArrayList()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -63,7 +63,7 @@ class ShannonResultFragment : AbstractResultFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val quizFlag = arguments?.getBoolean(KEY_QUIZ_FLAG) ?: throw NullPointerException("argument is null")
-        contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Content>
+        codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Code>
 
         createResult()
 
@@ -73,7 +73,7 @@ class ShannonResultFragment : AbstractResultFragment() {
     }
 
     private fun createResult() {
-        for((index, content) in contentList.withIndex()) {
+        for((index, content) in codeList.withIndex()) {
             val row: LinearLayout = layoutInflater.inflate(R.layout.container_result_shannon, result_shannon, false) as LinearLayout
             val content = content
 
@@ -106,7 +106,7 @@ class ShannonResultFragment : AbstractResultFragment() {
         quizPos.x = QUIZ_START_INDEX_X
         quizPos.y = QUIZ_START_INDEX_Y
 
-        for (x in quizPos.x until contentList.size + QUIZ_START_INDEX_X) {
+        for (x in quizPos.x until codeList.size + QUIZ_START_INDEX_X) {
             for (y in quizPos.y until ShannonCode.Order.Max.value) {
 
                 val row = (result_shannon.getChildAt(x) as LinearLayout).getChildAt(y) as LinearLayout
@@ -128,7 +128,7 @@ class ShannonResultFragment : AbstractResultFragment() {
         val imageSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Image.value) as ImageSwitcher
         val ans = (viewSwitcher.getChildAt(TextOrder.EditText.value) as EditText).text.toString()
 
-        val content = contentList?.get(quizPos.x - QUIZ_START_INDEX_X)
+        val content = codeList?.get(quizPos.x - QUIZ_START_INDEX_X)
         val correct = when(quizPos.y) {
             ShannonCode.Order.PreProbability.value -> content.preProbability.toString()
             ShannonCode.Order.Binary.value -> content.binaryText
@@ -152,8 +152,8 @@ class ShannonResultFragment : AbstractResultFragment() {
             // 次の問題へ
             quizPos.x++
 
-            if(quizPos.x - QUIZ_START_INDEX_X >= contentList.size) {
-                quizPos.x -= contentList.size
+            if(quizPos.x - QUIZ_START_INDEX_X >= codeList.size) {
+                quizPos.x -= codeList.size
                 quizPos.y++
             }
 

@@ -21,44 +21,44 @@ object ShannonCode {
     }
 
     // データ格納用の内部クラス
-    class Content(override val char: Char,
-                  override val probability: Int,
-                  override var codeword: String = "",
-                  var preProbability: Int = 0,
-                  var binaryText: String = "",
-                  var length: Int = 0): Serializable, com.rinon.shannoncode.model.AbstractContent()
+    class Code(override val char: Char,
+               override val probability: Int,
+               override var codeword: String = "",
+               var preProbability: Int = 0,
+               var binaryText: String = "",
+               var length: Int = 0): Serializable, com.rinon.shannoncode.model.AbstractCode()
 
-    fun calc(contentList: ArrayList<Content>): ArrayList<Content> {
+    fun calc(codeList: ArrayList<Code>): ArrayList<Code> {
         // 1.確率順に並び替える
-        contentList.sortByDescending { it -> it.probability }
+        codeList.sortByDescending { it -> it.probability }
 
         // 2.確率の合計値を計算していく
-        contentList[0].preProbability = 0
+        codeList[0].preProbability = 0
 
-        (0 until contentList.size)
+        (0 until codeList.size)
                 .asSequence()
                 .filter { it > 0 }  // 初回はとばす
                 .forEach {
-                    contentList[it].preProbability = contentList[it - 1].probability + contentList[it - 1].preProbability
+                    codeList[it].preProbability = codeList[it - 1].probability + codeList[it - 1].preProbability
                 }
 
         // 3.2進数にして符号を決める
-        for(content in contentList) {
+        for(code in codeList) {
             //-log2piを求める (切り上げ)
-            content.length = (- Math.log(content.probability / 100.0) / Math.log(2.0)).toInt() + 1
-            content.binaryText = generateBinaryText(content.preProbability / 100.0)
+            code.length = (- Math.log(code.probability / 100.0) / Math.log(2.0)).toInt() + 1
+            code.binaryText = generateBinaryText(code.preProbability / 100.0)
 
             // 最初の0.を抜いたbitNumの数
-            content.codeword = content.binaryText.substring(2, content.length + 2)
+            code.codeword = code.binaryText.substring(2, code.length + 2)
 
-            Log.d("result", "char: " + content.char + '\n' +
-                              "probability: " + content.probability.toString() + '\n' +
-                              "preProbability: " + content.preProbability.toString() + '\n' +
-                              "binaryText: " + content.binaryText + '\n' +
-                              "length: " + content.length.toString() + '\n' +
-                              "codeword: " + content.codeword + '\n')
+            Log.d("result", "char: " + code.char + '\n' +
+                              "probability: " + code.probability.toString() + '\n' +
+                              "preProbability: " + code.preProbability.toString() + '\n' +
+                              "binaryText: " + code.binaryText + '\n' +
+                              "length: " + code.length.toString() + '\n' +
+                              "codeword: " + code.codeword + '\n')
         }
-        return contentList
+        return codeList
     }
 
     private fun generateBinaryText(probability: Double): String {

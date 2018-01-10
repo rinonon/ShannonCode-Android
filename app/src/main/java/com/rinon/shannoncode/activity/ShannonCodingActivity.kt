@@ -12,7 +12,7 @@ import android.widget.EditText
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.fragment.*
 import com.rinon.shannoncode.managers.DialogManager
-import com.rinon.shannoncode.model.AbstractContent
+import com.rinon.shannoncode.model.AbstractCode
 import com.rinon.shannoncode.model.ShannonCode
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
 
@@ -23,7 +23,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                                                    ResultFragmentListener {
 
     companion object {
-        var result: ArrayList<ShannonCode.Content>? = null
+        var result: ArrayList<ShannonCode.Code>? = null
         var quizMode: Boolean = false
     }
 
@@ -154,7 +154,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                 if(pairList != null) {
                     result = convertToShannonCode(pairList)
                     val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.Shannon,
-                                                                    result as ArrayList<AbstractContent> ,
+                                                                    result as ArrayList<AbstractCode> ,
                                                                     quizMode)
 
                     supportFragmentManager.beginTransaction()
@@ -207,12 +207,12 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
        }
     }
 
-    private fun convertToShannonCode(pairList: ArrayList<Pair<EditText, EditText>>): ArrayList<ShannonCode.Content> {
-        val contentList = ArrayList<ShannonCode.Content>()
+    private fun convertToShannonCode(pairList: ArrayList<Pair<EditText, EditText>>): ArrayList<ShannonCode.Code> {
+        val contentList = ArrayList<ShannonCode.Code>()
 
         // 変換作業
         pairList.mapTo(contentList) {
-            ShannonCode.Content(it.first.text.toString()[0],
+            ShannonCode.Code(it.first.text.toString()[0],
                     it.second.text.toString().toInt())
         }
         return ShannonCode.calc(contentList)

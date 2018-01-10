@@ -8,7 +8,7 @@ import com.rinon.shannoncode.fragment.EncodeFragment
 import com.rinon.shannoncode.model.AbstractCode
 
 class EncodeDecodeFragmentPagerAdapter(fragmentManager: FragmentManager,
-                                       private val codeList: ArrayList<AbstractCode>) : FragmentPagerAdapter(fragmentManager) {
+                                       private val codeList: Array<AbstractCode>) : FragmentPagerAdapter(fragmentManager) {
 
     private val pageTitle = listOf("Encode", "Decode")
 

@@ -23,6 +23,7 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
     companion object {
         enum class Type {
             Shannon,
+            ShannonFano,
 
             None
         }
@@ -96,6 +97,14 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
                 val optionCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, Pair(view, view.transitionName))
                 val intent = Intent(this, ShannonCodingActivity::class.java)
                 startActivity(intent, optionCompat.toBundle())
+            }
+
+            TopMenuFragment.Companion.Event.ShannonFano -> {
+                type = Type.ShannonFano
+
+                //val optionCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, Pair(view, view.transitionName))
+                val intent = Intent(this, ShannonFanoActivity::class.java)
+                startActivity(intent)
             }
         }
     }

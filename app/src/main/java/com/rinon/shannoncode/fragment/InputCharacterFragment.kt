@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_input_character.*
 
 interface InputCharacterFragmentListener {
     fun inputCharacterListener(errorType: InputCharacterFragment.Companion.ErrorType,
-                               pairList: ArrayList<Pair<EditText, EditText>>?)
+                               pairList: Array<Pair<String, String>>?)
 }
 
 class InputCharacterFragment : Fragment() {
@@ -45,7 +45,7 @@ class InputCharacterFragment : Fragment() {
 
         private val KEY_CHARACTER_NUM = "character_num"
         private var listener: InputCharacterFragmentListener? = null
-        private var pairList: ArrayList<Pair<EditText, EditText>>? = null
+        private var pairList: Array<Pair<EditText, EditText>>? = null
     }
 
     override fun onAttach(context: Context?) {
@@ -66,18 +66,18 @@ class InputCharacterFragment : Fragment() {
         pairList = generateInputRows(arguments?.getInt(KEY_CHARACTER_NUM)?: throw IllegalArgumentException("argument is null"))
 
         calc_button.setOnClickListener {
-            val localPairList = pairList ?: throw NullPointerException("pairList is null")
+            val strPairList = convertToString(pairList?: throw NullPointerException("pair list is null"))
             val errorType = when {
-                !isInputAll(localPairList) -> ErrorType.InputAll
-                !isCorrectProbability(localPairList) -> ErrorType.CorrectProbability
-                !isCorrectCharacter(localPairList) -> ErrorType.Unique
+                !isInputAll(strPairList) -> ErrorType.InputAll
+                !isCorrectProbability(strPairList) -> ErrorType.CorrectProbability
+                !isCorrectCharacter(strPairList) -> ErrorType.Unique
                 else -> ErrorType.None
             }
-            listener?.inputCharacterListener(errorType, localPairList)
+            listener?.inputCharacterListener(errorType, strPairList)
         }
     }
 
-    private fun generateInputRows(num: Int):  ArrayList<Pair<EditText, EditText>> {
+    private fun generateInputRows(num: Int):  Array<Pair<EditText, EditText>> {
         val ret = ArrayList<Pair<EditText, EditText>>()        // first:char second:probability
 
         for(counter in 0 until num) {
@@ -88,19 +88,29 @@ class InputCharacterFragment : Fragment() {
 
             ret.add(Pair(char, probability))
         }
-        return ret
+        return ret.toTypedArray()
     }
 
-    private fun isInputAll(pairList: ArrayList<Pair<EditText, EditText>>): Boolean {
-        return pairList.none { it.first.text.toString() == "" || it.second.text.toString() == "" }
+    private fun isInputAll(pairList: Array<Pair<String, String>>): Boolean {
+        return pairList.none { it.first == "" || it.second == "" }
     }
 
-    private fun isCorrectProbability(pairList: ArrayList<Pair<EditText, EditText>>): Boolean {
-        val sum = pairList.sumBy { it.second.text.toString().toInt() }
+    private fun isCorrectProbability(pairList: Array<Pair<String, String>>): Boolean {
+        val sum = pairList.sumBy { it.second.toInt() }
         return (sum == 100)
     }
 
-    private fun isCorrectCharacter(pairList: ArrayList<Pair<EditText, EditText>>): Boolean {
-        return pairList.size == pairList.distinctBy { it.first.text.toString()[0] }.size
+    private fun isCorrectCharacter(pairList: Array<Pair<String, String>>): Boolean {
+        return pairList.size == pairList.distinctBy { it.first[0] }.size
+    }
+
+    private fun convertToString(pairList: Array<Pair<EditText, EditText>>): Array<Pair<String, String>> {
+        val ret = mutableListOf<Pair<String, String>>()
+
+        pairList.mapTo(ret) {
+            Pair(it.first.text.toString(), it.second.text.toString())
+        }
+
+        return ret.toTypedArray()
     }
 }

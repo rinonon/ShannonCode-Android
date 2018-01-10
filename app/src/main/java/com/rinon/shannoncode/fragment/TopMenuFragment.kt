@@ -22,6 +22,7 @@ class TopMenuFragment : Fragment() {
 
         enum class Event {
             Shannon,
+            ShannonFano,
 
             None
         }
@@ -46,6 +47,10 @@ class TopMenuFragment : Fragment() {
 
         button_shannon_coding.setOnClickListener {
             listener?.topMenuListener(Event.Shannon, button_shannon_coding)
+        }
+
+        button_shannon_fano.setOnClickListener {
+            listener?.topMenuListener(Event.ShannonFano, button_shannon_fano)
         }
     }
 }

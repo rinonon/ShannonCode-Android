@@ -30,7 +30,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
             None(-1);
         }
 
-        val CONTENT = "content"
+        val CODE = "code"
         val STATUS = "status"
     }
 
@@ -38,7 +38,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encode_decode)
 
-        val contentList = intent.getSerializableExtra(CONTENT) as ArrayList<AbstractCode>
+        val codeList = intent.getSerializableExtra(CODE) as Array<AbstractCode>
         val status = intent.getSerializableExtra(STATUS) as Status
 
         // ツールバーの設定
@@ -54,7 +54,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
         navigation_view.setNavigationItemSelectedListener(this)
 
-        view_pager.adapter = EncodeDecodeFragmentPagerAdapter(supportFragmentManager, contentList)
+        view_pager.adapter = EncodeDecodeFragmentPagerAdapter(supportFragmentManager, codeList)
 
         // 初期ページ設定
         if (status == Status.None) {

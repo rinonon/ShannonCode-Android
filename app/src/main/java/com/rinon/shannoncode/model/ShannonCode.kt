@@ -3,9 +3,6 @@ package com.rinon.shannoncode.model
 import android.util.Log
 import java.io.Serializable
 
-/**
- * Created by rinon on 2017/10/13.
- */
 object ShannonCode {
 
     enum class Order(val value: Int) {
@@ -28,7 +25,7 @@ object ShannonCode {
                var binaryText: String = "",
                var length: Int = 0): Serializable, com.rinon.shannoncode.model.AbstractCode()
 
-    fun calc(codeList: ArrayList<Code>): ArrayList<Code> {
+    fun calc(codeList: MutableList<Code>): Array<Code> {
         // 1.確率順に並び替える
         codeList.sortByDescending { it -> it.probability }
 
@@ -58,7 +55,7 @@ object ShannonCode {
                               "length: " + code.length.toString() + '\n' +
                               "codeword: " + code.codeword + '\n')
         }
-        return codeList
+        return codeList.toTypedArray()
     }
 
     private fun generateBinaryText(probability: Double): String {

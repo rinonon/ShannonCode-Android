@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_result_shannon.*
 class ShannonResultFragment : AbstractResultFragment() {
 
     companion object {
-        fun newInstance(codeList: ArrayList<ShannonCode.Code>,
+        fun newInstance(codeList: Array<ShannonCode.Code>,
                         quizFlag: Boolean): ShannonResultFragment {
 
             val instance = ShannonResultFragment()

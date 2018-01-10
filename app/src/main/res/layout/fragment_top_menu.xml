@@ -56,12 +56,13 @@
                     android:transitionName="image" />
 
                 <Button
+                    android:id="@+id/button_shannon_fano"
                     android:layout_width="match_parent"
                     android:layout_height="85dp"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:background="@color/a"
-                    android:text="Button"
+                    android:text="ShannonFano"
                     android:textAllCaps="false" />
             </LinearLayout>
 

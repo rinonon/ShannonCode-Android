@@ -20,7 +20,7 @@ class ResultFragment : Fragment() {
 
     companion object {
         fun newInstance(type: TopActivity.Companion.Type,
-                        codeList: ArrayList<AbstractCode>,
+                        codeList: Array<AbstractCode>,
                         quizFlag: Boolean): ResultFragment {
 
             val instance = ResultFragment()
@@ -68,10 +68,10 @@ class ResultFragment : Fragment() {
 
         val type = arguments?.getSerializable(KEY_TYPE) as TopActivity.Companion.Type
         val quizFlag = arguments?.getBoolean(KEY_QUIZ_FLAG)?: throw NullPointerException("quiz flag is null")
-        val contentList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractCode>
+        val codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as Array<AbstractCode>
 
         val fragment = when(type) {
-            TopActivity.Companion.Type.Shannon -> ShannonResultFragment.newInstance(contentList as ArrayList<ShannonCode.Code>, quizFlag)
+            TopActivity.Companion.Type.Shannon -> ShannonResultFragment.newInstance(codeList as Array<ShannonCode.Code>, quizFlag)
 
             else -> throw NullPointerException("Type is illegal")
         }

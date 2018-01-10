@@ -18,7 +18,7 @@ interface DecodeFragmentListener {
 class DecodeFragment : Fragment() {
 
     companion object {
-        fun newInstance(codeList: ArrayList<AbstractCode>): DecodeFragment {
+        fun newInstance(codeList: Array<AbstractCode>): DecodeFragment {
             val instance = DecodeFragment()
             val bundle = Bundle()
             bundle.putSerializable(KEY_CONTENT_LIST, codeList)
@@ -35,7 +35,7 @@ class DecodeFragment : Fragment() {
 
         private val KEY_CONTENT_LIST = "content_list"
         private var listener: DecodeFragmentListener? = null
-        private var codeList: ArrayList<AbstractCode>? = null
+        private var codeList: Array<AbstractCode>? = null
     }
 
     override fun onAttach(context: Context?) {
@@ -54,7 +54,7 @@ class DecodeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<AbstractCode>
+        codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as Array<AbstractCode>
 
         // 一覧の説明文作成
         var codewordListStr = ""
@@ -72,7 +72,7 @@ class DecodeFragment : Fragment() {
         }
     }
 
-    private fun decode(result: ArrayList<AbstractCode>, sourceText: String): String {
+    private fun decode(result: Array<AbstractCode>, sourceText: String): String {
         var ret = ""
         var currentIdx = 0
 

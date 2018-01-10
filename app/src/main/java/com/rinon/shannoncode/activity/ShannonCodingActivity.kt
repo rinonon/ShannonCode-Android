@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.fragment.*
 import com.rinon.shannoncode.managers.DialogManager
@@ -23,7 +22,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                                                    ResultFragmentListener {
 
     companion object {
-        var result: ArrayList<ShannonCode.Code>? = null
+        var result: Array<ShannonCode.Code>? = null
         var quizMode: Boolean = false
     }
 
@@ -133,7 +132,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
     }
 
     override fun inputCharacterListener(errorType: InputCharacterFragment.Companion.ErrorType,
-                                        pairList: ArrayList<Pair<EditText, EditText>>?) {
+                                        pairList: Array<Pair<String, String>>?) {
         when (errorType) {
             InputCharacterFragment.Companion.ErrorType.InputAll -> {
                 val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_input_check))
@@ -154,7 +153,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                 if(pairList != null) {
                     result = convertToShannonCode(pairList)
                     val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.Shannon,
-                                                                    result as ArrayList<AbstractCode> ,
+                                                                    result as Array<AbstractCode> ,
                                                                     quizMode)
 
                     supportFragmentManager.beginTransaction()
@@ -193,28 +192,28 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
 
            ResultFragment.Companion.Event.Encode -> {
                val intent = Intent(this, EncodeDecodeActivity::class.java)
-               intent.putExtra(EncodeDecodeActivity.CONTENT, result?: throw NullPointerException("result is null"))
+               intent.putExtra(EncodeDecodeActivity.CODE, result?: throw NullPointerException("result is null"))
                intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Encode)
                startActivity(intent)
            }
 
            ResultFragment.Companion.Event.Decode -> {
                val intent = Intent(this, EncodeDecodeActivity::class.java)
-               intent.putExtra(EncodeDecodeActivity.CONTENT, result?: throw NullPointerException("result is null"))
+               intent.putExtra(EncodeDecodeActivity.CODE, result?: throw NullPointerException("result is null"))
                intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Decode)
                startActivity(intent)
            }
        }
     }
 
-    private fun convertToShannonCode(pairList: ArrayList<Pair<EditText, EditText>>): ArrayList<ShannonCode.Code> {
-        val contentList = ArrayList<ShannonCode.Code>()
+    private fun convertToShannonCode(pairList: Array<Pair<String, String>>): Array<ShannonCode.Code> {
+        val codeList = mutableListOf<ShannonCode.Code>()
 
         // 変換作業
-        pairList.mapTo(contentList) {
-            ShannonCode.Code(it.first.text.toString()[0],
-                    it.second.text.toString().toInt())
+        pairList.mapTo(codeList) {
+            ShannonCode.Code(it.first[0],
+                    it.second.toInt())
         }
-        return ShannonCode.calc(contentList)
+        return ShannonCode.calc(codeList)
     }
 }

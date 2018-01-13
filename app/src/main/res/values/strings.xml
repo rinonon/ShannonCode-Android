@@ -8,6 +8,7 @@
     <!-- tool_bar -->
     <string name="top_menu">Top Menu</string>
     <string name="shannon_coding">Shannon Coding</string>
+    <string name="shannon_fano_coding">Shannon-Fano Coding</string>
 
     <!-- fragment_top -->
     <string name="info_button">Info</string>

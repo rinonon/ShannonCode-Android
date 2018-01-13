@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rinon.shannoncode.R
+import com.rinon.shannoncode.activity.TopActivity.Companion.Type as Type
 import kotlinx.android.synthetic.main.fragment_top.*
 
 interface TopFragmentListener {
@@ -16,8 +17,13 @@ interface TopFragmentListener {
 class TopFragment : Fragment() {
 
     companion object {
-        fun newInstance(): TopFragment {
-            return TopFragment()
+        fun newInstance(type: Type): TopFragment {
+            val instance = TopFragment()
+            val bundle = Bundle()
+            bundle.putSerializable(KEY_TYPE, type)
+            instance.arguments = bundle
+
+            return instance
         }
 
         enum class Event {
@@ -26,7 +32,9 @@ class TopFragment : Fragment() {
             None
         }
 
+        private val KEY_TYPE = "type"
         private var listener: TopFragmentListener? = null
+        private var type = Type.None
     }
 
     override fun onAttach(context: Context?) {
@@ -44,7 +52,14 @@ class TopFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        type = arguments?.getSerializable(KEY_TYPE) as Type
 
+        title.text = when(type) {
+            Type.Shannon -> resources.getString(R.string.shannon_coding)
+            Type.ShannonFano -> resources.getString(R.string.shannon_fano_coding)
+
+            else -> ""
+        }
 
         button_start.setOnClickListener {
             listener?.topListener(Event.Start, quiz_switch.isChecked)

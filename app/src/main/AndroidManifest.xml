@@ -21,6 +21,7 @@
             android:name=".activity.ShannonCodingActivity"
             android:theme="@style/AppTheme.CircleTransition" />
         <activity android:name=".activity.EncodeDecodeActivity" />
+        <activity android:name=".activity.ShannonFanoActivity" />
     </application>
 
 </manifest>

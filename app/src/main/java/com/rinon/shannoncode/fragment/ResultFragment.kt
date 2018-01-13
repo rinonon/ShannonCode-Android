@@ -10,6 +10,7 @@ import com.rinon.shannoncode.R
 import com.rinon.shannoncode.activity.TopActivity
 import com.rinon.shannoncode.model.AbstractCode
 import com.rinon.shannoncode.model.ShannonCode
+import com.rinon.shannoncode.model.ShannonFano
 import kotlinx.android.synthetic.main.fragment_result.*
 
 interface ResultFragmentListener {
@@ -72,6 +73,7 @@ class ResultFragment : Fragment() {
 
         val fragment = when(type) {
             TopActivity.Companion.Type.Shannon -> ShannonResultFragment.newInstance(codeList as Array<ShannonCode.Code>, quizFlag)
+            TopActivity.Companion.Type.ShannonFano -> ShannonFanoResultFragment.newInstance(codeList as Array<ShannonFano.Code>, quizFlag)
 
             else -> throw NullPointerException("Type is illegal")
         }

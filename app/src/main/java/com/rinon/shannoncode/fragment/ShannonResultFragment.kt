@@ -18,8 +18,8 @@ class ShannonResultFragment : AbstractResultFragment() {
 
             val instance = ShannonResultFragment()
             val bundle = Bundle()
-            bundle.putSerializable(ShannonResultFragment.KEY_CONTENT_LIST, codeList)
-            bundle.putBoolean(ShannonResultFragment.KEY_QUIZ_FLAG, quizFlag)
+            bundle.putSerializable(KEY_CONTENT_LIST, codeList)
+            bundle.putBoolean(KEY_QUIZ_FLAG, quizFlag)
             instance.arguments = bundle
 
             return instance
@@ -52,7 +52,7 @@ class ShannonResultFragment : AbstractResultFragment() {
         val KEY_QUIZ_FLAG = "quiz_flag"
         val KEY_CONTENT_LIST = "content_list"
 
-        var codeList: ArrayList<ShannonCode.Code> = ArrayList()
+        var codeList: Array<ShannonCode.Code> = arrayOf()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -63,7 +63,7 @@ class ShannonResultFragment : AbstractResultFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val quizFlag = arguments?.getBoolean(KEY_QUIZ_FLAG) ?: throw NullPointerException("argument is null")
-        codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as ArrayList<ShannonCode.Code>
+        codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as Array<ShannonCode.Code>
 
         createResult()
 
@@ -75,7 +75,6 @@ class ShannonResultFragment : AbstractResultFragment() {
     private fun createResult() {
         for((index, content) in codeList.withIndex()) {
             val row: LinearLayout = layoutInflater.inflate(R.layout.container_result_shannon, result_shannon, false) as LinearLayout
-            val content = content
 
             for(order in 0 until ShannonCode.Order.Max.value) {
                 val layout = row.getChildAt(order) as LinearLayout

@@ -48,7 +48,7 @@ object ShannonCode {
             // 最初の0.を抜いたbitNumの数
             code.codeword = code.binaryText.substring(2, code.length + 2)
 
-            Log.d("result", "char: " + code.char + '\n' +
+            Log.d("mCodeList", "char: " + code.char + '\n' +
                               "probability: " + code.probability.toString() + '\n' +
                               "preProbability: " + code.preProbability.toString() + '\n' +
                               "binaryText: " + code.binaryText + '\n' +

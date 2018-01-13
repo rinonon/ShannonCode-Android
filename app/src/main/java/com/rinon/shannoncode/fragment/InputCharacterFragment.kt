@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_input_character.*
 
 interface InputCharacterFragmentListener {
     fun inputCharacterListener(errorType: InputCharacterFragment.Companion.ErrorType,
-                               pairList: Array<Pair<String, String>>?)
+                               pairList: Array<Pair<String, String>>)
 }
 
 class InputCharacterFragment : Fragment() {

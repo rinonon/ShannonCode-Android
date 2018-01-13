@@ -44,7 +44,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         navigation_view.setNavigationItemSelectedListener(this)
 
         if (savedInstanceState == null) {
-            val fragment = TopFragment.newInstance()
+            val fragment = TopFragment.newInstance(TopActivity.Companion.Type.Shannon)
 
             supportFragmentManager.beginTransaction()
                     .replace(R.id.container, fragment, fragment.tag)
@@ -132,7 +132,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
     }
 
     override fun inputCharacterListener(errorType: InputCharacterFragment.Companion.ErrorType,
-                                        pairList: Array<Pair<String, String>>?) {
+                                        pairList: Array<Pair<String, String>>) {
         when (errorType) {
             InputCharacterFragment.Companion.ErrorType.InputAll -> {
                 val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_input_check))
@@ -192,14 +192,14 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
 
            ResultFragment.Companion.Event.Encode -> {
                val intent = Intent(this, EncodeDecodeActivity::class.java)
-               intent.putExtra(EncodeDecodeActivity.CODE, result?: throw NullPointerException("result is null"))
+               intent.putExtra(EncodeDecodeActivity.CODE, result?: throw NullPointerException("mCodeList is null"))
                intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Encode)
                startActivity(intent)
            }
 
            ResultFragment.Companion.Event.Decode -> {
                val intent = Intent(this, EncodeDecodeActivity::class.java)
-               intent.putExtra(EncodeDecodeActivity.CODE, result?: throw NullPointerException("result is null"))
+               intent.putExtra(EncodeDecodeActivity.CODE, result?: throw NullPointerException("mCodeList is null"))
                intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Decode)
                startActivity(intent)
            }

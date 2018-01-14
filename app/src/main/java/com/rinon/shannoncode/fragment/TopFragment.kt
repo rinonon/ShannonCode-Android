@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.activity.TopActivity.Companion.Type as Type
 import kotlinx.android.synthetic.main.fragment_top.*
 
+import com.rinon.shannoncode.activity.TopActivity.Companion.Type as Type
+import com.rinon.shannoncode.fragment.ResultFragment.Companion.QuizType as QuizType
+
 interface TopFragmentListener {
-    fun topListener(event: TopFragment.Companion.Event, quizFlag: Boolean)
+    fun topListener(event: TopFragment.Companion.Event, quizType: QuizType)
 }
 
 class TopFragment : Fragment() {
@@ -62,7 +64,7 @@ class TopFragment : Fragment() {
         }
 
         button_start.setOnClickListener {
-            listener?.topListener(Event.Start, quiz_switch.isChecked)
+            listener?.topListener(Event.Start, QuizType.None)
         }
     }
 }

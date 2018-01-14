@@ -22,13 +22,13 @@ class ResultFragment : Fragment() {
     companion object {
         fun newInstance(type: TopActivity.Companion.Type,
                         codeList: Array<AbstractCode>,
-                        quizFlag: Boolean): ResultFragment {
+                        quizType: QuizType): ResultFragment {
 
             val instance = ResultFragment()
             val bundle = Bundle()
             bundle.putSerializable(KEY_TYPE, type)
             bundle.putSerializable(KEY_CONTENT_LIST, codeList)
-            bundle.putBoolean(KEY_QUIZ_FLAG, quizFlag)
+            bundle.putSerializable(KEY_QUIZ_TYPE, quizType)
             instance.arguments = bundle
 
             return instance
@@ -44,11 +44,18 @@ class ResultFragment : Fragment() {
             None
         }
 
+        enum class QuizType {
+            Easy,
+            Normal,
+            Hard,
+
+            None
+        }
+
         private val KEY_TYPE = "type"
-        private val KEY_QUIZ_FLAG = "quiz_flag"
+        private val KEY_QUIZ_TYPE = "quiz_type"
         private val KEY_CONTENT_LIST = "content_list"
 
-        //private var codeList: ArrayList<AbstractCode>? = null
         private var listener: ResultFragmentListener? = null
     }
 
@@ -68,12 +75,12 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val type = arguments?.getSerializable(KEY_TYPE) as TopActivity.Companion.Type
-        val quizFlag = arguments?.getBoolean(KEY_QUIZ_FLAG)?: throw NullPointerException("quiz flag is null")
+        val quizType = arguments?.getSerializable(KEY_QUIZ_TYPE) as QuizType
         val codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as Array<AbstractCode>
 
         val fragment = when(type) {
-            TopActivity.Companion.Type.Shannon -> ShannonResultFragment.newInstance(codeList as Array<ShannonCode.Code>, quizFlag)
-            TopActivity.Companion.Type.ShannonFano -> ShannonFanoResultFragment.newInstance(codeList as Array<ShannonFano.Code>, quizFlag)
+            TopActivity.Companion.Type.Shannon -> ShannonResultFragment.newInstance(codeList as Array<ShannonCode.Code>, quizType)
+            TopActivity.Companion.Type.ShannonFano -> ShannonFanoResultFragment.newInstance(codeList as Array<ShannonFano.Code>, quizType)
 
             else -> throw NullPointerException("Type is illegal")
         }
@@ -84,7 +91,7 @@ class ResultFragment : Fragment() {
                             .commit()
 
 
-        if(!quizFlag) {
+        if(quizType == QuizType.None) {
             // エンコード/デコードボタンに切り替える
             button_switcher.showNext()
         }
@@ -106,15 +113,15 @@ class ResultFragment : Fragment() {
         }
     }
 
-    fun eventListener(event: ShannonResultFragment.Companion.Event) {
+    fun eventListener(event: Event) {
         when(event) {
-            ShannonResultFragment.Companion.Event.Complete -> {
+            Event.Complete -> {
                 // エンコード/デコードボタンに切り替える
                 button_switcher.showNext()
                 listener?.resultListener(Event.Complete)
             }
 
-            ShannonResultFragment.Companion.Event.Wrong -> {
+            Event.Wrong -> {
                 listener?.resultListener(Event.Wrong)
             }
         }

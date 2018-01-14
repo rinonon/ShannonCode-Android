@@ -7,29 +7,24 @@ import android.view.ViewGroup
 import android.widget.*
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.model.ShannonCode
-
 import kotlinx.android.synthetic.main.fragment_result_shannon.*
+
+import com.rinon.shannoncode.fragment.ResultFragment.Companion.QuizType as QuizType
+import com.rinon.shannoncode.fragment.ResultFragment.Companion.Event as Event
 
 class ShannonResultFragment : AbstractResultFragment() {
 
     companion object {
         fun newInstance(codeList: Array<ShannonCode.Code>,
-                        quizFlag: Boolean): ShannonResultFragment {
+                        quizType: QuizType): ShannonResultFragment {
 
             val instance = ShannonResultFragment()
             val bundle = Bundle()
             bundle.putSerializable(KEY_CONTENT_LIST, codeList)
-            bundle.putBoolean(KEY_QUIZ_FLAG, quizFlag)
+            bundle.putSerializable(KEY_QUIZ_TYPE, quizType)
             instance.arguments = bundle
 
             return instance
-        }
-
-        enum class Event {
-            Complete,
-            Wrong,
-
-            None
         }
 
         enum class Order(val value: Int) {
@@ -49,7 +44,7 @@ class ShannonResultFragment : AbstractResultFragment() {
         val QUIZ_START_INDEX_X = 1
         val QUIZ_START_INDEX_Y = ShannonCode.Order.PreProbability.value
 
-        val KEY_QUIZ_FLAG = "quiz_flag"
+        val KEY_QUIZ_TYPE = "quiz_type"
         val KEY_CONTENT_LIST = "content_list"
 
         var codeList: Array<ShannonCode.Code> = arrayOf()
@@ -62,14 +57,11 @@ class ShannonResultFragment : AbstractResultFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val quizFlag = arguments?.getBoolean(KEY_QUIZ_FLAG) ?: throw NullPointerException("argument is null")
+        val quizType = arguments?.getSerializable(KEY_QUIZ_TYPE) as QuizType
         codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as Array<ShannonCode.Code>
 
         createResult()
-
-        if(quizFlag) {
-            setQuiz()
-        }
+        setQuiz(quizType)
     }
 
     private fun createResult() {
@@ -101,7 +93,12 @@ class ShannonResultFragment : AbstractResultFragment() {
         }
     }
 
-    private fun setQuiz() {
+    private fun setQuiz(quizType: QuizType) {
+
+        if(quizType == QuizType.None) {
+            return
+        }
+
         quizPos.x = QUIZ_START_INDEX_X
         quizPos.y = QUIZ_START_INDEX_Y
 
@@ -122,7 +119,7 @@ class ShannonResultFragment : AbstractResultFragment() {
         }
     }
 
-    override fun check(): Boolean {
+    override fun check() {
         var viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
         val imageSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Image.value) as ImageSwitcher
         val ans = (viewSwitcher.getChildAt(TextOrder.EditText.value) as EditText).text.toString()
@@ -174,15 +171,15 @@ class ShannonResultFragment : AbstractResultFragment() {
             (parentFragment as ResultFragment).eventListener(Event.Wrong)
             status = Status.Wrong
         }
-        return false
+        //return false
     }
 
     override fun getHintText(): String {
         return when(quizPos.y) {
-            ShannonCode.Order.PreProbability.value -> resources.getString(R.string.shannon_preprobability_hint)
-            ShannonCode.Order.Binary.value -> resources.getString(R.string.shannon_binary_hint)
-            ShannonCode.Order.Length.value -> resources.getString(R.string.shannon_length_hint)
-            ShannonCode.Order.Codeword.value -> resources.getString(R.string.shannon_codeword_hint)
+            ShannonCode.Order.PreProbability.value -> resources.getString(R.string.hint_shannon_preprobability)
+            ShannonCode.Order.Binary.value -> resources.getString(R.string.hint_shannon_binary)
+            ShannonCode.Order.Length.value -> resources.getString(R.string.hint_shannon_length)
+            ShannonCode.Order.Codeword.value -> resources.getString(R.string.hint_shannon_codeword)
 
             else -> ""
         }

@@ -15,6 +15,7 @@ import com.rinon.shannoncode.model.AbstractCode
 import com.rinon.shannoncode.model.ShannonFano
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
 
+import com.rinon.shannoncode.fragment.ResultFragment.Companion.QuizType as QuizType
 
 class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
         TopFragmentListener,
@@ -23,14 +24,6 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         ResultFragmentListener {
 
     companion object {
-
-        enum class QuizType {
-            Easy,
-            Normal,
-            Hard,
-
-            None
-        }
 
         var mQuizType = QuizType.None
         var mCodeList: Array<ShannonFano.Code>? = null
@@ -95,10 +88,10 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     // --- Fragment listener ---
-    override fun topListener(event: TopFragment.Companion.Event, quizFlag: Boolean) {
+    override fun topListener(event: TopFragment.Companion.Event, quizType: QuizType) {
         when(event) {
             TopFragment.Companion.Event.Start -> {
-                //mQuizType = quizFlag
+                mQuizType = quizType
                 val fragment = InputNumberFragment.newInstance()
 
                 supportFragmentManager.beginTransaction()
@@ -164,7 +157,7 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 mCodeList = convertToShannonFano(pairList)
                 val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.ShannonFano,
                         mCodeList as Array<AbstractCode>,
-                        false)
+                        mQuizType)
 
                 supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_right,

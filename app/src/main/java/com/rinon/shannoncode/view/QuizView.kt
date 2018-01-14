@@ -22,10 +22,10 @@ class QuizView : LinearLayout {
         }
     }
 
-    var mState = State.None
-    var mAnswer = ""
-    var mQuizFlag = false
-
+    private var mState = State.None
+    private var mAnswer = ""
+    private var mQuizFlag = false
+    private var mHintTextId: Int? = null
 
     constructor(context: Context) : super(context) {
         prepare(context)
@@ -45,7 +45,6 @@ class QuizView : LinearLayout {
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                                 0,
                                                 1.0f)
-
     }
 
     fun setAnswer(answer: String) {
@@ -53,7 +52,48 @@ class QuizView : LinearLayout {
         text_answer.text = answer
     }
 
-    fun correct() {
+    fun setHintTextId(id: Int) {
+        mHintTextId = id
+    }
+
+    fun getHintTextId(): Int {
+        return mHintTextId?: throw NullPointerException("hint id is null")
+    }
+
+    fun hide() {
+        view_switcher.visibility = View.INVISIBLE
+    }
+
+    fun show() {
+        view_switcher.visibility = View.VISIBLE
+    }
+
+    fun setQuiz(quiz: Boolean) {
+        mQuizFlag = quiz
+
+        if (quiz) {
+            view_switcher.showNext()
+        }
+    }
+
+    fun isQuiz(): Boolean {
+        return mQuizFlag
+    }
+
+    fun check(): Boolean {
+        return when (edit_text.text.toString() == mAnswer) {
+            true -> {
+                correct()
+                true
+            }
+            false -> {
+                wrong()
+                false
+            }
+        }
+    }
+
+    private fun correct() {
         when(mState) {
             State.Correct -> {
                 // なにもしない
@@ -68,9 +108,10 @@ class QuizView : LinearLayout {
             }
         }
         mState = State.Correct
+        view_switcher.showNext()
     }
 
-    fun wrong() {
+    private fun wrong() {
         when(mState) {
             State.Correct -> {
                 image_switcher.showNext()

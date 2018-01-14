@@ -15,6 +15,8 @@ import com.rinon.shannoncode.model.AbstractCode
 import com.rinon.shannoncode.model.ShannonCode
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
 
+import com.rinon.shannoncode.fragment.ResultFragment.Companion.QuizType as QuizType
+
 class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
                                                    TopFragmentListener,
                                                    InputNumberFragmentListener,
@@ -23,7 +25,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
 
     companion object {
         var result: Array<ShannonCode.Code>? = null
-        var quizMode: Boolean = false
+        var quizType: QuizType = QuizType.None
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,10 +86,10 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
     }
 
     // --- Fragment listener ---
-    override fun topListener(event: TopFragment.Companion.Event, quizFlag: Boolean) {
+    override fun topListener(event: TopFragment.Companion.Event, quiz: QuizType) {
         when(event) {
             TopFragment.Companion.Event.Start -> {
-                quizMode = quizFlag
+                quizType = quiz
                 val fragment = InputNumberFragment.newInstance()
 
                 supportFragmentManager.beginTransaction()
@@ -154,7 +156,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                     result = convertToShannonCode(pairList)
                     val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.Shannon,
                                                                     result as Array<AbstractCode> ,
-                                                                    quizMode)
+                                                                    quizType)
 
                     supportFragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_right,

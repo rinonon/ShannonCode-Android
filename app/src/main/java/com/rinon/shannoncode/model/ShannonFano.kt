@@ -4,18 +4,6 @@ import java.io.Serializable
 
 object ShannonFano {
 
-    enum class Order(val value: Int) {
-        Num(0),
-        Character(1),
-        Probability(2),
-        PreProbability(3),
-        Binary(4),
-        Length(5),
-        Codeword(6),
-
-        Max(7)
-    }
-
     // データ格納用の内部クラス
     class Code(override val char: Char,
                override val probability: Int,
@@ -26,7 +14,17 @@ object ShannonFano {
         codeList.sortByDescending { it -> it.probability }
 
         // 2.確率の合計値を計算していく
-        addBit(codeList, true)
+        if(codeList.size >= 2) {
+            val separator = getSeparatorIndex(codeList.toTypedArray())
+
+            val upList = codeList.subList(0, separator)
+            val downList = codeList.subList(separator, codeList.size)
+
+            addBit(upList, true)
+            addBit(downList, false)
+        } else {
+            codeList[0].codeword += '0'
+        }
 
         return codeList.toList()
     }
@@ -50,6 +48,13 @@ object ShannonFano {
     }
 
     private fun getSeparatorIndex(codeList: Array<Code>): Int {
-        return 1
+        var index = 1
+        val border = (codeList.sumBy { it.probability }) / 2
+
+        while(Math.abs(border - codeList.slice(IntRange(0, index - 1)).sumBy { it.probability }) >
+                Math.abs(border - codeList.slice(IntRange(0, index)).sumBy { it.probability })) {
+            index++
+        }
+        return index
     }
 }

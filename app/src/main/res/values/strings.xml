@@ -58,10 +58,13 @@
     <string name="wrong_answer">Wrong answer!</string>
 
     <!-- shannon hint -->
-    <string name="shannon_preprobability_hint">This formula stands for cumulative probabilities</string>
-    <string name="shannon_binary_hint">Make cumulative probabilities a decimal number and make it a binary number</string>
-    <string name="shannon_length_hint">Length is minus of the absolute value of probability log2</string>
-    <string name="shannon_codeword_hint">Codeword is assigned by taking the first value of length bits from the binary expansions</string>
+    <string name="hint_shannon_preprobability">This formula stands for cumulative probabilities</string>
+    <string name="hint_shannon_binary">Make cumulative probabilities a decimal number and make it a binary number</string>
+    <string name="hint_shannon_length">Length is minus of the absolute value of probability log2</string>
+    <string name="hint_shannon_codeword">Codeword is assigned by taking the first value of length bits from the binary expansions</string>
+
+    <!-- shannon fano hint -->
+    <string name="hint_shannon_fano">hint</string>
 
     <!-- menu -->
     <string name="menu_how_to_use">How to use</string>

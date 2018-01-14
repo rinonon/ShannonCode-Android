@@ -2,10 +2,6 @@ package com.rinon.shannoncode.fragment
 
 import android.support.v4.app.Fragment
 
-/**
- * Created by rinon on 2017/12/16.
- */
-
 abstract class AbstractResultFragment : Fragment() {
 
     object Grid {
@@ -21,6 +17,6 @@ abstract class AbstractResultFragment : Fragment() {
     var quizPos: Grid = Grid
     var status = Status.Correct
 
-    abstract fun check(): Boolean
+    abstract fun check()
     abstract fun getHintText(): String
 }

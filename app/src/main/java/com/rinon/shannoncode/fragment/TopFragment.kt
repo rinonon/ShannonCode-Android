@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import com.rinon.shannoncode.R
 import kotlinx.android.synthetic.main.fragment_top.*
 
@@ -61,6 +62,16 @@ class TopFragment : Fragment() {
             Type.ShannonFano -> resources.getString(R.string.shannon_fano_coding)
 
             else -> ""
+        }
+
+        quiz_switch.setOnCheckedChangeListener { _, checked ->
+            if(checked) {
+                radio_group.visibility = View.VISIBLE
+                radio_group.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_down))
+            } else {
+                radio_group.visibility = View.INVISIBLE
+                radio_group.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_up))
+            }
         }
 
         button_start.setOnClickListener {

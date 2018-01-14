@@ -64,7 +64,19 @@ class TopFragment : Fragment() {
         }
 
         button_start.setOnClickListener {
-            listener?.topListener(Event.Start, QuizType.None)
+            var quizType = when(radio_group.checkedRadioButtonId) {
+                R.id.radio_easy -> QuizType.Easy
+                R.id.radio_normal -> QuizType.Normal
+                R.id.radio_hard -> QuizType.Hard
+                else -> QuizType.None
+            }
+
+            if(!quiz_switch.isChecked) {
+                // チェックされていなければNone
+                quizType = QuizType.None
+            }
+
+            listener?.topListener(Event.Start, quizType)
         }
     }
 }

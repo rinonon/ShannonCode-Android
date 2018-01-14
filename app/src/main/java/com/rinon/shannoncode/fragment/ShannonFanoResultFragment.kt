@@ -52,7 +52,6 @@ class ShannonFanoResultFragment : AbstractResultFragment() {
     }
 
     private fun setResult(codeList: Array<ShannonFano.Code>) {
-
         val context = context?: throw NullPointerException("context is null")
         val maxLength: Int = (codeList.maxBy { it.codeword.length })?.codeword?.length?: throw NullPointerException("maxLength is null")
         quizList.clear()
@@ -92,7 +91,6 @@ class ShannonFanoResultFragment : AbstractResultFragment() {
     }
 
     private fun setQuiz(codeList: Array<ShannonFano.Code>, quizType: QuizType) {
-
         val quizRate = (when(quizType) {
             QuizType.Easy -> resources.getInteger(R.integer.quiz_rate_easy)
             QuizType.Normal -> resources.getInteger(R.integer.quiz_rate_normal)
@@ -116,6 +114,7 @@ class ShannonFanoResultFragment : AbstractResultFragment() {
             }
         }
 
+        // 初期化
         var setFlag = false
         for((index, quiz) in quizList.withIndex()) {
             if(!quiz.isQuiz()) {

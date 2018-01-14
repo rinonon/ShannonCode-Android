@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.*
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.model.ShannonCode
+import com.rinon.shannoncode.view.QuizView
 import kotlinx.android.synthetic.main.fragment_result_shannon.*
+import java.util.*
 
 import com.rinon.shannoncode.fragment.ResultFragment.Companion.QuizType as QuizType
 import com.rinon.shannoncode.fragment.ResultFragment.Companion.Event as Event
@@ -27,27 +29,11 @@ class ShannonResultFragment : AbstractResultFragment() {
             return instance
         }
 
-        enum class Order(val value: Int) {
-            Text(0),
-            Image(1),
+        private val KEY_QUIZ_TYPE = "quiz_type"
+        private val KEY_CONTENT_LIST = "content_list"
+        private val quizList = mutableListOf<QuizView>()
 
-            Max(2)
-        }
-
-        enum class TextOrder(val value: Int) {
-            TextView(0),
-            EditText(1),
-
-            Max(2)
-        }
-
-        val QUIZ_START_INDEX_X = 1
-        val QUIZ_START_INDEX_Y = ShannonCode.Order.PreProbability.value
-
-        val KEY_QUIZ_TYPE = "quiz_type"
-        val KEY_CONTENT_LIST = "content_list"
-
-        var codeList: Array<ShannonCode.Code> = arrayOf()
+        private var quizIndex = 0
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -58,130 +44,126 @@ class ShannonResultFragment : AbstractResultFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val quizType = arguments?.getSerializable(KEY_QUIZ_TYPE) as QuizType
-        codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as Array<ShannonCode.Code>
+        val codeList = arguments?.getSerializable(KEY_CONTENT_LIST) as Array<ShannonCode.Code>
 
-        createResult()
-        setQuiz(quizType)
+        setResult(codeList)
+        setQuiz(codeList, quizType)
     }
 
-    private fun createResult() {
-        for((index, content) in codeList.withIndex()) {
-            val row: LinearLayout = layoutInflater.inflate(R.layout.container_result_shannon, result_shannon, false) as LinearLayout
+    private fun setResult(codeList: Array<ShannonCode.Code>) {
+        val context = context?: throw NullPointerException("context is null")
+        quizList.clear()
 
-            for(order in 0 until ShannonCode.Order.Max.value) {
-                val layout = row.getChildAt(order) as LinearLayout
-                val viewSwitcher = layout.getChildAt(Order.Text.value) as ViewSwitcher
-                val imageSwitcher = layout.getChildAt(Order.Image.value) as ImageSwitcher
+        for((index, code) in codeList.withIndex()) {
+            val row = layoutInflater.inflate(R.layout.container_result_shannon, container, false) as LinearLayout
 
-                val str = when(order) {
-                    ShannonCode.Order.Num.value -> (index + 1).toString()
-                    ShannonCode.Order.Character.value -> content.char.toString()
-                    ShannonCode.Order.Probability.value -> content.probability.toString()
-                    ShannonCode.Order.PreProbability.value -> content.preProbability.toString()
-                    ShannonCode.Order.Binary.value -> content.binaryText
-                    ShannonCode.Order.Length.value -> content.length.toString()
-                    ShannonCode.Order.Codeword.value -> content.codeword
+            val num = QuizView(context)
+            num.setAnswer((index + 1).toString())
+            row.addView(num)
 
-                    else -> ""
-                }
+            val char = QuizView(context)
+            char.setAnswer(code.char.toString())
+            row.addView(char)
 
-                (viewSwitcher.getChildAt(TextOrder.TextView.value) as TextView).text = str
-                imageSwitcher.visibility = View.INVISIBLE
-            }
+            val probability = QuizView(context)
+            probability.setAnswer(code.probability.toString())
+            row.addView(probability)
+
+            val preProbability = QuizView(context)
+            preProbability.setAnswer(code.preProbability.toString())
+            preProbability.setHintTextId(R.string.hint_shannon_preprobability)
+            row.addView(preProbability)
+            quizList.add(preProbability)
+
+            val binary = QuizView(context)
+            binary.setAnswer(code.binaryText)
+            binary.setHintTextId(R.string.hint_shannon_binary)
+            row.addView(binary)
+            quizList.add(binary)
+
+            val length = QuizView(context)
+            length.setAnswer(code.length.toString())
+            length.setHintTextId(R.string.hint_shannon_length)
+            row.addView(length)
+            quizList.add(length)
+
+            val codeword = QuizView(context)
+            codeword.setAnswer(code.codeword)
+            codeword.setHintTextId(R.string.hint_shannon_codeword)
+            row.addView(codeword)
+            quizList.add(codeword)
+
             // 行を付け足す
-            result_shannon.addView(row)
+            container.addView(row)
         }
     }
 
-    private fun setQuiz(quizType: QuizType) {
+    private fun setQuiz(codeList: Array<ShannonCode.Code>, quizType: QuizType) {
+        val quizRate = (when(quizType) {
+            QuizType.Easy -> resources.getInteger(R.integer.quiz_rate_easy)
+            QuizType.Normal -> resources.getInteger(R.integer.quiz_rate_normal)
+            QuizType.Hard -> resources.getInteger(R.integer.quiz_rate_hard)
+            else -> return
+        }) / 100.0
 
-        if(quizType == QuizType.None) {
-            return
+        // クイズフラグ設定
+        val rowNum = ShannonCode.Order.Codeword.value - ShannonCode.Order.Probability.value
+        val quizNum = (Math.ceil(rowNum * quizRate)).toInt()
+
+        for(index in 0 until codeList.size) {
+            var count = 0
+            while(count < quizNum) {
+                val random = Random().nextInt(rowNum)
+
+                if(!quizList[random + rowNum * index].isQuiz()) {
+                    quizList[random + rowNum * index].setQuiz(true)
+                    count++
+                }
+            }
         }
 
-        quizPos.x = QUIZ_START_INDEX_X
-        quizPos.y = QUIZ_START_INDEX_Y
-
-        for (x in quizPos.x until codeList.size + QUIZ_START_INDEX_X) {
-            for (y in quizPos.y until ShannonCode.Order.Max.value) {
-
-                val row = (result_shannon.getChildAt(x) as LinearLayout).getChildAt(y) as LinearLayout
-                val viewSwitcher = row.getChildAt(Order.Text.value) as ViewSwitcher
-
-                // ViewをEditTextにしておく
-                viewSwitcher.showNext()
-
-                if (x > quizPos.x || y > quizPos.y) {
-                    // 一問目以外はまだ見えなくしておく
-                    viewSwitcher.visibility = View.INVISIBLE
-                }
+        // 初期化
+        var setFlag = false
+        for((index, quiz) in quizList.withIndex()) {
+            if(!quiz.isQuiz()) {
+                continue
+            } else if(!setFlag) {
+                quiz.show()
+                setFlag = true
+                quizIndex = index
+            } else {
+                quiz.hide()
             }
         }
     }
 
     override fun check() {
-        var viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
-        val imageSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Image.value) as ImageSwitcher
-        val ans = (viewSwitcher.getChildAt(TextOrder.EditText.value) as EditText).text.toString()
+        if(quizList[quizIndex].check()) {
+            // correct
+            quizIndex++
+            while(true) {
+                if(quizIndex >= quizList.size) {
+                    // 全問正解
+                    (parentFragment as ResultFragment).eventListener(Event.Complete)
+                    break
+                }
 
-        val content = codeList?.get(quizPos.x - QUIZ_START_INDEX_X)
-        val correct = when(quizPos.y) {
-            ShannonCode.Order.PreProbability.value -> content.preProbability.toString()
-            ShannonCode.Order.Binary.value -> content.binaryText
-            ShannonCode.Order.Length.value -> content.length.toString()
-            ShannonCode.Order.Codeword.value -> content.codeword
-            else -> ""
-        }
-
-        // 正誤マークを出す
-        imageSwitcher.visibility = View.VISIBLE
-
-        if(ans == correct) {
-            //correctマークに変える
-            if(status == Status.Wrong) {
-                imageSwitcher.showNext()
-                status = Status.Correct
-            }
-            // EditTextからTextViewへ
-            viewSwitcher.showNext()
-
-            // 次の問題へ
-            quizPos.x++
-
-            if(quizPos.x - QUIZ_START_INDEX_X >= codeList.size) {
-                quizPos.x -= codeList.size
-                quizPos.y++
+                if(quizList[quizIndex].isQuiz()) {
+                    quizList[quizIndex].show()
+                    break
+                } else {
+                    quizIndex++
+                    continue
+                }
             }
 
-            // すべて正解
-            if(quizPos.y >= ShannonCode.Order.Max.value) {
-                (parentFragment as ResultFragment).eventListener(Event.Complete)
-            }
-            else {
-                viewSwitcher = ((result_shannon.getChildAt(quizPos.x) as LinearLayout).getChildAt(quizPos.y) as LinearLayout).getChildAt(Order.Text.value) as ViewSwitcher
-                viewSwitcher.visibility = View.VISIBLE
-            }
-
-        }
-        else {
-            // wrongマークを出す
-            if(status == Status.Correct) {
-                imageSwitcher.showNext()
-            }
+        } else {
+            // wrong
             (parentFragment as ResultFragment).eventListener(Event.Wrong)
-            status = Status.Wrong
         }
-        //return false
     }
 
     override fun getHintText(): String {
-        return when(quizPos.y) {
-            ShannonCode.Order.PreProbability.value -> resources.getString(R.string.hint_shannon_preprobability)
-            ShannonCode.Order.Binary.value -> resources.getString(R.string.hint_shannon_binary)
-            ShannonCode.Order.Length.value -> resources.getString(R.string.hint_shannon_length)
-            ShannonCode.Order.Codeword.value -> resources.getString(R.string.hint_shannon_codeword)
-
-            else -> ""
-        }
+        return resources.getString(quizList[quizIndex].getHintTextId())
     }
 }

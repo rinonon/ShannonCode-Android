@@ -152,23 +152,19 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
             }
 
             InputCharacterFragment.Companion.ErrorType.None -> {
-                if(pairList != null) {
-                    result = convertToShannonCode(pairList)
-                    val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.Shannon,
-                                                                    result as Array<AbstractCode> ,
-                                                                    quizType)
+                result = convertToShannonCode(pairList)
+                val resultFragment = ResultFragment.newInstance(TopActivity.Companion.Type.Shannon,
+                        result as Array<AbstractCode>,
+                        quizType)
 
-                    supportFragmentManager.beginTransaction()
-                            .setCustomAnimations(R.anim.slide_in_right,
-                                    R.anim.slide_out_left,
-                                    R.anim.slide_in_left,
-                                    R.anim.slide_out_right)
-                            .replace(R.id.container, resultFragment)
-                            .addToBackStack(resultFragment.tag)
-                            .commit()
-                } else {
-                    throw IllegalArgumentException("pairList is null")
-                }
+                supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_right,
+                                R.anim.slide_out_left,
+                                R.anim.slide_in_left,
+                                R.anim.slide_out_right)
+                        .replace(R.id.container, resultFragment)
+                        .addToBackStack(resultFragment.tag)
+                        .commit()
             }
         }
     }

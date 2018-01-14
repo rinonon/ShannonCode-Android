@@ -19,9 +19,9 @@
                 android:icon="@android:drawable/ic_menu_save"
                 android:title="@string/shannon_coding" />
             <item
-                android:id="@+id/menu_item4"
+                android:id="@+id/menu_shannon_fano"
                 android:icon="@android:drawable/ic_menu_delete"
-                android:title="Delete" />
+                android:title="@string/shannon_fano_coding" />
         </menu>
     </item>
 

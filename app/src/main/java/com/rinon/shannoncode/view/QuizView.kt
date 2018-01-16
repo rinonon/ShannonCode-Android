@@ -42,9 +42,9 @@ class QuizView : LinearLayout {
     private fun prepare(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.container_quiz, this, true)
 
-        layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                                                0,
-                                                1.0f)
+        layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
     fun setAnswer(answer: String) {
@@ -54,6 +54,12 @@ class QuizView : LinearLayout {
 
     fun setHintTextId(id: Int) {
         mHintTextId = id
+    }
+
+    fun setMargin(left: Int, top: Int, right: Int, bottom: Int) {
+        val marginParam = layoutParams as MarginLayoutParams
+        marginParam.setMargins(left, top, right, bottom)
+        layoutParams = marginParam
     }
 
     fun getHintTextId(): Int {

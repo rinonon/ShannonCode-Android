@@ -59,13 +59,26 @@ class ShannonFanoResultFragment : AbstractResultFragment() {
         // 列追加
         for(x in 0 until maxLength) {
             val column: LinearLayout = layoutInflater.inflate(R.layout.container_result_shannon_fano, container, false) as LinearLayout
-
-            ((column.getChildAt(0) as LinearLayout).getChildAt(0) as TextView).text = (x + 1).toString()
+            (column.getChildAt(0) as TextView).text = (x + 1).toString()
 
             for(code in codeList) {
                 val quiz = QuizView(context)
                 quiz.setAnswer(code.codeword.substring(0, minOf(x + 1, code.codeword.length)))
                 quiz.setHintTextId(R.string.hint_shannon_fano)
+                quiz.setBackgroundColor(resources.getColor(R.color.table_normal))
+
+                quiz.layoutParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        0,
+                        1.0f)
+
+                // 表用のマージン設定
+                quiz.setMargin(
+                        0,
+                        1,
+                        0,
+                        0)
+
                 column.addView(quiz)
                 quizList.add(quiz)
             }
@@ -74,19 +87,45 @@ class ShannonFanoResultFragment : AbstractResultFragment() {
 
         // 文字、確率、符号設定
         for(code in codeList) {
-            val character = QuizView(context)
-            character.setAnswer(code.char.toString())
-            column_character.addView(character)
+            for(order in ShannonFano.Order.Character.value until ShannonFano.Order.Max.value) {
+                val answer = when(order) {
+                    ShannonFano.Order.Character.value -> code.char.toString()
+                    ShannonFano.Order.Probability.value -> code.probability.toString()
+                    ShannonFano.Order.Codeword.value -> code.codeword
 
-            val probability = QuizView(context)
-            probability.setAnswer(code.probability.toString())
-            column_probability.addView(probability)
+                    else -> throw IllegalArgumentException("order is illegal")
+                }
 
-            val codeword = QuizView(context)
-            codeword.setAnswer(code.codeword)
-            codeword.setHintTextId(R.string.hint_shannon_fano)
-            column_codeword.addView(codeword)
-            quizList.add(codeword)      // codewordはクイズにいれる
+                val quiz = QuizView(context)
+                quiz.setAnswer(answer)
+                quiz.setHintTextId(R.string.hint_shannon_fano)
+                quiz.setBackgroundColor(resources.getColor(R.color.table_normal))
+
+                quiz.layoutParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        0,
+                        1.0f)
+
+                // 表用のマージン設定
+                quiz.setMargin(
+                        0,
+                        1,
+                        0,
+                        0)
+
+                when(order) {
+                    ShannonFano.Order.Character.value -> {
+                        column_character.addView(quiz)
+                    }
+                    ShannonFano.Order.Probability.value -> {
+                        column_probability.addView(quiz)
+                    }
+                    ShannonFano.Order.Codeword.value -> {
+                        column_codeword.addView(quiz)
+                        quizList.add(quiz)      // codewordはクイズにいれる
+                    }
+                }
+            }
         }
     }
 

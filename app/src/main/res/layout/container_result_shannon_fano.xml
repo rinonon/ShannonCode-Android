@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="70dp"
+    android:layout_width="80dp"
     android:layout_height="match_parent"
+    android:layout_marginBottom="1dp"
+    android:layout_marginStart="1dp"
+    android:layout_marginTop="1dp"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_height="30dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/table_accent"
+        android:text="@string/character"
+        android:textAlignment="center"
+        android:textSize="@dimen/app_text_size_small" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="0.8"
-            android:text="test"
-            android:textAlignment="center" />
-    </LinearLayout>
 </LinearLayout>

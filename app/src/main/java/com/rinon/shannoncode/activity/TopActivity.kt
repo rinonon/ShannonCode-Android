@@ -94,15 +94,15 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
             TopMenuFragment.Companion.Event.Shannon -> {
                 type = Type.Shannon
 
-                val optionCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, Pair(view, view.transitionName))
+                //val optionCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, Pair(view, view.transitionName))
                 val intent = Intent(this, ShannonCodingActivity::class.java)
-                startActivity(intent, optionCompat.toBundle())
+                //startActivity(intent, optionCompat.toBundle())
+                startActivity(intent)
             }
 
             TopMenuFragment.Companion.Event.ShannonFano -> {
                 type = Type.ShannonFano
 
-                //val optionCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, Pair(view, view.transitionName))
                 val intent = Intent(this, ShannonFanoActivity::class.java)
                 startActivity(intent)
             }

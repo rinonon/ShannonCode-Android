@@ -4,6 +4,14 @@ import java.io.Serializable
 
 object ShannonFano {
 
+    enum class Order(val value: Int) {
+        Character(0),
+        Probability(1),
+        Codeword(2),
+
+        Max(3)
+    }
+
     // データ格納用の内部クラス
     class Code(override val char: Char,
                override val probability: Int,

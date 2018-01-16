@@ -57,42 +57,44 @@ class ShannonResultFragment : AbstractResultFragment() {
         for((index, code) in codeList.withIndex()) {
             val row = layoutInflater.inflate(R.layout.container_result_shannon, container, false) as LinearLayout
 
-            val num = QuizView(context)
-            num.setAnswer((index + 1).toString())
-            row.addView(num)
+            for(order in ShannonCode.Order.Num.value until ShannonCode.Order.Max.value) {
+                val answer = when(order) {
+                    ShannonCode.Order.Num.value -> (index + 1).toString()
+                    ShannonCode.Order.Character.value -> (code.char).toString()
+                    ShannonCode.Order.Probability.value -> (code.probability).toString()
+                    ShannonCode.Order.PreProbability.value -> (code.preProbability).toString()
+                    ShannonCode.Order.Binary.value -> code.binaryText
+                    ShannonCode.Order.Length.value -> (code.length).toString()
+                    ShannonCode.Order.Codeword.value -> code.codeword
 
-            val char = QuizView(context)
-            char.setAnswer(code.char.toString())
-            row.addView(char)
+                    else -> throw IllegalArgumentException("order is illegal")
+                }
 
-            val probability = QuizView(context)
-            probability.setAnswer(code.probability.toString())
-            row.addView(probability)
+                val quiz = QuizView(context)
+                quiz.setAnswer(answer)
+                quiz.setBackgroundColor(resources.getColor(R.color.table_normal))
 
-            val preProbability = QuizView(context)
-            preProbability.setAnswer(code.preProbability.toString())
-            preProbability.setHintTextId(R.string.hint_shannon_preprobability)
-            row.addView(preProbability)
-            quizList.add(preProbability)
+                quiz.layoutParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        0,
+                        1.0f)
 
-            val binary = QuizView(context)
-            binary.setAnswer(code.binaryText)
-            binary.setHintTextId(R.string.hint_shannon_binary)
-            row.addView(binary)
-            quizList.add(binary)
+                // 表用のマージン設定
+                quiz.setMargin(
+                        1,
+                        1,
+                        if(index == codeList.size - 1) 1 else 0,
+                        if(order == ShannonCode.Order.Max.value - 1) 1 else 0)
 
-            val length = QuizView(context)
-            length.setAnswer(code.length.toString())
-            length.setHintTextId(R.string.hint_shannon_length)
-            row.addView(length)
-            quizList.add(length)
+                row.addView(quiz)
 
-            val codeword = QuizView(context)
-            codeword.setAnswer(code.codeword)
-            codeword.setHintTextId(R.string.hint_shannon_codeword)
-            row.addView(codeword)
-            quizList.add(codeword)
-
+                when(order) {
+                    ShannonCode.Order.PreProbability.value -> quizList.add(quiz)
+                    ShannonCode.Order.Binary.value -> quizList.add(quiz)
+                    ShannonCode.Order.Length.value -> quizList.add(quiz)
+                    ShannonCode.Order.Codeword.value -> quizList.add(quiz)
+                }
+            }
             // 行を付け足す
             container.addView(row)
         }

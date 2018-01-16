@@ -10,5 +10,9 @@
     <color name="a">#FFE082</color>
     <color name="b">#A5D6A7</color>
     <color name="c">#90CAF9</color>
-    
+
+    <color name="gray">#DDDDDD</color>
+    <color name="table_back">#999999</color>
+    <color name="table_accent">#DDDDDD</color>
+    <color name="table_normal">#FFFF</color>
 </resources>

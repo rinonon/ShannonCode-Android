@@ -1,73 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/column_character"
-        android:layout_width="90dp"
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/table_back"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:id="@+id/column_character"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="0.8"
+                android:layout_marginBottom="1dp"
+                android:background="@color/table_accent"
                 android:text="@string/character"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/app_text_size_small" />
+
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/column_probability"
-        android:layout_width="90dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:id="@+id/column_probability"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="0.8"
+                android:layout_marginBottom="1dp"
+                android:background="@color/table_accent"
                 android:text="@string/probability"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/app_text_size_small" />
+
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/column_codeword"
-        android:layout_width="90dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:id="@+id/column_codeword"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="0.8"
+                android:layout_marginBottom="1dp"
+                android:background="@color/table_accent"
                 android:text="@string/codeword"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/app_text_size_small" />
+
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</HorizontalScrollView>

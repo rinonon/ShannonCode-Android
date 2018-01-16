@@ -1,77 +1,103 @@
-<LinearLayout xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="80dp"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
+<HorizontalScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:background="@color/table_back"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/i"
-            android:textAlignment="center"
-            android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/character"
-            android:textAlignment="center"
-            android:textSize="12sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@color/table_accent"
+                android:gravity="center_vertical"
+                android:text="@string/i"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/probability_percent"
-            android:textAlignment="center"
-            android:textSize="12sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@color/table_accent"
+                android:gravity="center_vertical"
+                android:text="@string/character"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/pre_probability_description"
-            android:gravity="center_vertical"
-            app:srcCompat="@drawable/sum_probability" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@color/table_accent"
+                android:gravity="center_vertical"
+                android:text="@string/probability_percent"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/binary"
-            android:textAlignment="center"
-            android:textSize="12sp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@color/table_accent"
+                android:contentDescription="@string/pre_probability_description"
+                android:gravity="center_vertical"
+                app:srcCompat="@drawable/sum_probability" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/length"
-            android:textAlignment="center"
-            android:textSize="12sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@color/table_accent"
+                android:gravity="center_vertical"
+                android:text="@string/binary"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/codeword"
-            android:textAlignment="center"
-            android:textSize="12sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@color/table_accent"
+                android:gravity="center_vertical"
+                android:text="@string/length"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@color/table_accent"
+                android:gravity="center_vertical"
+                android:text="@string/codeword"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+</HorizontalScrollView>

@@ -51,7 +51,7 @@
                     android:layout_weight="1"
                     android:background="@color/shannon"
                     android:elevation="0dp"
-                    android:text="@string/shannon_coding"
+                    android:text="Shannon"
                     android:textAllCaps="false"
                     android:transitionName="image" />
 
@@ -62,7 +62,7 @@
                     android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:background="@color/a"
-                    android:text="ShannonFano"
+                    android:text="Shannon-Fano"
                     android:textAllCaps="false" />
             </LinearLayout>
 
@@ -78,7 +78,6 @@
                     android:layout_weight="1"
                     android:background="@color/b"
                     android:elevation="0dp"
-                    android:text="ShannonCoding"
                     android:textAllCaps="false" />
 
                 <Button
@@ -87,7 +86,6 @@
                     android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:background="@color/c"
-                    android:text="Button"
                     android:textAllCaps="false" />
             </LinearLayout>
         </LinearLayout>
@@ -95,7 +93,7 @@
     </ScrollView>
 
     <com.gc.materialdesign.views.ButtonFlat
-        android:id="@+id/button"
+        android:id="@+id/button_help"
         android:layout_width="56dp"
         android:layout_height="33dp"
         android:layout_marginStart="@dimen/spacing_normal"

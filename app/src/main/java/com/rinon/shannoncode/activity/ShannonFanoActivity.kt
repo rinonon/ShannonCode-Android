@@ -58,15 +58,32 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     // --- Navigation View ---
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.menu_item1 -> {
+            R.id.menu_top -> {
+                val intent = Intent(this, TopActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            }
 
+            R.id.menu_how_to_use -> {
+                val intent = Intent(this, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.HowToUse)
+                startActivity(intent)
+            }
+
+            R.id.menu_about_this_app -> {
+                val intent = Intent(this, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.AboutThisApp)
+                startActivity(intent)
             }
 
             R.id.menu_shannon -> {
-
+                val intent = Intent(this, ShannonCodingActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
             }
 
-            else -> {
+            R.id.menu_shannon_fano -> {
+
             }
         }
         drawer.closeDrawer(GravityCompat.START)
@@ -102,6 +119,12 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                         .replace(R.id.container, fragment, fragment.tag)
                         .addToBackStack(fragment.tag)
                         .commit()
+            }
+
+            TopFragment.Companion.Event.Info -> {
+                val intent = Intent(this, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.ShannonFano)
+                startActivity(intent)
             }
         }
     }
@@ -174,7 +197,7 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     override fun resultListener(status: ResultFragment.Companion.Event, hintText: String?) {
         when(status) {
             ResultFragment.Companion.Event.Wrong -> {
-                val dialog = DialogManager.createSimpleDialog("Wrong", resources.getString(R.string.wrong_answer))
+                val dialog = DialogManager.createSimpleDialog("Wrong Answer!", resources.getString(R.string.wrong_answer))
                 dialog.show(supportFragmentManager, null)
             }
 

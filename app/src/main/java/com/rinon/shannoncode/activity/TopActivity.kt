@@ -4,11 +4,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.util.Pair
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -60,15 +57,34 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
     // --- Navigation View ---
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.menu_item1 -> {
+            R.id.menu_top -> {
+
+            }
+
+            R.id.menu_how_to_use -> {
+                val intent = Intent(this, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.HowToUse)
+                startActivity(intent)
+            }
+
+            R.id.menu_about_this_app -> {
+                val intent = Intent(this, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.AboutThisApp)
+                startActivity(intent)
             }
 
             R.id.menu_shannon -> {
-                Log.d("menu", "shannon")
+                val intent = Intent(this, ShannonCodingActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
             }
 
-            else -> {
+            R.id.menu_shannon_fano -> {
+                val intent = Intent(this, ShannonFanoActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
             }
+
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
@@ -89,8 +105,14 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
     }
 
     // --- Fragment listener ---
-    override fun topMenuListener(event: TopMenuFragment.Companion.Event, view: View) {
+    override fun topMenuListener(event: TopMenuFragment.Companion.Event) {
         when(event) {
+            TopMenuFragment.Companion.Event.Help -> {
+                val intent = Intent(this, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.HowToUse)
+                startActivity(intent)
+            }
+
             TopMenuFragment.Companion.Event.Shannon -> {
                 type = Type.Shannon
 

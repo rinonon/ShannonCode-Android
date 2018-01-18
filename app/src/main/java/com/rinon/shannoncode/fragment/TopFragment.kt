@@ -31,6 +31,7 @@ class TopFragment : Fragment() {
 
         enum class Event {
             Start,
+            Info,
 
             None
         }
@@ -86,8 +87,11 @@ class TopFragment : Fragment() {
                 // チェックされていなければNone
                 quizType = QuizType.None
             }
-
             listener?.topListener(Event.Start, quizType)
+        }
+
+        button_info.setOnClickListener {
+            listener?.topListener(Event.Info, QuizType.None)
         }
     }
 }

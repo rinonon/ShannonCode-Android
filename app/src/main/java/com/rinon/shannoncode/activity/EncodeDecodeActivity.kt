@@ -1,5 +1,6 @@
 package com.rinon.shannoncode.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -27,7 +28,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
             Encode(0),
             Decode(1),
 
-            None(-1);
+            None(-1)
         }
 
         val CODE = "code"
@@ -71,14 +72,34 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     // --- Navigation View ---
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.menu_item1 -> {
+            R.id.menu_top -> {
+                val intent = Intent(this, TopActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            }
+
+            R.id.menu_how_to_use -> {
+                val intent = Intent(this, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.HowToUse)
+                startActivity(intent)
+            }
+
+            R.id.menu_about_this_app -> {
+                val intent = Intent(this, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.AboutThisApp)
+                startActivity(intent)
             }
 
             R.id.menu_shannon -> {
-
+                val intent = Intent(this, ShannonCodingActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
             }
 
-            else -> {
+            R.id.menu_shannon_fano -> {
+                val intent = Intent(this, ShannonFanoActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
             }
         }
         drawer.closeDrawer(GravityCompat.START)
@@ -91,11 +112,6 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
-            R.id.action_settings -> {
-
-            }
-        }
         return true
     }
 

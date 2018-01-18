@@ -23,11 +23,13 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginBottom="1dp"
                 android:background="@color/table_accent"
                 android:text="@string/character"
                 android:textAlignment="center"
+                android:gravity="center_vertical"
                 android:textSize="@dimen/app_text_size_small" />
 
         </LinearLayout>
@@ -43,11 +45,13 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginBottom="1dp"
                 android:background="@color/table_accent"
                 android:text="@string/probability"
                 android:textAlignment="center"
+                android:gravity="center_vertical"
                 android:textSize="@dimen/app_text_size_small" />
 
         </LinearLayout>
@@ -64,11 +68,13 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginBottom="1dp"
                 android:background="@color/table_accent"
                 android:text="@string/codeword"
                 android:textAlignment="center"
+                android:gravity="center_vertical"
                 android:textSize="@dimen/app_text_size_small" />
 
         </LinearLayout>

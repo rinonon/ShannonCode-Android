@@ -9,8 +9,6 @@ class InformationActivity : AppCompatActivity() {
 
     companion object {
         enum class Type {
-            Shannon,
-            ShannonFano,
             AboutThisApp,
             HowToUse,
 
@@ -28,10 +26,8 @@ class InformationActivity : AppCompatActivity() {
 
         // ツールバーの設定
         val title = when(type) {
-            Type.Shannon -> "Shannon Cording"
-            Type.ShannonFano -> "Shannon-Fano Cording"
-            Type.AboutThisApp -> "About this App"
-            Type.HowToUse -> "How to use"
+            Type.AboutThisApp -> resources.getString(R.string.menu_about_this_app)
+            Type.HowToUse -> resources.getString(R.string.menu_how_to_use)
 
             else -> ""
         }

@@ -23,6 +23,7 @@
         <activity android:name=".activity.EncodeDecodeActivity" />
         <activity android:name=".activity.ShannonFanoActivity" />
         <activity android:name=".activity.InformationActivity" />
+        <activity android:name=".activity.AlgorithmDescriptionActivity" />
     </application>
 
 </manifest>

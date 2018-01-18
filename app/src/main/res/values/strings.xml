@@ -19,7 +19,8 @@
     <string name="start_button">Start</string>
 
     <!-- activity_input_number -->
-    <string name="input_character_number">Input number of character</string>
+    <string name="input_number_of_character">Input number of character</string>
+    <string name="max_number">Maximum number is %s</string>
     <string name="next_button">Next</string>
 
     <!-- activity_input_character -->
@@ -45,23 +46,23 @@
     <string name="decode_button">Decode</string>
 
     <!-- error_dialog -->
-    <string name="error_input_check">Please input all</string>
-    <string name="error_num_check">"Number should be less than</string>
-    <string name="error_probability_check">Sum of probability should be 100%</string>
-    <string name="error_unique_check">Character should be unique</string>
-    <string name="error_encode_check">Can not encode</string>
-    <string name="error_decode_check">Can not decode</string>
+    <string name="error_input_check">Please input all.</string>
+    <string name="error_num_check">"Number should be less than %s.</string>
+    <string name="error_probability_check">Sum of probability should be 100%.</string>
+    <string name="error_unique_check">Character should be unique.</string>
+    <string name="error_encode_check">Can not encode.</string>
+    <string name="error_decode_check">Can not decode.</string>
 
     <!-- dialog -->
     <string name="congratulation">Congratulation!</string>
     <string name="all_correct">All are Correct!</string>
-    <string name="wrong_answer">Wrong answer!</string>
+    <string name="wrong_answer">Check hint and try again!</string>
 
     <!-- shannon hint -->
-    <string name="hint_shannon_preprobability">This formula stands for cumulative probabilities</string>
-    <string name="hint_shannon_binary">Make cumulative probabilities a decimal number and make it a binary number</string>
-    <string name="hint_shannon_length">Length is minus of the absolute value of probability log2</string>
-    <string name="hint_shannon_codeword">Codeword is assigned by taking the first value of length bits from the binary expansions</string>
+    <string name="hint_shannon_preprobability">This formula stands for cumulative probabilities.</string>
+    <string name="hint_shannon_binary">Make cumulative probabilities a decimal number and make it a binary number.</string>
+    <string name="hint_shannon_length">Length is minus of the absolute value of probability log2.</string>
+    <string name="hint_shannon_codeword">Codeword is assigned by taking the first value of length bits from the binary expansions.</string>
 
     <!-- shannon fano hint -->
     <string name="hint_shannon_fano">hint</string>

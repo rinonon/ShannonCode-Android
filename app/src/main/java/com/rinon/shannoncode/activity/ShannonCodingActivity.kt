@@ -138,7 +138,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
             }
             InputNumberFragment.Companion.ErrorType.Max -> {
                 // 数が最大値よりも大きい
-                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_num_check) + InputNumberFragment.MAX_NUM)
+                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_num_check).format(InputNumberFragment.MAX_NUM))
                 dialog.show(supportFragmentManager, null)
             }
             else -> {

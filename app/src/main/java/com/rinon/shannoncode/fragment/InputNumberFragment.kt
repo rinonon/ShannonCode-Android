@@ -48,6 +48,8 @@ class InputNumberFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        text_max_num.text = resources.getString(R.string.max_number).format(MAX_NUM)
+
         next_button.setOnClickListener {
             val num = char_num.text.toString().toIntOrNull()
             val errorType = when {

@@ -76,7 +76,7 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                 startActivity(intent)
             }
 
-            R.id.menu_overview -> {
+            R.id.menu_description -> {
                 val intent = Intent(this, AlgorithmDescriptionActivity::class.java)
                 intent.putExtra(AlgorithmDescriptionActivity.KEY_TYPE, Type.Shannon)
                 startActivity(intent)

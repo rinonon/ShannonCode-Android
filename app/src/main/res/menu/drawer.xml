@@ -14,9 +14,9 @@
             android:icon="@drawable/ic_menu_info"
             android:title="@string/menu_about_this_app" />
         <item
-            android:id="@+id/menu_overview"
-            android:icon="@drawable/ic_menu_home"
-            android:title="@string/menu_overview" />
+            android:id="@+id/menu_description"
+            android:icon="@drawable/ic_menu_description"
+            android:title="@string/menu_description" />
     </group>
 
     <item android:title="Algorithms">

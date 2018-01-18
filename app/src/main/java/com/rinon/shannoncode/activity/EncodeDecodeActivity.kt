@@ -95,7 +95,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
                 startActivity(intent)
             }
 
-            R.id.menu_overview -> {
+            R.id.menu_description -> {
                 val intent = Intent(this, AlgorithmDescriptionActivity::class.java)
                 intent.putExtra(AlgorithmDescriptionActivity.KEY_TYPE, Type.None)
                 startActivity(intent)

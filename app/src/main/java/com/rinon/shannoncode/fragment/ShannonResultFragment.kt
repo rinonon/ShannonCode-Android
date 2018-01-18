@@ -89,10 +89,22 @@ class ShannonResultFragment : AbstractResultFragment() {
                 row.addView(quiz)
 
                 when(order) {
-                    ShannonCode.Order.PreProbability.value -> quizList.add(quiz)
-                    ShannonCode.Order.Binary.value -> quizList.add(quiz)
-                    ShannonCode.Order.Length.value -> quizList.add(quiz)
-                    ShannonCode.Order.Codeword.value -> quizList.add(quiz)
+                    ShannonCode.Order.PreProbability.value -> {
+                        quiz.setHintTextId(R.string.hint_shannon_preprobability)
+                        quizList.add(quiz)
+                    }
+                    ShannonCode.Order.Binary.value -> {
+                        quiz.setHintTextId(R.string.hint_shannon_binary)
+                        quizList.add(quiz)
+                    }
+                    ShannonCode.Order.Length.value -> {
+                        quiz.setHintTextId(R.string.hint_shannon_length)
+                        quizList.add(quiz)
+                    }
+                    ShannonCode.Order.Codeword.value -> {
+                        quiz.setHintTextId(R.string.hint_shannon_codeword)
+                        quizList.add(quiz)
+                    }
                 }
             }
             // 行を付け足す

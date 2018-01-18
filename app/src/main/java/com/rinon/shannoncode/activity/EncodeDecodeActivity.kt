@@ -19,6 +19,8 @@ import com.rinon.shannoncode.managers.DialogManager
 import com.rinon.shannoncode.model.AbstractCode
 import kotlinx.android.synthetic.main.activity_encode_decode.*
 
+import com.rinon.shannoncode.activity.TopActivity.Companion.Type as Type
+
 class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
                                                   EncodeFragmentListener,
                                                   DecodeFragmentListener {
@@ -33,6 +35,8 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
         val CODE = "code"
         val STATUS = "status"
+        val KEY_TYPE = "type"
+        var type = TopActivity.Companion.Type.None
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +45,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
         val codeList = intent.getSerializableExtra(CODE) as Array<AbstractCode>
         val status = intent.getSerializableExtra(STATUS) as Status
+        type = intent.getSerializableExtra(KEY_TYPE) as TopActivity.Companion.Type
 
         // ツールバーの設定
         toolbar.title = "Encode/Decode"
@@ -87,6 +92,12 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
             R.id.menu_about_this_app -> {
                 val intent = Intent(this, InformationActivity::class.java)
                 intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.AboutThisApp)
+                startActivity(intent)
+            }
+
+            R.id.menu_overview -> {
+                val intent = Intent(this, AlgorithmDescriptionActivity::class.java)
+                intent.putExtra(AlgorithmDescriptionActivity.KEY_TYPE, Type.None)
                 startActivity(intent)
             }
 

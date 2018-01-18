@@ -15,6 +15,7 @@ import com.rinon.shannoncode.model.AbstractCode
 import com.rinon.shannoncode.model.ShannonFano
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
 
+import com.rinon.shannoncode.activity.TopActivity.Companion.Type as Type
 import com.rinon.shannoncode.fragment.ResultFragment.Companion.QuizType as QuizType
 
 class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
@@ -76,6 +77,12 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 startActivity(intent)
             }
 
+            R.id.menu_overview -> {
+                val intent = Intent(this, AlgorithmDescriptionActivity::class.java)
+                intent.putExtra(AlgorithmDescriptionActivity.KEY_TYPE, Type.ShannonFano)
+                startActivity(intent)
+            }
+
             R.id.menu_shannon -> {
                 val intent = Intent(this, ShannonCodingActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -122,8 +129,8 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             }
 
             TopFragment.Companion.Event.Info -> {
-                val intent = Intent(this, InformationActivity::class.java)
-                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.ShannonFano)
+                val intent = Intent(this, AlgorithmDescriptionActivity::class.java)
+                intent.putExtra(AlgorithmDescriptionActivity.KEY_TYPE, Type.ShannonFano)
                 startActivity(intent)
             }
         }
@@ -217,6 +224,7 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 val intent = Intent(this, EncodeDecodeActivity::class.java)
                 intent.putExtra(EncodeDecodeActivity.CODE, mCodeList ?: throw NullPointerException("mCodeList is null"))
                 intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Encode)
+                intent.putExtra(EncodeDecodeActivity.KEY_TYPE, Type.Shannon)
                 startActivity(intent)
             }
 
@@ -224,6 +232,7 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 val intent = Intent(this, EncodeDecodeActivity::class.java)
                 intent.putExtra(EncodeDecodeActivity.CODE, mCodeList ?: throw NullPointerException("mCodeList is null"))
                 intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Decode)
+                intent.putExtra(EncodeDecodeActivity.KEY_TYPE, Type.Shannon)
                 startActivity(intent)
             }
         }

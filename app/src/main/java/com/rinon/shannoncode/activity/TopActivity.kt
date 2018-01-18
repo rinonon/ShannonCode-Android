@@ -18,11 +18,11 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
                                         , TopMenuFragmentListener {
 
     companion object {
-        enum class Type {
-            Shannon,
-            ShannonFano,
+        enum class Type(val value: Int) {
+            Shannon(0),
+            ShannonFano(1),
 
-            None
+            None(-1)
         }
     }
 
@@ -70,6 +70,12 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
             R.id.menu_about_this_app -> {
                 val intent = Intent(this, InformationActivity::class.java)
                 intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.AboutThisApp)
+                startActivity(intent)
+            }
+
+            R.id.menu_overview -> {
+                val intent = Intent(this, AlgorithmDescriptionActivity::class.java)
+                intent.putExtra(AlgorithmDescriptionActivity.KEY_TYPE, Type.None)
                 startActivity(intent)
             }
 

@@ -2,25 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+        <item android:id="@+id/menu_top"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/top_menu" />
         <item
-            android:id="@+id/menu_item1"
-            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:id="@+id/menu_how_to_use"
+            android:icon="@drawable/ic_menu_help"
             android:title="@string/menu_how_to_use" />
         <item
-            android:id="@+id/menu_item2"
-            android:icon="@android:drawable/ic_menu_myplaces"
+            android:id="@+id/menu_about_this_app"
+            android:icon="@drawable/ic_menu_info"
             android:title="@string/menu_about_this_app" />
     </group>
 
-    <item android:title="Algorithm">
+    <item android:title="Algorithms">
         <menu>
             <item
                 android:id="@+id/menu_shannon"
-                android:icon="@android:drawable/ic_menu_save"
+                android:icon="@drawable/ic_menu_item1"
                 android:title="@string/shannon_coding" />
             <item
                 android:id="@+id/menu_shannon_fano"
-                android:icon="@android:drawable/ic_menu_delete"
+                android:icon="@drawable/ic_menu_item2"
                 android:title="@string/shannon_fano_coding" />
         </menu>
     </item>

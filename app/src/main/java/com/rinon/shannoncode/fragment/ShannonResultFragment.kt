@@ -29,8 +29,8 @@ class ShannonResultFragment : AbstractResultFragment() {
             return instance
         }
 
-        private val KEY_QUIZ_TYPE = "quiz_type"
-        private val KEY_CONTENT_LIST = "content_list"
+        private const val KEY_QUIZ_TYPE = "quiz_type"
+        private const val KEY_CONTENT_LIST = "content_list"
         private val quizList = mutableListOf<QuizView>()
 
         private var quizIndex = 0

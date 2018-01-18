@@ -23,9 +23,9 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
 
             None(-1)
         }
+        var type = Type.None
     }
 
-    var type = Type.None
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

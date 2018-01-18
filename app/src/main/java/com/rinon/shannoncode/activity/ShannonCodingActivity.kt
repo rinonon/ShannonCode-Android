@@ -221,16 +221,16 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
 
            ResultFragment.Companion.Event.Encode -> {
                val intent = Intent(this, EncodeDecodeActivity::class.java)
-               intent.putExtra(EncodeDecodeActivity.CODE, result?: throw NullPointerException("mCodeList is null"))
-               intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Encode)
+               intent.putExtra(EncodeDecodeActivity.KEY_CODE, result?: throw NullPointerException("mCodeList is null"))
+               intent.putExtra(EncodeDecodeActivity.KEY_STATUS, EncodeDecodeActivity.Companion.Status.Encode)
                intent.putExtra(EncodeDecodeActivity.KEY_TYPE, Type.Shannon)
                startActivity(intent)
            }
 
            ResultFragment.Companion.Event.Decode -> {
                val intent = Intent(this, EncodeDecodeActivity::class.java)
-               intent.putExtra(EncodeDecodeActivity.CODE, result?: throw NullPointerException("mCodeList is null"))
-               intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Decode)
+               intent.putExtra(EncodeDecodeActivity.KEY_CODE, result?: throw NullPointerException("mCodeList is null"))
+               intent.putExtra(EncodeDecodeActivity.KEY_STATUS, EncodeDecodeActivity.Companion.Status.Decode)
                intent.putExtra(EncodeDecodeActivity.KEY_TYPE, Type.Shannon)
                startActivity(intent)
            }

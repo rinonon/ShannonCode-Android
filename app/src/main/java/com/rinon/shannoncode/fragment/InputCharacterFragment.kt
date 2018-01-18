@@ -43,7 +43,7 @@ class InputCharacterFragment : Fragment() {
             None
         }
 
-        private val KEY_CHARACTER_NUM = "character_num"
+        private const val KEY_CHARACTER_NUM = "character_num"
         private var listener: InputCharacterFragmentListener? = null
         private var pairList: Array<Pair<EditText, EditText>>? = null
     }

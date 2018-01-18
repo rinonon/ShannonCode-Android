@@ -52,9 +52,9 @@ class ResultFragment : Fragment() {
             None
         }
 
-        private val KEY_TYPE = "type"
-        private val KEY_QUIZ_TYPE = "quiz_type"
-        private val KEY_CONTENT_LIST = "content_list"
+        private const val KEY_TYPE = "type"
+        private const val KEY_QUIZ_TYPE = "quiz_type"
+        private const val KEY_CONTENT_LIST = "content_list"
 
         private var listener: ResultFragmentListener? = null
     }

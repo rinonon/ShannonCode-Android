@@ -33,7 +33,7 @@ class EncodeFragment : Fragment() {
             None
         }
 
-        private val KEY_CONTENT_LIST = "content_list"
+        private const val KEY_CONTENT_LIST = "content_list"
         private var listener: EncodeFragmentListener? = null
         private var codeList: Array<AbstractCode>? = null
     }

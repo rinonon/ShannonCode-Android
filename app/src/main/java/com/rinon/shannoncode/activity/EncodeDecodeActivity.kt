@@ -33,9 +33,9 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
             None(-1)
         }
 
-        val CODE = "code"
-        val STATUS = "status"
-        val KEY_TYPE = "type"
+        const val KEY_CODE = "code"
+        const val KEY_STATUS = "status"
+        const val KEY_TYPE = "type"
         var type = TopActivity.Companion.Type.None
     }
 
@@ -43,8 +43,8 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encode_decode)
 
-        val codeList = intent.getSerializableExtra(CODE) as Array<AbstractCode>
-        val status = intent.getSerializableExtra(STATUS) as Status
+        val codeList = intent.getSerializableExtra(KEY_CODE) as Array<AbstractCode>
+        val status = intent.getSerializableExtra(KEY_STATUS) as Status
         type = intent.getSerializableExtra(KEY_TYPE) as TopActivity.Companion.Type
 
         // ツールバーの設定
@@ -97,7 +97,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
             R.id.menu_description -> {
                 val intent = Intent(this, AlgorithmDescriptionActivity::class.java)
-                intent.putExtra(AlgorithmDescriptionActivity.KEY_TYPE, Type.None)
+                intent.putExtra(AlgorithmDescriptionActivity.KEY_TYPE, type)
                 startActivity(intent)
             }
 

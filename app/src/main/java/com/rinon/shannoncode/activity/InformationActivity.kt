@@ -15,7 +15,7 @@ class InformationActivity : AppCompatActivity() {
             None
         }
 
-        val KEY_TYPE = "type"
+        const val KEY_TYPE = "type"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

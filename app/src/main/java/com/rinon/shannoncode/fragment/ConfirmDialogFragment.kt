@@ -23,9 +23,9 @@ class ConfirmDialogFragment : DialogFragment() {
             return instance
         }
 
-        private val KEY_TITLE = "title"
-        private val KEY_MESSAGE = "message"
-        private val KEY_POSITIVE_TEXT = "positive_text"
+        private const val KEY_TITLE = "title"
+        private const val KEY_MESSAGE = "message"
+        private const val KEY_POSITIVE_TEXT = "positive_text"
         // private val KEY_ON_CLICK_LISTENER = "on_click_listener"
     }
 

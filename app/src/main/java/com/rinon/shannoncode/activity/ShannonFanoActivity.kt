@@ -25,7 +25,6 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         ResultFragmentListener {
 
     companion object {
-
         var mQuizType = QuizType.None
         var mCodeList: Array<ShannonFano.Code>? = null
     }
@@ -222,17 +221,17 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
             ResultFragment.Companion.Event.Encode -> {
                 val intent = Intent(this, EncodeDecodeActivity::class.java)
-                intent.putExtra(EncodeDecodeActivity.CODE, mCodeList ?: throw NullPointerException("mCodeList is null"))
-                intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Encode)
-                intent.putExtra(EncodeDecodeActivity.KEY_TYPE, Type.Shannon)
+                intent.putExtra(EncodeDecodeActivity.KEY_CODE, mCodeList ?: throw NullPointerException("mCodeList is null"))
+                intent.putExtra(EncodeDecodeActivity.KEY_STATUS, EncodeDecodeActivity.Companion.Status.Encode)
+                intent.putExtra(EncodeDecodeActivity.KEY_TYPE, Type.ShannonFano)
                 startActivity(intent)
             }
 
             ResultFragment.Companion.Event.Decode -> {
                 val intent = Intent(this, EncodeDecodeActivity::class.java)
-                intent.putExtra(EncodeDecodeActivity.CODE, mCodeList ?: throw NullPointerException("mCodeList is null"))
-                intent.putExtra(EncodeDecodeActivity.STATUS, EncodeDecodeActivity.Companion.Status.Decode)
-                intent.putExtra(EncodeDecodeActivity.KEY_TYPE, Type.Shannon)
+                intent.putExtra(EncodeDecodeActivity.KEY_CODE, mCodeList ?: throw NullPointerException("mCodeList is null"))
+                intent.putExtra(EncodeDecodeActivity.KEY_STATUS, EncodeDecodeActivity.Companion.Status.Decode)
+                intent.putExtra(EncodeDecodeActivity.KEY_TYPE, Type.ShannonFano)
                 startActivity(intent)
             }
         }

@@ -11,7 +11,7 @@ import com.rinon.shannoncode.activity.TopActivity.Companion.Type as Type
 class AlgorithmDescriptionActivity : AppCompatActivity() {
 
     companion object {
-        val KEY_TYPE = "type"
+        const val KEY_TYPE = "type"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

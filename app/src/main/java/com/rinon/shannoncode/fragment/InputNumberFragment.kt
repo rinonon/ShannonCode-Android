@@ -29,7 +29,7 @@ class InputNumberFragment : Fragment() {
             None
         }
 
-        val MAX_NUM = 10
+        const val MAX_NUM = 10
         private var listener: InputNumberFragmentListener? = null
     }
 

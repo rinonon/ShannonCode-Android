@@ -36,7 +36,7 @@ class TopFragment : Fragment() {
             None
         }
 
-        private val KEY_TYPE = "type"
+        private const val KEY_TYPE = "type"
         private var listener: TopFragmentListener? = null
         private var type = Type.None
     }

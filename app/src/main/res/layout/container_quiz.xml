@@ -40,12 +40,12 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/correct" />
+            app:srcCompat="@drawable/quiz_correct" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/wrong" />
+            app:srcCompat="@drawable/quiz_wrong" />
     </ImageSwitcher>
 
 </merge>

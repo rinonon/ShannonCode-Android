@@ -6,6 +6,8 @@
     <string name="probability_percent">Probability(%)</string>
 
     <!-- tool_bar -->
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
     <string name="top_menu">Top Menu</string>
     <string name="shannon_coding">Shannon Coding</string>
     <string name="shannon_fano_coding">Shannon-Fano Coding</string>

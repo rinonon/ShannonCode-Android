@@ -38,8 +38,8 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.top_menu,
-                R.string.shannon_coding)
+                R.string.drawer_open,
+                R.string.drawer_close)
 
         drawer.addDrawerListener(toggle)
         toggle.syncState()

@@ -6,7 +6,6 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.fragment.*
@@ -93,20 +92,6 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
             }
         }
         drawer.closeDrawer(GravityCompat.START)
-        return true
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.options, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
-            R.id.action_settings -> {
-
-            }
-        }
         return true
     }
 

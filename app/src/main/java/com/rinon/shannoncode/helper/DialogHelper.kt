@@ -1,10 +1,10 @@
-package com.rinon.shannoncode.managers
+package com.rinon.shannoncode.helper
 
 import android.content.DialogInterface
 import com.rinon.shannoncode.fragment.ConfirmDialogFragment
 
 
-internal object DialogManager {
+internal object DialogHelper {
 
     fun createSimpleErrorDialog(message: String,
                                 onOkClickListener: DialogInterface.OnClickListener? = null,

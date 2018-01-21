@@ -1,4 +1,4 @@
-package com.rinon.shannoncode.managers
+package com.rinon.shannoncode.helper
 
 import android.content.Context
 import android.graphics.drawable.Drawable

@@ -10,7 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.rinon.shannoncode.R
 import com.rinon.shannoncode.fragment.*
-import com.rinon.shannoncode.managers.DialogManager
+import com.rinon.shannoncode.helper.DialogHelper
 import com.rinon.shannoncode.model.AbstractCode
 import com.rinon.shannoncode.model.ShannonCode
 import kotlinx.android.synthetic.main.activity_shannon_coding.*
@@ -140,12 +140,12 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         when (errorType){
             InputNumberFragment.Companion.ErrorType.Input -> {
                 // 数字が入力されていない
-                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_input_check))
+                val dialog = DialogHelper.createSimpleErrorDialog(resources.getString(R.string.error_input_check))
                 dialog.show(supportFragmentManager, null)
             }
             InputNumberFragment.Companion.ErrorType.Max -> {
                 // 数が最大値よりも大きい
-                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_num_check).format(InputNumberFragment.MAX_NUM))
+                val dialog = DialogHelper.createSimpleErrorDialog(resources.getString(R.string.error_num_check).format(InputNumberFragment.MAX_NUM))
                 dialog.show(supportFragmentManager, null)
             }
             else -> {
@@ -168,17 +168,17 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                                         pairList: Array<Pair<String, String>>) {
         when (errorType) {
             InputCharacterFragment.Companion.ErrorType.InputAll -> {
-                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_input_check))
+                val dialog = DialogHelper.createSimpleErrorDialog(resources.getString(R.string.error_input_check))
                 dialog.show(supportFragmentManager, null)
             }
 
             InputCharacterFragment.Companion.ErrorType.CorrectProbability -> {
-                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_probability_check))
+                val dialog = DialogHelper.createSimpleErrorDialog(resources.getString(R.string.error_probability_check))
                 dialog.show(supportFragmentManager, null)
             }
 
             InputCharacterFragment.Companion.ErrorType.Unique -> {
-                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_unique_check))
+                val dialog = DialogHelper.createSimpleErrorDialog(resources.getString(R.string.error_unique_check))
                 dialog.show(supportFragmentManager, null)
             }
 
@@ -203,19 +203,19 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
     override fun resultListener(status: ResultFragment.Companion.Event, hintText: String?) {
        when(status) {
            ResultFragment.Companion.Event.Wrong -> {
-               val dialog = DialogManager.createSimpleDialog("Wrong Answer!", resources.getString(R.string.wrong_answer))
+               val dialog = DialogHelper.createSimpleDialog("Wrong Answer!", resources.getString(R.string.wrong_answer))
                dialog.show(supportFragmentManager, null)
            }
 
            ResultFragment.Companion.Event.Complete -> {
                // ダイアログを出す
-               val dialog = DialogManager.createSimpleDialog(resources.getString(R.string.congratulation),
+               val dialog = DialogHelper.createSimpleDialog(resources.getString(R.string.congratulation),
                                                              resources.getString(R.string.all_correct))
                dialog.show(supportFragmentManager, null)
            }
 
            ResultFragment.Companion.Event.Hint -> {
-               val dialog = DialogManager.createSimpleDialog("Hint", hintText?: throw NullPointerException("hint text is null"))
+               val dialog = DialogHelper.createSimpleDialog("Hint", hintText?: throw NullPointerException("hint text is null"))
                dialog.show(supportFragmentManager, null)
            }
 

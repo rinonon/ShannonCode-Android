@@ -15,7 +15,7 @@ import com.rinon.shannoncode.fragment.DecodeFragment
 import com.rinon.shannoncode.fragment.DecodeFragmentListener
 import com.rinon.shannoncode.fragment.EncodeFragment
 import com.rinon.shannoncode.fragment.EncodeFragmentListener
-import com.rinon.shannoncode.managers.DialogManager
+import com.rinon.shannoncode.helper.DialogHelper
 import com.rinon.shannoncode.model.AbstractCode
 import kotlinx.android.synthetic.main.activity_encode_decode.*
 
@@ -130,7 +130,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     override fun encodeListener(event: EncodeFragment.Companion.Event) {
         when(event) {
             EncodeFragment.Companion.Event.EncodeError -> {
-                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_encode_check))
+                val dialog = DialogHelper.createSimpleErrorDialog(resources.getString(R.string.error_encode_check))
                 dialog.show(supportFragmentManager, null)
             }
         }
@@ -139,7 +139,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     override fun decodeListener(event: DecodeFragment.Companion.Event) {
         when(event) {
             DecodeFragment.Companion.Event.DecodeError -> {
-                val dialog = DialogManager.createSimpleErrorDialog(resources.getString(R.string.error_decode_check))
+                val dialog = DialogHelper.createSimpleErrorDialog(resources.getString(R.string.error_decode_check))
                 dialog.show(supportFragmentManager, null)
             }
         }

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.managers.ImageGetterHelper
+import com.rinon.shannoncode.helper.ImageGetterHelper
 import kotlinx.android.synthetic.main.fragment_description_shannon.*
 
 class DescriptionShannonFragment : Fragment() {

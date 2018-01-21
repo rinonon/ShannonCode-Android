@@ -1,6 +1,5 @@
 package com.rinon.shannoncode.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Html
@@ -8,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rinon.shannoncode.R
-import com.rinon.shannoncode.managers.ImageGetterHelper
+import com.rinon.shannoncode.helper.ImageGetterHelper
 import kotlinx.android.synthetic.main.fragment_description_shannon_fano.*
 
 class DescriptionShannonFanoFragment : Fragment() {

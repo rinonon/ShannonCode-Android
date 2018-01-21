@@ -62,7 +62,7 @@
                 android:background="@color/table_accent"
                 android:contentDescription="@string/pre_probability_description"
                 android:gravity="center_vertical"
-                app:srcCompat="@drawable/sum_probability" />
+                app:srcCompat="@drawable/formula_sum_probability" />
 
             <TextView
                 android:layout_width="match_parent"

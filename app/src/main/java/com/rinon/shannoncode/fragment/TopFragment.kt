@@ -47,6 +47,9 @@ class TopFragment : Fragment() {
         if (context is TopFragmentListener) {
             listener = context
         }
+        else {
+            throw ClassCastException("context does not implement listener")
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

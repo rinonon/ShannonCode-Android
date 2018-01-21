@@ -65,6 +65,9 @@ class ResultFragment : Fragment() {
         if (context is ResultFragmentListener) {
             listener = context
         }
+        else {
+            throw ClassCastException("context does not implement listener")
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

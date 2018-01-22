@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:layout_marginBottom="1dp"
         android:background="@color/table_accent"
-        android:text="@string/character"
+        android:text="@string/symbol"
         android:textAlignment="center"
         android:gravity="center_vertical"
         android:textSize="@dimen/app_text_size_small" />

@@ -62,7 +62,7 @@ class EncodeFragment : Fragment() {
         // 一覧の説明文作成
         var codewordListStr = ""
         codeList?.forEachIndexed {
-            index, content -> codewordListStr += content.char + ":" + content.codeword +
+            index, content -> codewordListStr += content.symbol + ":" + content.codeword +
                 if(index + 1 % 5 == 0) "\n" else if(index + 1 == codeList?.size) "" else ", "
         }
         description_text.text = "($codewordListStr)"
@@ -82,7 +82,7 @@ class EncodeFragment : Fragment() {
         for (char in sourceText) {
             try {
                 val match: AbstractCode = result.find {
-                    it.char == char
+                    it.symbol == char
                 } ?: throw Exception("not found")
                 ret += match.codeword
 

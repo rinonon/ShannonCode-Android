@@ -13,7 +13,7 @@
         android:layout_marginLeft="@dimen/padding_normal"
         android:layout_marginRight="@dimen/padding_normal"
         android:layout_marginTop="@dimen/padding_tab"
-        android:text="@string/input_number_of_character"
+        android:text="@string/input_number_of_symbol"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"

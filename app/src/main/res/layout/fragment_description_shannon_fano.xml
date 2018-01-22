@@ -96,7 +96,7 @@
                             android:layout_weight="1"
                             android:background="@color/table_accent"
                             android:gravity="center_vertical"
-                            android:text="@string/character"
+                            android:text="@string/symbol"
                             android:textAlignment="center"
                             android:textSize="@dimen/app_text_size_small" />
 

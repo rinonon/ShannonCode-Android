@@ -13,7 +13,7 @@ object ShannonFano {
     }
 
     // データ格納用の内部クラス
-    class Code(override val char: Char,
+    class Code(override val symbol: Char,
                override val probability: Int,
                override var codeword: String = ""): Serializable, com.rinon.shannoncode.model.AbstractCode()
 

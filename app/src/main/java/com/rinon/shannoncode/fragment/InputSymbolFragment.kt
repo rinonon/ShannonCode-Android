@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TableRow
 import com.rinon.shannoncode.R
-import kotlinx.android.synthetic.main.fragment_input_character.*
+import kotlinx.android.synthetic.main.fragment_input_symbol.*
 
 interface InputCharacterFragmentListener {
     fun inputCharacterListener(errorType: InputCharacterFragment.Companion.ErrorType,
@@ -60,7 +60,7 @@ class InputCharacterFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_input_character, container, false)
+        return inflater.inflate(R.layout.fragment_input_symbol, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +81,7 @@ class InputCharacterFragment : Fragment() {
     }
 
     private fun generateInputRows(num: Int):  Array<Pair<EditText, EditText>> {
-        val ret = ArrayList<Pair<EditText, EditText>>()        // first:char second:probability
+        val ret = ArrayList<Pair<EditText, EditText>>()        // first:symbol second:probability
 
         for(counter in 0 until num) {
             val row = layoutInflater.inflate(R.layout.container_input_character, scroll_view_content, false) as TableRow

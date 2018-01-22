@@ -1,7 +1,7 @@
 <resources>
     <!-- global -->
     <string name="app_name">ShannonCoding</string>
-    <string name="character">Character</string>
+    <string name="symbol">Symbol</string>
     <string name="probability">Probability</string>
     <string name="probability_percent">Probability(%)</string>
 
@@ -22,7 +22,7 @@
     <string name="start_button">Start</string>
 
     <!-- activity_input_number -->
-    <string name="input_number_of_character">Input number of character</string>
+    <string name="input_number_of_symbol">Input number of symbol</string>
     <string name="max_number">Maximum number is %s</string>
     <string name="next_button">Next</string>
 

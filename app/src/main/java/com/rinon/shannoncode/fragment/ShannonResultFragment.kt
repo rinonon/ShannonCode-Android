@@ -60,7 +60,7 @@ class ShannonResultFragment : AbstractResultFragment() {
             for(order in ShannonCode.Order.Num.value until ShannonCode.Order.Max.value) {
                 val answer = when(order) {
                     ShannonCode.Order.Num.value -> (index + 1).toString()
-                    ShannonCode.Order.Character.value -> (code.char).toString()
+                    ShannonCode.Order.Character.value -> (code.symbol).toString()
                     ShannonCode.Order.Probability.value -> (code.probability).toString()
                     ShannonCode.Order.PreProbability.value -> (code.preProbability).toString()
                     ShannonCode.Order.Binary.value -> code.binaryText

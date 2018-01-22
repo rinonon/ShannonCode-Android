@@ -18,7 +18,7 @@ object ShannonCode {
     }
 
     // データ格納用の内部クラス
-    class Code(override val char: Char,
+    class Code(override val symbol: Char,
                override val probability: Int,
                override var codeword: String = "",
                var preProbability: Int = 0,
@@ -48,7 +48,7 @@ object ShannonCode {
             // 最初の0.を抜いたbitNumの数
             code.codeword = code.binaryText.substring(2, code.length + 2)
 
-            Log.d("mCodeList", "char: " + code.char + '\n' +
+            Log.d("mCodeList", "symbol: " + code.symbol + '\n' +
                               "probability: " + code.probability.toString() + '\n' +
                               "preProbability: " + code.preProbability.toString() + '\n' +
                               "binaryText: " + code.binaryText + '\n' +

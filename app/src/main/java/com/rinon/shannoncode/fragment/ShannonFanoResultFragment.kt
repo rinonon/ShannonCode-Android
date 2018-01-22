@@ -89,7 +89,7 @@ class ShannonFanoResultFragment : AbstractResultFragment() {
         for(code in codeList) {
             for(order in ShannonFano.Order.Character.value until ShannonFano.Order.Max.value) {
                 val answer = when(order) {
-                    ShannonFano.Order.Character.value -> code.char.toString()
+                    ShannonFano.Order.Character.value -> code.symbol.toString()
                     ShannonFano.Order.Probability.value -> code.probability.toString()
                     ShannonFano.Order.Codeword.value -> code.codeword
 

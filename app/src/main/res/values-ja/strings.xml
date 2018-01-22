@@ -1,11 +1,11 @@
 <resources>
     <!-- global -->
     <string name="app_name">ShannonCode</string>
-    <string name="character">character</string>
+    <string name="symbol">character</string>
     <string name="probability">probability</string>
 
     <!-- activity_input_number -->
-    <string name="input_number_of_character">input character number</string>
+    <string name="input_number_of_symbol">input character number</string>
     <string name="next_button">next</string>
 
     <!-- activity_input_character -->

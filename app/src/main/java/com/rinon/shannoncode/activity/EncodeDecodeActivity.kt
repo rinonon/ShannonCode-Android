@@ -47,7 +47,7 @@ class EncodeDecodeActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         type = intent.getSerializableExtra(KEY_TYPE) as TopActivity.Companion.Type
 
         // ツールバーの設定
-        toolbar.title = "Encode/Decode"
+        toolbar.title = resources.getString(R.string.encode_decode)
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar,

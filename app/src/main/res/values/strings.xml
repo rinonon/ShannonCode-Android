@@ -11,6 +11,7 @@
     <string name="top_menu">Top Menu</string>
     <string name="shannon_coding">Shannon Coding</string>
     <string name="shannon_fano_coding">Shannon-Fano Coding</string>
+    <string name="encode_decode">Encode/Decode</string>
 
     <!-- fragment_top -->
     <string name="info_button">Info</string>
@@ -67,7 +68,7 @@
     <string name="hint_shannon_codeword">Codeword is assigned by taking the first value of length bits from the binary expansions.</string>
 
     <!-- shannon fano hint -->
-    <string name="hint_shannon_fano">hint</string>
+    <string name="hint_shannon_fano">Split it in two places where the sum of the probabilities of each set is as equal as possible, and assign "0" to one of the divided sets and "1" to the other set.</string>
 
     <!-- menu -->
     <string name="menu_how_to_use">How to use</string>

@@ -48,7 +48,7 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="290dp"
         android:layout_marginLeft="@dimen/padding_normal"
         android:layout_marginRight="@dimen/padding_normal"
         android:layout_marginTop="@dimen/padding_normal"
@@ -70,7 +70,7 @@
         android:id="@+id/calc_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_bottom"
+        android:layout_marginBottom="@dimen/padding_large"
         android:layout_marginLeft="130dp"
         android:layout_marginRight="130dp"
         android:text="@string/calc_button"

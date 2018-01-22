@@ -6,12 +6,18 @@
     <color name="toolbarText">#FFFF</color>
     <color name="colorDrawerHeader">#CDDC39</color>
 
-    <color name="shannon">#EF9A9A</color>
-    <color name="a">#FFE082</color>
-    <color name="b">#A5D6A7</color>
-    <color name="c">#90CAF9</color>
+    <!--
+    <color name="a">#EF9A9A</color>
+    <color name="b">#FFE082</color>
+    <color name="shannon">#A5D6A7</color>
+    <color name="shannon_fano">#90CAF9</color>
+    -->
 
-    <color name="gray">#DDDDDD</color>
+    <color name="a">#EF9A9A</color>
+    <color name="b">#FFE082</color>
+    <color name="shannon">#A5D6A7</color>
+    <color name="shannon_fano">#90CAF9</color>
+
     <color name="white">#FFFF</color>
     <color name="table_back">#999999</color>
     <color name="table_accent">#DDDDDD</color>

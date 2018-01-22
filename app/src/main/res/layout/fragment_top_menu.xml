@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,23 +8,34 @@
     tools:context="com.rinon.shannoncode.activity.TopActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/padding_normal"
         android:layout_marginStart="@dimen/padding_normal"
-        android:layout_marginTop="@dimen/padding_toolbar"
+        android:layout_marginTop="@dimen/padding_tab"
         android:text="@string/top_text"
         android:textAlignment="center"
-        android:textSize="@dimen/app_text_size_xlarge"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.gc.materialdesign.views.ButtonFlat
+        android:id="@+id/button_help"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="@dimen/padding_normal"
+        android:layout_marginTop="24dp"
+        android:text="@string/help_button"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="@dimen/padding_bottom"
         android:layout_marginEnd="@dimen/padding_normal"
         android:layout_marginStart="@dimen/padding_normal"
@@ -35,72 +47,39 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="140dp"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/button_shannon_coding"
                     android:layout_width="match_parent"
-                    android:layout_height="85dp"
+                    android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:background="@color/shannon"
                     android:elevation="0dp"
-                    android:text="Shannon"
+                    android:text="@string/shannon_coding"
                     android:textAllCaps="false"
                     android:transitionName="image" />
 
                 <Button
                     android:id="@+id/button_shannon_fano"
                     android:layout_width="match_parent"
-                    android:layout_height="85dp"
+                    android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:background="@color/a"
-                    android:text="Shannon-Fano"
+                    android:background="@color/shannon_fano"
+                    android:text="@string/shannon_fano_coding"
                     android:textAllCaps="false" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:layout_margin="20dp"
-                    android:layout_weight="1"
-                    android:background="@color/b"
-                    android:elevation="0dp"
-                    android:textAllCaps="false" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:layout_margin="20dp"
-                    android:layout_weight="1"
-                    android:background="@color/c"
-                    android:textAllCaps="false" />
-            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
-
-    <com.gc.materialdesign.views.ButtonFlat
-        android:id="@+id/button_help"
-        android:layout_width="56dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/padding_normal"
-        android:text="@string/help_button"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </android.support.constraint.ConstraintLayout>

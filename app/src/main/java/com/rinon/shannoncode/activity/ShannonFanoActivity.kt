@@ -185,8 +185,8 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         }
     }
 
-    override fun resultListener(status: ResultFragment.Companion.Event, hintText: String?) {
-        when(status) {
+    override fun resultListener(event: ResultFragment.Companion.Event, hintText: String?) {
+        when(event) {
             ResultFragment.Companion.Event.Wrong -> {
                 val dialog = DialogHelper.createSimpleDialog("Wrong Answer!", resources.getString(R.string.wrong_answer))
                 dialog.show(supportFragmentManager, null)
@@ -230,7 +230,6 @@ class ShannonFanoActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             ShannonFano.Code(it.first[0],
                     it.second.toInt())
         }
-
-        return ShannonFano.calc(codeList).toTypedArray()
+        return ShannonFano.calc(codeList)
     }
 }

@@ -185,8 +185,8 @@ class ShannonCodingActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         }
     }
 
-    override fun resultListener(status: ResultFragment.Companion.Event, hintText: String?) {
-       when(status) {
+    override fun resultListener(event: ResultFragment.Companion.Event, hintText: String?) {
+       when(event) {
            ResultFragment.Companion.Event.Wrong -> {
                val dialog = DialogHelper.createSimpleDialog("Wrong Answer!", resources.getString(R.string.wrong_answer))
                dialog.show(supportFragmentManager, null)

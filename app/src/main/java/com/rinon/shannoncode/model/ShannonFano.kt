@@ -17,7 +17,7 @@ object ShannonFano {
                override val probability: Int,
                override var codeword: String = ""): Serializable, com.rinon.shannoncode.model.AbstractCode()
 
-    fun calc(codeList: MutableList<Code>): List<Code> {
+    fun calc(codeList: MutableList<Code>): Array<Code> {
         // 1.確率順に並び替える
         codeList.sortByDescending { it -> it.probability }
 
@@ -34,7 +34,7 @@ object ShannonFano {
             codeList[0].codeword += '0'
         }
 
-        return codeList.toList()
+        return codeList.toTypedArray()
     }
 
     private fun addBit(codeList: MutableList<Code>, up: Boolean) {

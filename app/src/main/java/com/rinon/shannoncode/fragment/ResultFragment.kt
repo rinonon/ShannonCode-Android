@@ -14,7 +14,7 @@ import com.rinon.shannoncode.model.ShannonFano
 import kotlinx.android.synthetic.main.fragment_result.*
 
 interface ResultFragmentListener {
-    fun resultListener(result: ResultFragment.Companion.Event, hintText: String? = null)
+    fun resultListener(event: ResultFragment.Companion.Event, hintText: String? = null)
 }
 
 class ResultFragment : Fragment() {

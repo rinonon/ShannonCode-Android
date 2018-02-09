@@ -24,6 +24,7 @@
         <activity android:name=".activity.ShannonFanoActivity" />
         <activity android:name=".activity.InformationActivity" />
         <activity android:name=".activity.AlgorithmDescriptionActivity" />
+        <activity android:name=".activity.TutorialActivity" />
     </application>
 
 </manifest>

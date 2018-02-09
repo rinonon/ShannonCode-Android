@@ -19,6 +19,7 @@
     <color name="shannon_fano">#90CAF9</color>
 
     <color name="white">#FFFF</color>
+    <color name="gray">#A59E99</color>
     <color name="table_back">#999999</color>
     <color name="table_accent">#DDDDDD</color>
     <color name="table_normal">#FFFF</color>

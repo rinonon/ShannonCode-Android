@@ -120,4 +120,13 @@
         "Email: hamada@u-aizu.ac.jp\n"
     </string>
 
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="start">Start!</string>
+    <string name="tutorial_1">"Choose algorithm"</string>
+    <string name="tutorial_2">"Choose quiz difficulty level"</string>
+    <string name="tutorial_3">"Input Information"</string>
+    <string name="tutorial_4">"Challenge the Quiz"</string>
+    <string name="tutorial_5">"Encode and Decode"</string>
+
 </resources>

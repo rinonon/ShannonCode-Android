@@ -60,14 +60,12 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
             }
 
             R.id.menu_how_to_use -> {
-                val intent = Intent(this, InformationActivity::class.java)
-                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.HowToUse)
+                val intent = Intent(this, TutorialActivity::class.java)
                 startActivity(intent)
             }
 
             R.id.menu_about_this_app -> {
                 val intent = Intent(this, InformationActivity::class.java)
-                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.AboutThisApp)
                 startActivity(intent)
             }
 
@@ -98,8 +96,7 @@ class TopActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelecte
     override fun topMenuListener(event: TopMenuFragment.Companion.Event) {
         when(event) {
             TopMenuFragment.Companion.Event.Help -> {
-                val intent = Intent(this, InformationActivity::class.java)
-                intent.putExtra(InformationActivity.KEY_TYPE, InformationActivity.Companion.Type.HowToUse)
+                val intent = Intent(this, TutorialActivity::class.java)
                 startActivity(intent)
             }
 

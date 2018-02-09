@@ -3,6 +3,8 @@ package com.rinon.shannoncode.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.rinon.shannoncode.R
+import com.rinon.shannoncode.fragment.AboutThisAppFragment
+import com.rinon.shannoncode.fragment.HowToUseFragment
 import kotlinx.android.synthetic.main.activity_information.*
 
 class InformationActivity : AppCompatActivity() {
@@ -37,6 +39,18 @@ class InformationActivity : AppCompatActivity() {
 
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        if(savedInstanceState == null) {
+            val fragment = when (type) {
+                Type.HowToUse -> HowToUseFragment.newInstance()
+                Type.AboutThisApp -> AboutThisAppFragment.newInstance()
+                else -> throw IllegalArgumentException("type is illegal")
+            }
+
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment, fragment.tag)
+                    .commit()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

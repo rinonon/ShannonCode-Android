@@ -19,5 +19,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:padding="16dp"
-        android:text="App name" />
+        android:text="@string/app_name" />
 </LinearLayout>

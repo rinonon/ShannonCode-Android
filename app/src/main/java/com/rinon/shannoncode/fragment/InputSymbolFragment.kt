@@ -84,7 +84,7 @@ class InputCharacterFragment : Fragment() {
         val ret = ArrayList<Pair<EditText, EditText>>()        // first:symbol second:probability
 
         for(counter in 0 until num) {
-            val row = layoutInflater.inflate(R.layout.container_input_character, scroll_view_content, false) as TableRow
+            val row = layoutInflater.inflate(R.layout.container_input_symbol, scroll_view_content, false) as TableRow
             val char = row.getChildAt(Order.Character.value) as EditText
             val probability = row.getChildAt(Order.Probability.value) as EditText
             scroll_view_content.addView(row)
